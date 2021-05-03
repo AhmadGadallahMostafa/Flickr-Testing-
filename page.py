@@ -1,6 +1,7 @@
 from locator import *
 from element import BasePageElement
 from selenium.webdriver.common.action_chains import ActionChains
+import time
 
 
 class LoginTextElement(BasePageElement):
@@ -36,6 +37,10 @@ class HomePage(BasePage):
         upload = self.driver.find_element(*HomePageLocators.UPLOAD_ICON)
         upload.click()
 
+    def go_to_photostream(self):
+        you = self.driver.find_element(*HomePageLocators.YOU)
+        you.click()
+
 
 class UploadPage(BasePage):
     def title_matches(self):
@@ -44,15 +49,11 @@ class UploadPage(BasePage):
     def choose_file(self, files):
         choose_button = self.driver.find_element(*UploadPageLocators.CHOOSE_PHOTO)
         for i in range(0, len(files)):
-            choose_button.send_keys("C:\\Users\\Fastoraaa\\Desktop\\" + files[i])
-
-    def complete_upload_confirmation(self):
-        status = self.driver.find_element(*UploadPageLocators.DIALOG_BOX)
-        while "Yee haw!" not in status.text:
-            status = self.driver.find_element(*UploadPageLocators.DIALOG_BOX)
-        return "Yee haw!" in status.text
+            choose_button.send_keys("D:\\TV & Movies\\" + files[i])
 
     def confirm_upload(self):
+        photostream_link = self.driver.find_element(*UploadPageLocators.PHOTOSTREAM_LINK).get_attribute("href")
+        time.sleep(1)
         publish = self.driver.find_element(*UploadPageLocators.PUBLISH)
         action = ActionChains(self.driver)
         action.move_to_element(publish)
@@ -61,6 +62,10 @@ class UploadPage(BasePage):
         self.driver.implicitly_wait(3)
         confirm_publish = self.driver.find_element(*UploadPageLocators.CONFRIM_PUBLISH)
         confirm_publish.click()
+        self.driver.implicitly_wait(5)
+        time.sleep(5)
+        url = self.driver.current_url
+        return photostream_link in url
 
     def detects_invalid(self):
         user_messaging = self.driver.find_element(*UploadPageLocators.USER_MESSAGING)
@@ -70,13 +75,33 @@ class UploadPage(BasePage):
         remove_button = self.driver.find_element(*UploadPageLocators.REMOVE_FILE_BUTTON)
         remove_button.click()
 
+    def cancel_upload(self):
+        publish = self.driver.find_element(*UploadPageLocators.PUBLISH)
+        action = ActionChains(self.driver)
+        action.move_to_element(publish)
+        action.click(publish)
+        action.perform()
+        self.driver.implicitly_wait(3)
+        confirm_publish = self.driver.find_element(*UploadPageLocators.CONFRIM_PUBLISH)
+        confirm_publish.click()
+        time.sleep(5)
+        self.driver.close()
+
 
 class PhotoStreamPage(BasePage):
     def picture_title_matches_upload(self, title_uploaded):
         self.driver.implicitly_wait(5)
         title_matches_upload = []
         picture_title = self.driver.find_elements(*PhotoStreamLocators.TITLE)
+
         for i in range(0, len(picture_title)):
-            title_matches_upload.append(title_uploaded[i] in picture_title[i].get_attribute("title"))
-            print(title_matches_upload[i])
+            for j in range(0, len(title_uploaded)):
+                if title_uploaded[j] in picture_title[i].get_attribute("title"):
+                    title_matches_upload.append(True)
+                    break
+                else:
+                    if j == len(title_uploaded)-1:
+                        title_matches_upload.append(False)
         return all(title_matches_upload)
+
+
