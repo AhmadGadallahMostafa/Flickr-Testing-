@@ -23,7 +23,9 @@ class FlickrSignupAndroid(unittest.TestCase):
         get_started.click()
         inst.driver.implicitly_wait(15)
 
-    def test_email_1(self):
+    # Tester: Mohamed Amr
+    # In this function if we try to log in with an email in a wrong format an error message will appear to the user "Hmm… that's not an email address"
+    def test_wrong_email_format(self):
         email = self.driver.find_element_by_id("login-email")
         email.send_keys("aaaa")
         login = self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.widget.Button")
@@ -33,14 +35,18 @@ class FlickrSignupAndroid(unittest.TestCase):
         result = email_warning.text.find("Hmm… that's not an email address")
         self.assertGreaterEqual(result, 0)
 
-    def test_email_2(self):
+    # Tester: Mohamed Amr
+    # In this function if we try to log in without an email the word "Required" will appear
+    def test_no_email(self):
         login = self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.widget.Button")
         login.click()
         self.driver.implicitly_wait(2)
         email_required = self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.view.View[2]/android.view.View[2]/android.view.View")
         self.assertTrue("Required" in email_required.text)
 
-    def test_email_4(self):
+    # Tester: Mohamed Amr
+    # In this function if we try to log in with an email in a right format the password text box will appear
+    def test_right_email(self):
         email = self.driver.find_element_by_id("login-email")
         email.send_keys("mohamedamr866@gmail.com")
         login = self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.widget.Button")
@@ -49,7 +55,9 @@ class FlickrSignupAndroid(unittest.TestCase):
         result = self.driver.find_element_by_id("login-password")
         self.assertTrue(result)
 
-    def test_password_1(self):
+    # Tester: Mohamed Amr
+    # In this function if we try to log in without the password we will check that the page isn't the home page
+    def test_no_password(self):
         email = self.driver.find_element_by_id("login-email")
         email.send_keys("mohamedamr866@gmail.com")
         login = self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.widget.Button")
@@ -61,7 +69,9 @@ class FlickrSignupAndroid(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             result = self.driver.find_element_by_accessibility_id("Profile")
 
-    def test_password_2(self):
+    # Tester: Mohamed Amr
+    # In this function if we try to log in with a wrong password "Invalid password" will appear
+    def test_wrong_password(self):
         email = self.driver.find_element_by_id("login-email")
         email.send_keys("mohamedamr866@gmail.com")
         login = self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.widget.Button")
@@ -75,7 +85,26 @@ class FlickrSignupAndroid(unittest.TestCase):
         password_required = self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.view.View[3]/android.view.View[2]/android.view.View")
         self.assertTrue("Invalid password" in password_required.text)
 
-    def test_email_and_password(self):
+    # Tester: Mohamed Amr
+    # In this function if we try to log in with a wrong email and wrong password "Invalid email or password." will appear
+    def test_wrong_email_and_wrong_password(self):
+        email = self.driver.find_element_by_id("login-email")
+        email.send_keys("karimamr3009@gmail.com")
+        login = self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.widget.Button")
+        login.click()
+        self.driver.implicitly_wait(2)
+        password = self.driver.find_element_by_id("login-password")
+        password.send_keys("abcd12345678")
+        signin = self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.widget.Button")
+        signin.click()
+        self.driver.implicitly_wait(2)
+        result = self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.view.View[2]")
+        self.assertTrue("Invalid email or password." in result.text)
+
+
+    # Tester: Mohamed Amr
+    # In this function if we try to log in with a right email and right password the home page will be reached
+    def test_right_email_and_right_password(self):
         email = self.driver.find_element_by_id("login-email")
         email.send_keys("mohamedamr866@gmail.com")
         login = self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.widget.Button")
