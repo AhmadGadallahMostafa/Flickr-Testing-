@@ -36,6 +36,7 @@ class HomePage:
         self.driver = d
 
     def go_to_upload(self):
+        self.driver.implicitly_wait(5)
         upload_button = self.driver.find_element(*AndroidLocator.HomePageLocator.UPLOAD_ICON)
         upload_button.click()
 
@@ -69,9 +70,33 @@ class UploadPage:
         next_button = self.driver.find_element(*AndroidLocator.UploadPageLocator.NEXT_BUTTON)
         next_button.click()
         title_text = self.driver.find_element(*AndroidLocator.UploadPageLocator.TITLE_TEXT)
-        title_text.send_keys("Android upload")
+        title_text.send_keys("Android camera upload")
         post_button = self.driver.find_element(*AndroidLocator.UploadPageLocator.POST_BUTTON)
         post_button.click()
+
+    def choose_from_gallery(self):
+        time.sleep(1)
+        gallery_button = self.driver.find_element(*AndroidLocator.UploadPageLocator.GALLERY_BUTTON)
+        gallery_button.click()
+        time.sleep(1)
+        downloads = self.driver.find_element(*AndroidLocator.UploadPageLocator.DOWNLOADS)
+        downloads.click()
+        time.sleep(1)
+        picture = self.driver.find_element(*AndroidLocator.UploadPageLocator.PICKER_GRID)
+        picture.click()
+        time.sleep(1)
+        done = self.driver.find_element(*AndroidLocator.UploadPageLocator.DONE)
+        done.click()
+        time.sleep(1)
+        next_button = self.driver.find_element(*AndroidLocator.UploadPageLocator.NEXT_BUTTON)
+        next_button.click()
+        time.sleep(1)
+        title_text = self.driver.find_element(*AndroidLocator.UploadPageLocator.TITLE_TEXT)
+        title_text.send_keys("Android gallery upload")
+        time.sleep(1)
+        post_button = self.driver.find_element(*AndroidLocator.UploadPageLocator.POST_BUTTON)
+        post_button.click()
+        
 
 
 class PhotoStreamPage:
@@ -79,14 +104,15 @@ class PhotoStreamPage:
         self.driver = d
 
     def check_last_uploaded_title_matches(self, title):
-        time.sleep(5)
+        self.driver.implicitly_wait(10)
         picture_box = self.driver.find_element(*AndroidLocator.PhotoStreamPageLocator.PICTURE_BOX)
         picture_box.click()
+        self.driver.implicitly_wait(10)
         picture_title = self.driver.find_element(*AndroidLocator.PhotoViewPageLocator.TITLE)
         return title in picture_title.text
 
     def close_photo_view(self):
-        close = self.driver.find_element(*AndroidLocator.PhotoViewPageLocator.ClOSE)
+        close = self.driver.find_element(*AndroidLocator.PhotoViewPageLocator.CLOSE_BUTTON)
         close.click()
         self.driver.implicitly_wait(5)
         upload_icon = self.driver.find_element(*AndroidLocator.HomePageLocator.UPLOAD_ICON)
