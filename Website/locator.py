@@ -17,6 +17,7 @@ class HomePageLocators(object):
     SEARCH_PEOPLE = (By.PARTIAL_LINK_TEXT, "People")
     SEARCH_FIELD = (By.ID, "search-field")
     NOTIFICATION = (By.XPATH, "//ul[@class='notifications-list']//li[2]")
+    PRINTS = (By.XPATH, "//ul[@class='nav-menu desktop-only']//li[3]/a")
 
 class UploadPageLocators(object):
     CHOOSE_PHOTO = (By.ID, "button-add-photos")

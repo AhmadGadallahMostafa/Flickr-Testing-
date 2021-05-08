@@ -2,6 +2,7 @@ import unittest
 from selenium import webdriver
 import page
 import time
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 def login(driver):
@@ -58,10 +59,7 @@ class FlickerUpload(unittest.TestCase):
         time.sleep(5)
         photo_stream_page = page.PhotoStreamPage(self.driver)
         self.assertTrue(photo_stream_page.picture_title_matches_upload(self.titles))
-        d = self.driver.find_element_by_id("")
         
-
-# -------------------------------------------------------------------------------------------------------------------------------------------------
 
     def test_upload_invalid_type(self):
         upload_age = page.UploadPage(self.driver)
@@ -153,6 +151,8 @@ class FlickrGroupsTest(unittest.TestCase):
     def tearDownClass(inst):
         inst.driver.close()
 
+
+
 class FlickrNotifications(unittest.TestCase):
     
     @classmethod
@@ -190,6 +190,7 @@ class FlickrNotifications(unittest.TestCase):
     @classmethod
     def tearDownClass(inst):
         inst.driver.close()
+
 
 if __name__ == "__main__":
     unittest.main()

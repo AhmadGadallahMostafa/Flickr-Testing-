@@ -18,11 +18,10 @@ upload_test_suite.addTest(AndroidMain.FlickrUploadAndroid('test_photo_from_galle
 
 
 
-
 # open the report file
 
 
 # configure HTMLTestRunner options
-runner = HtmlTestRunner.HTMLTestRunner(report_name="Flicker valid Upload").run(upload_test_suite)
+runner = HtmlTestRunner.HTMLTestRunner(report_name="Flicker Android Upload").run(upload_test_suite)
 
 # run the suite

@@ -164,11 +164,11 @@ class GroupsPage(BasePage):
         next1.click()
         time.sleep(2)
         group_name = self.driver.find_element(*GroupsPageLocators.GROUP_NAME_TEXT)
-        group_name.send_keys("TEST GROUP12345678159")
+        group_name.send_keys("TESTGROUP12341256456741589")
         next1.click() #2nd next
         next1.click() #create group
         time.sleep(5)
-        return "TEST GROUP12345678159" in self.driver.title
+        return "TESTGROUP12341256456741589" in self.driver.title
 
     def create_group_that_exists(self):
         create_group = self.driver.find_element(*GroupsPageLocators.CREATE_GROUP)
@@ -177,7 +177,7 @@ class GroupsPage(BasePage):
         next1 = self.driver.find_element(*GroupsPageLocators.NEXT)
         next1.click()
         group_name = self.driver.find_element(*GroupsPageLocators.GROUP_NAME_TEXT)
-        group_name.send_keys("TEST GROUP123456789")
+        group_name.send_keys("TESTGROUP12341256456741589")
         next1.click() #2nd next
         next1.click() #create group
         time.sleep(1)
@@ -194,7 +194,7 @@ class GroupsPage(BasePage):
         next1.click()
         time.sleep(2)
         group_name = self.driver.find_element(*GroupsPageLocators.GROUP_NAME_TEXT)
-        group_name.send_keys("czxczxcqweqwe123")
+        group_name.send_keys("This is a test group20111 18+")
         #This is a test group 18+
         next1.click()
         check_adult = self.driver.find_element(*GroupsPageLocators.ADULT_GROUP_SELECTOR)
