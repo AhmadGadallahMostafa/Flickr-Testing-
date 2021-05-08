@@ -58,6 +58,8 @@ class FlickerUpload(unittest.TestCase):
         time.sleep(5)
         photo_stream_page = page.PhotoStreamPage(self.driver)
         self.assertTrue(photo_stream_page.picture_title_matches_upload(self.titles))
+        d = self.driver.find_element_by_id("")
+        
 
 # -------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -105,6 +107,89 @@ class FlickerUpload(unittest.TestCase):
     def tearDownClass(inst):
         inst.driver.close()
 
+
+
+class FlickrGroupsTest(unittest.TestCase):
+    
+    @classmethod
+    def setUpClass(inst):
+        path = "C:\Program Files (x86)\chromedriver.exe"
+        inst.driver = webdriver.Chrome(path)
+        inst.driver.get("https://www.flickr.com/")
+        inst.driver.maximize_window()
+        login(inst.driver)
+        home_page = page.HomePage(inst.driver)
+        home_page.go_to_groups()
+
+    def test_groups_page_title(self):
+        groups_page = page.GroupsPage(self.driver)
+        self.assertTrue(groups_page.title_matches())
+
+    def test_create_group_no_name(self):
+        groups_page = page.GroupsPage(self.driver)
+        self.assertTrue(groups_page.create_group_no_name())
+        
+    def test_create_group(self):
+        groups_page = page.GroupsPage(self.driver)
+        self.assertTrue(groups_page.create_group())
+    
+    def test_create_group_that_exists(self):
+        home_page = page.HomePage(self.driver)
+        home_page.go_to_groups()
+        groups_page = page.GroupsPage(self.driver)
+        self.assertTrue(groups_page.create_group_that_exists())
+
+    def test_create_18_group(self):
+        groups_page = page.GroupsPage(self.driver)
+        self.assertTrue(groups_page.create_18_age_group())
+
+    def test_add_photo_to_group(self):
+        home_page = page.HomePage(self.driver)
+        home_page.go_to_groups()
+        groups_page = page.GroupsPage(self.driver)
+        self.assertTrue(groups_page.add_photo_to_group())
+
+    @classmethod
+    def tearDownClass(inst):
+        inst.driver.close()
+
+class FlickrNotifications(unittest.TestCase):
+    
+    @classmethod
+    def setUpClass(inst):
+        #first send open second account and send notification to main acc
+        path = "C:\Program Files (x86)\chromedriver.exe"
+        inst.driver = webdriver.Chrome(path)
+        inst.driver.get("https://www.flickr.com/")
+        inst.driver.maximize_window()
+        main_page = page.MainPage(inst.driver)
+        main_page.click_login_button()
+        loginPage = page.LoginPage(inst.driver)
+        loginPage.email_text = "karim_nimo@yahoo.com"
+        loginPage.go_next()
+        loginPage.password_text = "AVZ7Xf!_SNRBQP2"
+        loginPage.go_next()
+        home_page = page.HomePage(inst.driver)
+        time.sleep(5)
+        home_page.send_notification()
+        inst.driver.close()
+        path = "C:\Program Files (x86)\chromedriver.exe"
+        inst.driver = webdriver.Chrome(path)
+        inst.driver.get("https://www.flickr.com/")
+        inst.driver.maximize_window()
+        login(inst.driver)
+
+    def test_push(self):
+        home_page = page.HomePage(self.driver)
+        self.assertTrue(home_page.check_push_notifications())
+
+    def test_notifications(self):
+        notification_page = page.NotificationPage(self.driver)
+        self.assertTrue(notification_page.check_last_notficiation())
+
+    @classmethod
+    def tearDownClass(inst):
+        inst.driver.close()
 
 if __name__ == "__main__":
     unittest.main()
