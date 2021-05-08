@@ -132,7 +132,7 @@ class FlickrLogin(unittest.TestCase):
 
     def test_no_password(self):
         login_page = page.LoginPage(self.driver)
-        self.assertTrue(login_page.no_password())
+        self.assertFalse(login_page.no_password())
 
     def test_wrong_password(self):
         login_page = page.LoginPage(self.driver)
@@ -306,6 +306,30 @@ class FlickrNotifications(unittest.TestCase):
     def test_notifications(self):
         notification_page = page.NotificationPage(self.driver)
         self.assertTrue(notification_page.check_last_notficiation())
+
+    @classmethod
+    def tearDownClass(inst):
+        inst.driver.close()
+
+class FlikcrPrints(unittest.TestCase):
+    @classmethod
+    def setUpClass(inst):
+        path = "C:\Program Files (x86)\chromedriver.exe"
+        inst.driver = webdriver.Chrome(path)
+        inst.driver.get("https://www.flickr.com/")
+        inst.driver.maximize_window()
+        login(inst.driver)
+        home_page = page.HomePage(inst.driver)
+        time.sleep(5)
+        home_page.go_to_prints()
+    
+    def test_prints_title(self):
+        prints_page = page.PrintsPage(self.driver)
+        self.assertTrue(prints_page.title_matches())
+
+    def test_choose_photo(self):
+        prints_page = page.PrintsPage(self.driver)
+        self.assertTrue(prints_page.choose_photo())
 
     @classmethod
     def tearDownClass(inst):

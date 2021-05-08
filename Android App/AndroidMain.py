@@ -2,6 +2,7 @@ import unittest
 import time
 import AndroidPage
 from appium import webdriver
+from appium.webdriver.common import touch_action
 import unittest
 import AndroidLocator
 from selenium.webdriver.support import expected_conditions as EC
@@ -77,7 +78,6 @@ class FlickrUploadAndroid(unittest.TestCase):
         upload_page = AndroidPage.UploadPage(self.driver)
         upload_page.choose_from_gallery()
         self.assertTrue(photo_stream_page.is_uploading())
-
 
 class FlickrLoginAndroid(unittest.TestCase):
     def setUp(self):

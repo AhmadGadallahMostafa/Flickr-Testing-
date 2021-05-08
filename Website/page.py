@@ -39,9 +39,10 @@ class LoginPage(BasePage):
         email.send_keys("aaaa")
         login = self.driver.find_element(*LoginPageLocators.LOGIN_BUTTON)
         login.click()
-        self.driver.implicitly_wait(2)
+        time.sleep(2)
         email_warning = self.driver.find_element(*LoginPageLocators.EMAIL_WARNING)
         result = "Hmm… that's not an email address" in email_warning.text
+        return result
 
     # Tester: Mohamed Amr
     # In this function if we try to log in without an email the word "Required" will appear
@@ -49,9 +50,9 @@ class LoginPage(BasePage):
         self.driver.refresh()
         login = self.driver.find_element(*LoginPageLocators.LOGIN_BUTTON)
         login.click()
-        self.driver.implicitly_wait(2)
+        time.sleep(2)
         email_required = self.driver.find_element(*LoginPageLocators.EMAIL_REQUIRED)
-        return email_required.text == "Required"
+        return "Required" in email_required.text 
 
     # Tester: Mohamed Amr
     # In this function if we try to log in with an email in a right format the password text box will appear
@@ -61,7 +62,7 @@ class LoginPage(BasePage):
         email.send_keys("mohamedamr866@gmail.com")
         login = self.driver.find_element(*LoginPageLocators.LOGIN_BUTTON)
         login.click()
-        self.driver.implicitly_wait(2)
+        time.sleep(2)
         result = self.driver.find_element(*LoginPageLocators.PASSWORD_TEXTBOX)
         return result
 
@@ -75,7 +76,7 @@ class LoginPage(BasePage):
         login.click()
         self.driver.implicitly_wait(2)
         login.click()
-        self.driver.implicitly_wait(2)
+        time.sleep(5)
         result = self.driver.title
         return "Home" in result
 
@@ -91,9 +92,9 @@ class LoginPage(BasePage):
         password = self.driver.find_element(*LoginPageLocators.PASSWORD_TEXTBOX)
         password.send_keys("aaaaaaaaaaaa")
         login.click()
-        self.driver.implicitly_wait(2)
+        time.sleep(2)
         password_required = self.driver.find_element(*LoginPageLocators.PASSWORD_REQUIRED)
-        return password_required.text == "Invalid password"
+        return "Invalid password" in password_required.text
 
     # Tester: Mohamed Amr
     # In this function if we try to log in with a wrong email and wrong password "Invalid email or password." will appear
@@ -107,7 +108,7 @@ class LoginPage(BasePage):
         password = self.driver.find_element(*LoginPageLocators.PASSWORD_TEXTBOX)
         password.send_keys("abcd12345678")
         login.click()
-        self.driver.implicitly_wait(5)
+        time.sleep(2)
         invalid_email_or_password = self.driver.find_element(*LoginPageLocators.INVALID_EMAIL_OR_PASSWORD)
         return "Invalid email or password." in invalid_email_or_password.text
 
@@ -123,7 +124,7 @@ class LoginPage(BasePage):
         password = self.driver.find_element(*LoginPageLocators.PASSWORD_TEXTBOX)
         password.send_keys("abcd12345678")
         login.click()
-        self.driver.implicitly_wait(5)
+        time.sleep(5)
         result = self.driver.title
         return "Home" in result
 
@@ -148,6 +149,9 @@ class HomePage(BasePage):
         action.click(groups)
         action.perform()
 
+    def go_to_prints(self):
+        self.driver.get("https://www.flickr.com/prints")
+
     def check_push_notifications(self):
         time.sleep(10)
         push_notifications = self.driver.find_element(*HomePageLocators.PUSH_NOTIFICATION)
@@ -166,7 +170,6 @@ class HomePage(BasePage):
         follow_button.click()
         time.sleep(5)
         
-
 
 class UploadPage(BasePage):
     def title_matches(self):
@@ -330,11 +333,6 @@ class NotificationPage(BasePage):
         return "karim amr is now following you" in last_notification.text
         
 
-
-
-
-
-
 class LogoutPage(BasePage):
     # Tester: Mohamed Amr
     # In this function when we choose the log out button a block contains "Choose an account" will appear
@@ -473,3 +471,22 @@ class SignupPage(BasePage):
         time.sleep(5)
         password_warning = self.driver.find_element(*SignupPageLocators.PASSWORD_WARNING)
         return password_warning.text == "Invalid password"
+
+class PrintsPage(BasePage):
+    # Tester: Mohamed Amr
+    #In this function when we click on the choose photos button "Drag and drop your photo to upload or browse." will appear
+    def choose_photo(self):
+        choose_photo = self.driver.find_element(*PrintsPageLocators.CHOOSE_PHOTO)
+        choose_photo.click()
+        time.sleep(2)
+        get_started = self.driver.find_element(*PrintsPageLocators.GET_STARTED)
+        get_started.click()
+        time.sleep(5)
+        result = self.driver.find_element(*PrintsPageLocators.RESULT)
+        return "Drag and drop your photo to upload or browse." in result.text
+    
+    def title_matches(self):
+        time.sleep(2)
+        result = self.driver.title
+        return "Prints" in result
+

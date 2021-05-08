@@ -83,3 +83,7 @@ class SignupPageLocators(object):
     PASSWORD_WARNING = (By.XPATH, "//form[@id='sign-up-form']//div[5]//div[2]")
 
 
+class PrintsPageLocators(object):
+    GET_STARTED = (By.XPATH, "//button[@class='button accept-button']")
+    CHOOSE_PHOTO = (By.XPATH, "//div[@class='content-container']/button")
+    RESULT = (By.XPATH, "//div[@class='view photo-selector-view flickr-view-root-view']/div[4]/div/div/p[1]")
