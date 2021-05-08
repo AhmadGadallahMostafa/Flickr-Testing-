@@ -14,6 +14,8 @@ class FlickerSignup(unittest.TestCase):
         signup = inst.driver.find_element_by_link_text("Sign Up")
         signup.click()
 
+    #Tester: Mohamed Amr
+    #This function tests if we try to signup without the first name it must show the word required to the user
     def test_firstname(self):
         lastname = self.driver.find_element_by_id("sign-up-last-name")
         lastname.send_keys("Amr")
@@ -29,6 +31,8 @@ class FlickerSignup(unittest.TestCase):
         firstname_required = self.driver.find_element_by_xpath("//form[@id='sign-up-form']//div[1]//div[2]")
         self.assertTrue(firstname_required.text == "Required")
 
+    # Tester: Mohamed Amr
+    # This function tests if we try to signup without the last name it must show the word required to the user
     def test_lastname(self):
         self.driver.refresh()
         time.sleep(2)
@@ -46,6 +50,8 @@ class FlickerSignup(unittest.TestCase):
         lastname_required = self.driver.find_element_by_xpath("//form[@id='sign-up-form']//div[2]//div[2]")
         self.assertTrue(lastname_required.text == "Required")
 
+    # Tester: Mohamed Amr
+    # This function tests if we try to signup without the age it must show the word required to the user
     def test_age(self):
         self.driver.refresh()
         time.sleep(2)
@@ -63,6 +69,8 @@ class FlickerSignup(unittest.TestCase):
         age_required = self.driver.find_element_by_xpath("//form[@id='sign-up-form']//div[3]//div[2]")
         self.assertTrue(age_required.text == "Required")
 
+    # Tester: Mohamed Amr
+    # This function tests if we try to signup without the email it must show the word required to the user
     def test_email(self):
         self.driver.refresh()
         time.sleep(2)
@@ -80,6 +88,8 @@ class FlickerSignup(unittest.TestCase):
         email_required = self.driver.find_element_by_xpath("//form[@id='sign-up-form']//div[4]//div[2]")
         self.assertTrue(email_required.text == "Required")
 
+    # Tester: Mohamed Amr
+    # This function tests if we try to signup without the password it must show the word required to the user
     def test_password(self):
         self.driver.refresh()
         time.sleep(2)
@@ -97,6 +107,8 @@ class FlickerSignup(unittest.TestCase):
         password_required = self.driver.find_element_by_xpath("//form[@id='sign-up-form']//div[5]//div[2]")
         self.assertTrue(password_required.text == "Required")
 
+    # Tester: Mohamed Amr
+    # This function tests if we try to signup with age less than 13 years it must show "In order to use Flickr, you must be 13 or older"  to the user
     def test_valid_age(self):
         self.driver.refresh()
         age = self.driver.find_element_by_id("sign-up-age")
@@ -107,6 +119,8 @@ class FlickerSignup(unittest.TestCase):
         age_warning = self.driver.find_element_by_xpath("//form[@id='sign-up-form']//div[3]//div[2]")
         self.assertTrue(age_warning.text == "In order to use Flickr, you must be 13 or older")
 
+    # Tester: Mohamed Amr
+    # This function tests if we try to signup with an email in a wrong format it must show "Invalid email"  to the user
     def test_valid_email_1(self):
         self.driver.refresh()
         email = self.driver.find_element_by_id("sign-up-email")
@@ -136,6 +150,8 @@ class FlickerSignup(unittest.TestCase):
         email_warning = self.driver.find_element_by_xpath("//form[@id='sign-up-form']//div[4]//div[2]")
         self.assertTrue(email_warning.text == "Email unavailable")"""
 
+    # Tester: Mohamed Amr
+    # This function tests if we try to signup with a password less than 12 charachters  it must show "Invalid password"  to the user
     def test_valid_password(self):
         self.driver.refresh()
         password = self.driver.find_element_by_id("sign-up-password")

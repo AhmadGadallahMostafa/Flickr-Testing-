@@ -23,7 +23,8 @@ class Flickerlprints(unittest.TestCase):
         signin = inst.driver.find_element_by_xpath("//button")
         signin.click()
         time.sleep(5)
-
+    #Tester: Mohamed Amr
+    #In this function if we click on prints button we will check that we are in the prints page using its title
     def test_prints_page(self):
         prints = self.driver.find_element_by_xpath("//ul[@class='nav-menu desktop-only']//li[3]")
         prints.click()
@@ -31,9 +32,11 @@ class Flickerlprints(unittest.TestCase):
         result = self.driver.title
         self.assertTrue("Prints" in result)
 
+    # Tester: Mohamed Amr
+    #In this function when we click on the choose photos button "Drag and drop your photo to upload or browse." will appear
     def test_choose_photo(self):
-        choose_photo = self.driver.find_element_by_xpath("//Button[@class='unfluid hero-button bordered-button-black']")
-        choose_photo.click()
+        choose_photos = self.driver.find_element_by_xpath("//Button[@class='unfluid hero-button bordered-button-black']")
+        choose_photos.click()
         time.sleep(2)
         result = self.driver.find_element_by_xpath("//div[@class='fluid-modal-overlay no-stack-flip']")
         self.assertTrue("Drag and drop your photo to upload or browse." in result)

@@ -4,7 +4,7 @@ import unittest
 import time
 
 
-class Flickerlogout(unittest.TestCase):
+class FlickerLogout(unittest.TestCase):
     @classmethod
     def setUpClass(inst):
         path = "C:\Program Files (x86)\chromedriver.exe"
@@ -23,6 +23,8 @@ class Flickerlogout(unittest.TestCase):
         signin.click()
         time.sleep(3)
 
+    #Tester: Mohamed Amr
+    #In this function when we choose the log out button a block contains "Choose an account" will appear
     def test_logout(self):
         account = self.driver.find_element_by_xpath("//div[contains(@class,'avatar person tiny')]")
         account.click()
@@ -30,7 +32,7 @@ class Flickerlogout(unittest.TestCase):
         logout.click()
         time.sleep(3)
         result = self.driver.find_element_by_xpath("//h6")
-        self.assertTrue(result)
+        self.assertTrue("Choose an account" in result.text)
 
 
 

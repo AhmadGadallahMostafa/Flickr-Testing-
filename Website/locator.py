@@ -6,8 +6,13 @@ class MainPageLocators(object):
 
 class LoginPageLocators(object):
     NEXT_BUTTON = (By.CSS_SELECTOR, "button")
-
-
+    EMAIL_TEXTBOX = (By.ID,"login-email")
+    LOGIN_BUTTON = (By.XPATH,"//button")
+    EMAIL_WARNING = (By.XPATH, "//div[contains(@class,'flickr-modal bg-white elevation-2 b-rad-1 flex column pa-3')]")
+    EMAIL_REQUIRED = (By.XPATH, "//form[@id='login-form']//div[2]//div[2]")
+    PASSWORD_TEXTBOX = (By.ID, "login-password")
+    PASSWORD_REQUIRED = (By.XPATH, "//form[@id='login-form']//div[3]//div[1]//div[2]")
+    INVALID_EMAIL_OR_PASSWORD = (By.XPATH, "//p")
 class HomePageLocators(object):
     UPLOAD_ICON = (By.CLASS_NAME, "upload-icon")
     YOU = (By.XPATH, "//ul[@class='nav-menu desktop-only']//li[1]")
@@ -34,6 +39,7 @@ class PhotoStreamLocators(object):
     TITLE = (By.CLASS_NAME, "interaction-bar")
 
 
+
 class GroupsPageLocators(object):
     CREATE_GROUP = (By.PARTIAL_LINK_TEXT, "Create Group")
     NEXT = (By.XPATH, "//button[@class='mini action button-action']")
@@ -52,3 +58,28 @@ class GroupsPageLocators(object):
 
 class SearchPeoplePageLocators(object):
     FOLLOW_BUTTON = (By.XPATH, "//button[@class='follow ']")
+
+
+
+class LogoutLocators(object):
+    ACCOUNT = (By.XPATH, "//div[contains(@class,'avatar person tiny')]")
+    LOGOUT = (By.LINK_TEXT, "Log out")
+    CHOOSE_AN_ACCOUNT = (By.XPATH, "//h6")
+
+class SignupPageLocators(object):
+    FIRST_NAME = (By.ID, "sign-up-first-name")
+    LAST_NAME = (By.ID, "sign-up-last-name")
+    AGE = (By.ID, "sign-up-age")
+    EMAIL = (By.ID, "sign-up-email")
+    PASSWORD = (By.ID, "sign-up-password")
+    SIGNUP = (By.XPATH, "//button")
+    FIRST_NAME_REQUIRED = (By.XPATH, "//form[@id='sign-up-form']//div[1]//div[2]")
+    LAST_NAME_REQUIRED = (By.XPATH, "//form[@id='sign-up-form']//div[2]//div[2]")
+    AGE_REQUIRED = (By.XPATH, "//form[@id='sign-up-form']//div[3]//div[2]")
+    EMAIL_REQUIRED = (By.XPATH, "//form[@id='sign-up-form']//div[4]//div[2]")
+    PASSWORD_REQUIRED = (By.XPATH, "//form[@id='sign-up-form']//div[5]//div[2]")
+    AGE_WARNING = (By.XPATH, "//form[@id='sign-up-form']//div[3]//div[2]")
+    EMAIL_WARNING = (By.XPATH, "//form[@id='sign-up-form']//div[4]//div[2]")
+    PASSWORD_WARNING = (By.XPATH, "//form[@id='sign-up-form']//div[5]//div[2]")
+
+

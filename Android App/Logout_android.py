@@ -32,6 +32,8 @@ class FlickrSignupAndroid(unittest.TestCase):
         signin.click()
         inst.driver.implicitly_wait(60)
 
+    # Tester: Mohamed Amr
+    # In this function when we choose the log out button Get Started button will appear
     def test_logout(self):
         profile = self.driver.find_element_by_accessibility_id("Profile")
         profile.click()

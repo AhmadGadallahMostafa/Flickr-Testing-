@@ -101,6 +101,126 @@ class FlickerUpload(unittest.TestCase):
         title = ["never"]
         self.assertFalse(photo_stream_page.picture_title_matches_upload(title))
 
+
+
+    @classmethod
+    def tearDownClass(inst):
+        inst.driver.close()
+
+# -------------------------------------------------------------------------------------------------------------------------------------------------
+
+class FlickrLogin(unittest.TestCase):
+    @classmethod
+    def setUpClass(inst):
+        path = "C:\Program Files (x86)\chromedriver.exe"
+        inst.driver = webdriver.Chrome(path)
+        inst.driver.get("https://www.flickr.com/")
+        login = inst.driver.find_element_by_link_text("Log In")
+        login.click()
+
+    def test_wrong_email_format(self):
+        login_page = page.LoginPage(self.driver)
+        self.assertTrue(login_page.wrong_email_format())
+
+    def test_no_email(self):
+        login_page = page.LoginPage(self.driver)
+        self.assertTrue(login_page.no_email())
+
+    def test_right_email(self):
+        login_page = page.LoginPage(self.driver)
+        self.assertTrue(login_page.right_email())
+
+    def test_no_password(self):
+        login_page = page.LoginPage(self.driver)
+        self.assertTrue(login_page.no_password())
+
+    def test_wrong_password(self):
+        login_page = page.LoginPage(self.driver)
+        self.assertTrue(login_page.wrong_password())
+
+    def test_wrong_email_and_wrong_password(self):
+        login_page = page.LoginPage(self.driver)
+        self.assertTrue(login_page.wrong_email_and_wrong_password())
+
+    def test_right_email_and_right_password(self):
+        login_page = page.LoginPage(self.driver)
+        self.assertTrue(login_page.right_email_and_right_password())
+
+
+    @classmethod
+    def tearDownClass(inst):
+        inst.driver.close()
+
+
+class FlickerLogout(unittest.TestCase):
+    @classmethod
+    def setUpClass(inst):
+        path = "C:\Program Files (x86)\chromedriver.exe"
+        inst.driver = webdriver.Chrome(path)
+        inst.driver.get("https://www.flickr.com/")
+        login = inst.driver.find_element_by_link_text("Log In")
+        login.click()
+        email = inst.driver.find_element_by_id("login-email")
+        email.send_keys("mohamedamr866@gmail.com")
+        login = inst.driver.find_element_by_xpath("//button")
+        login.click()
+        time.sleep(3)
+        password = inst.driver.find_element_by_id("login-password")
+        password.send_keys("abcd12345678")
+        signin = inst.driver.find_element_by_xpath("//button")
+        signin.click()
+        time.sleep(3)
+
+    def test_logout(self):
+        logout_page = page.LogoutPage(self.driver)
+        self.assertTrue(logout_page.logout())
+
+
+    @classmethod
+    def tearDownClass(inst):
+        inst.driver.close()
+
+class FlickerSignup(unittest.TestCase):
+    @classmethod
+    def setUpClass(inst):
+        path = "C:\Program Files (x86)\chromedriver.exe"
+        inst.driver = webdriver.Chrome(path)
+        inst.driver.get("https://www.flickr.com/")
+        signup = inst.driver.find_element_by_link_text("Sign Up")
+        signup.click()
+
+    def test_firstname(self):
+        signup_page = page.SignupPage(self.driver)
+        self.assertTrue(signup_page.firstname())
+
+    def test_lastname(self):
+        signup_page = page.SignupPage(self.driver)
+        self.assertTrue(signup_page.lastname())
+
+    def test_age(self):
+        signup_page = page.SignupPage(self.driver)
+        self.assertTrue(signup_page.age())
+
+    def test_email(self):
+        signup_page = page.SignupPage(self.driver)
+        self.assertTrue(signup_page.email())
+
+    def test_password(self):
+        signup_page = page.SignupPage(self.driver)
+        self.assertTrue(signup_page.password())
+
+    def test_valid_age(self):
+        signup_page = page.SignupPage(self.driver)
+        self.assertTrue(signup_page.valid_age())
+
+    def test_valid_email(self):
+        signup_page = page.SignupPage(self.driver)
+        self.assertTrue(signup_page.valid_email())
+
+    def test_valid_password(self):
+        signup_page = page.SignupPage(self.driver)
+        self.assertTrue(signup_page.valid_password())
+
     @classmethod
     def tearDownClass(inst):
         inst.driver.close()
@@ -194,3 +314,5 @@ class FlickrNotifications(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
