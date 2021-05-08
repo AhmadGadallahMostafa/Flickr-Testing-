@@ -35,3 +35,4 @@ upload_test_suite.addTest(main.FlickerUpload('test_close_before_uploading'))
 runner = HtmlTestRunner.HTMLTestRunner(report_name="Flicker valid Upload").run(upload_test_suite)
 
 # run the suite
+

@@ -4,7 +4,7 @@ import unittest
 import time
 
 
-class Flickerlogout(unittest.TestCase):
+class FlickerLogout(unittest.TestCase):
     @classmethod
     def setUpClass(inst):
         path = "C:\Program Files (x86)\chromedriver.exe"
