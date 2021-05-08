@@ -192,7 +192,7 @@ class PhotoStreamPage:
         self.driver = d
 
     def check_last_uploaded_title_matches(self, title):
-        self.driver.implicitly_wait(10)
+        time.sleep(10)
         picture_box = self.driver.find_element(*AndroidLocator.PhotoStreamPageLocator.PICTURE_BOX)
         picture_box.click()
         self.driver.implicitly_wait(10)
@@ -311,7 +311,7 @@ class SignupPage:
         down.click()
         signup = self.driver.find_element(*AndroidLocator.SignupPageLocator.SIGNUP)
         signup.click()
-        self.driver.implicitly_wait(5)
+        time.sleep(5)
         email_required = self.driver.find_element(*AndroidLocator.SignupPageLocator.EMAIL_REQUIRED)
         return "Required" in email_required.text
 
@@ -330,7 +330,7 @@ class SignupPage:
         down.click()
         signup = self.driver.find_element(*AndroidLocator.SignupPageLocator.SIGNUP)
         signup.click()
-        self.driver.implicitly_wait(5)
+        time.sleep(10)
         password_required = self.driver.find_element(*AndroidLocator.SignupPageLocator.PASSWORD_REQUIRED)
         return "Required" in password_required.text
 
@@ -343,7 +343,7 @@ class SignupPage:
         down.click()
         signup = self.driver.find_element(*AndroidLocator.SignupPageLocator.SIGNUP)
         signup.click()
-        self.driver.implicitly_wait(5)
+        time.sleep(5)
         age_warning = self.driver.find_element(*AndroidLocator.SignupPageLocator.AGE_WARNING)
         return "In order to use Flickr, you must be 13 or older" in age_warning.text
 
@@ -356,7 +356,7 @@ class SignupPage:
         down.click()
         signup = self.driver.find_element(*AndroidLocator.SignupPageLocator.SIGNUP)
         signup.click()
-        self.driver.implicitly_wait(60)
+        time.sleep(5)
         email_warning = self.driver.find_element(*AndroidLocator.SignupPageLocator.EMAIL_WARNING)
         return "Invalid email" in email_warning.text
 
@@ -370,7 +370,7 @@ class SignupPage:
         down.click()
         signup = self.driver.find_element(*AndroidLocator.SignupPageLocator.SIGNUP)
         signup.click()
-        self.driver.implicitly_wait(5)
+        time.sleep(5)
         password_warning = self.driver.find_element(*AndroidLocator.SignupPageLocator.PASSWORD_WARNING)
         print(password_warning.text)
         return "Invalid password" in password_warning.text

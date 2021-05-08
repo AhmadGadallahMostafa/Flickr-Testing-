@@ -1,6 +1,7 @@
 from locator import *
 from element import BasePageElement
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 import time
 
 
@@ -38,9 +39,10 @@ class LoginPage(BasePage):
         email.send_keys("aaaa")
         login = self.driver.find_element(*LoginPageLocators.LOGIN_BUTTON)
         login.click()
-        self.driver.implicitly_wait(2)
+        time.sleep(2)
         email_warning = self.driver.find_element(*LoginPageLocators.EMAIL_WARNING)
         result = "Hmm… that's not an email address" in email_warning.text
+        return result
 
     # Tester: Mohamed Amr
     # In this function if we try to log in without an email the word "Required" will appear
@@ -48,9 +50,9 @@ class LoginPage(BasePage):
         self.driver.refresh()
         login = self.driver.find_element(*LoginPageLocators.LOGIN_BUTTON)
         login.click()
-        self.driver.implicitly_wait(2)
+        time.sleep(2)
         email_required = self.driver.find_element(*LoginPageLocators.EMAIL_REQUIRED)
-        return email_required.text == "Required"
+        return "Required" in email_required.text 
 
     # Tester: Mohamed Amr
     # In this function if we try to log in with an email in a right format the password text box will appear
@@ -60,7 +62,7 @@ class LoginPage(BasePage):
         email.send_keys("mohamedamr866@gmail.com")
         login = self.driver.find_element(*LoginPageLocators.LOGIN_BUTTON)
         login.click()
-        self.driver.implicitly_wait(2)
+        time.sleep(2)
         result = self.driver.find_element(*LoginPageLocators.PASSWORD_TEXTBOX)
         return result
 
@@ -74,7 +76,7 @@ class LoginPage(BasePage):
         login.click()
         self.driver.implicitly_wait(2)
         login.click()
-        self.driver.implicitly_wait(2)
+        time.sleep(5)
         result = self.driver.title
         return "Home" in result
 
@@ -90,9 +92,9 @@ class LoginPage(BasePage):
         password = self.driver.find_element(*LoginPageLocators.PASSWORD_TEXTBOX)
         password.send_keys("aaaaaaaaaaaa")
         login.click()
-        self.driver.implicitly_wait(2)
+        time.sleep(2)
         password_required = self.driver.find_element(*LoginPageLocators.PASSWORD_REQUIRED)
-        return password_required.text == "Invalid password"
+        return "Invalid password" in password_required.text
 
     # Tester: Mohamed Amr
     # In this function if we try to log in with a wrong email and wrong password "Invalid email or password." will appear
@@ -106,7 +108,7 @@ class LoginPage(BasePage):
         password = self.driver.find_element(*LoginPageLocators.PASSWORD_TEXTBOX)
         password.send_keys("abcd12345678")
         login.click()
-        self.driver.implicitly_wait(5)
+        time.sleep(2)
         invalid_email_or_password = self.driver.find_element(*LoginPageLocators.INVALID_EMAIL_OR_PASSWORD)
         return "Invalid email or password." in invalid_email_or_password.text
 
@@ -122,7 +124,7 @@ class LoginPage(BasePage):
         password = self.driver.find_element(*LoginPageLocators.PASSWORD_TEXTBOX)
         password.send_keys("abcd12345678")
         login.click()
-        self.driver.implicitly_wait(5)
+        time.sleep(5)
         result = self.driver.title
         return "Home" in result
 
@@ -133,9 +135,41 @@ class HomePage(BasePage):
         upload.click()
 
     def go_to_photostream(self):
+        self.driver.implicitly_wait(10)
         you = self.driver.find_element(*HomePageLocators.YOU)
         you.click()
+    
+    def go_to_groups(self):
+        self.driver.implicitly_wait(10)
+        you = self.driver.find_element(*HomePageLocators.YOU)
+        action = ActionChains(self.driver)
+        action.move_to_element(you)
+        groups = self.driver.find_element(*HomePageLocators.GROUPS_ICON)
+        action.move_to_element(groups)
+        action.click(groups)
+        action.perform()
 
+    def go_to_prints(self):
+        self.driver.get("https://www.flickr.com/prints")
+
+    def check_push_notifications(self):
+        time.sleep(10)
+        push_notifications = self.driver.find_element(*HomePageLocators.PUSH_NOTIFICATION)
+        return len(push_notifications.text) != 0 
+        #if not zero => true then we got a notification
+    
+    def send_notification(self):
+        search = self.driver.find_element(*HomePageLocators.SEARCH_FIELD)
+        search.send_keys("karimamr9")
+        search.send_keys(Keys.RETURN)
+        time.sleep(5)
+        search_people = self.driver.find_element(*HomePageLocators.SEARCH_PEOPLE)
+        search_people.click()
+        time.sleep(5)
+        follow_button = self.driver.find_element(*SearchPeoplePageLocators.FOLLOW_BUTTON)
+        follow_button.click()
+        time.sleep(5)
+        
 
 class UploadPage(BasePage):
     def title_matches(self):
@@ -199,6 +233,105 @@ class PhotoStreamPage(BasePage):
                         title_matches_upload.append(False)
         return all(title_matches_upload)
 
+
+class GroupsPage(BasePage):
+    def title_matches(self):
+        time.sleep(1)
+        page_title = self.driver.title
+        return "groups" in page_title
+
+    def create_group_no_name(self):
+        create_group = self.driver.find_element(*GroupsPageLocators.CREATE_GROUP)
+        create_group.click()
+        time.sleep(2)
+        next1 = self.driver.find_element(*GroupsPageLocators.NEXT)
+        next1.click()
+        time.sleep(1)
+        next1.click()
+        time.sleep(1)
+        error_message = self.driver.find_element(*GroupsPageLocators.ERROR_TEXT)
+        return "Please enter a group name" in error_message.text
+
+    def create_group(self):
+        self.driver.refresh()
+        time.sleep(5)
+        create_group = self.driver.find_element(*GroupsPageLocators.CREATE_GROUP)
+        create_group.click()
+        time.sleep(2)
+        next1 = self.driver.find_element(*GroupsPageLocators.NEXT)
+        next1.click()
+        time.sleep(2)
+        group_name = self.driver.find_element(*GroupsPageLocators.GROUP_NAME_TEXT)
+        group_name.send_keys("TESTGROUP12341256456741589")
+        next1.click() #2nd next
+        next1.click() #create group
+        time.sleep(5)
+        return "TESTGROUP12341256456741589" in self.driver.title
+
+    def create_group_that_exists(self):
+        create_group = self.driver.find_element(*GroupsPageLocators.CREATE_GROUP)
+        create_group.click()
+        time.sleep(2)
+        next1 = self.driver.find_element(*GroupsPageLocators.NEXT)
+        next1.click()
+        group_name = self.driver.find_element(*GroupsPageLocators.GROUP_NAME_TEXT)
+        group_name.send_keys("TESTGROUP12341256456741589")
+        next1.click() #2nd next
+        next1.click() #create group
+        time.sleep(1)
+        error_message = self.driver.find_element(*GroupsPageLocators.ERROR_TEXT)
+        return "There is already a group with this name" in error_message.text
+
+    def create_18_age_group(self):
+        self.driver.refresh()
+        time.sleep(5)
+        create_group = self.driver.find_element(*GroupsPageLocators.CREATE_GROUP)
+        create_group.click()
+        time.sleep(2)
+        next1 = self.driver.find_element(*GroupsPageLocators.NEXT)
+        next1.click()
+        time.sleep(2)
+        group_name = self.driver.find_element(*GroupsPageLocators.GROUP_NAME_TEXT)
+        group_name.send_keys("This is a test group20111 18+")
+        #This is a test group 18+
+        next1.click()
+        check_adult = self.driver.find_element(*GroupsPageLocators.ADULT_GROUP_SELECTOR)
+        check_adult.click()
+        next1.click()
+        time.sleep(5)
+        group_text = self.driver.find_element(*GroupsPageLocators.GROUP_MESSAGE)
+        return "group is 18+" in group_text.text
+
+    def add_photo_to_group(self):
+        time.sleep(5)
+        group_link = self.driver.find_element(*GroupsPageLocators.GROUP_LINK)
+        group_link.click()
+        time.sleep(5)
+        photo_pool = self.driver.find_element(*GroupsPageLocators.PHOTO_POOL)
+        photo_pool.click()
+        time.sleep(2)
+        add_photo = self.driver.find_element(*GroupsPageLocators.ADD_PHOTO)
+        add_photo.click()
+        time.sleep(2)
+        photo_box = self.driver.find_element(*GroupsPageLocators.PHOTO_BOX)
+        photo_box.click()
+        photo_box_selected = self.driver.find_element(*GroupsPageLocators.PHOTO_BOX_SELECTED)
+        selected_title = photo_box_selected.get_attribute("title")
+        add_to_group_button = self.driver.find_element(*GroupsPageLocators.ADD_TO_GROUP)
+        add_to_group_button.click()
+        time.sleep(5)
+        uploaded_title = self.driver.find_element(*GroupsPageLocators.PHOTO_UPLOADED_TITLE)
+        return selected_title in uploaded_title.text
+
+
+class NotificationPage(BasePage):
+    def check_last_notficiation(self):
+        notification_icon = self.driver.find_element(*HomePageLocators.NOTIFICATIONS_ICON)
+        notification_icon.click()
+        time.sleep(1)
+        last_notification = self.driver.find_element(*HomePageLocators.NOTIFICATION)
+        return "karim amr is now following you" in last_notification.text
+        
 
 class LogoutPage(BasePage):
     # Tester: Mohamed Amr
@@ -338,3 +471,22 @@ class SignupPage(BasePage):
         time.sleep(5)
         password_warning = self.driver.find_element(*SignupPageLocators.PASSWORD_WARNING)
         return password_warning.text == "Invalid password"
+
+class PrintsPage(BasePage):
+    # Tester: Mohamed Amr
+    #In this function when we click on the choose photos button "Drag and drop your photo to upload or browse." will appear
+    def choose_photo(self):
+        choose_photo = self.driver.find_element(*PrintsPageLocators.CHOOSE_PHOTO)
+        choose_photo.click()
+        time.sleep(2)
+        get_started = self.driver.find_element(*PrintsPageLocators.GET_STARTED)
+        get_started.click()
+        time.sleep(5)
+        result = self.driver.find_element(*PrintsPageLocators.RESULT)
+        return "Drag and drop your photo to upload or browse." in result.text
+    
+    def title_matches(self):
+        time.sleep(2)
+        result = self.driver.title
+        return "Prints" in result
+
