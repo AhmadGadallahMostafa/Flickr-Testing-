@@ -15,14 +15,22 @@ from Pages.UploadPage import UploadPage
 import time
 
 
-def login(driver):
+def login(driver, account):
     main_page = MainPage(driver)
     main_page.click_login_button()
     loginPage = LoginPage(driver)
-    loginPage.email_text = "karimamr9@outlook.com"
-    loginPage.go_next()
-    loginPage.password_text = ",Q#8zUvxmSVJ-L^"
-    loginPage.go_next()
+    if (account == "k"):
+        loginPage.email_text = "karimamr9@outlook.com"
+        loginPage.go_next()
+        loginPage.password_text = ",Q#8zUvxmSVJ-L^"
+        loginPage.go_next()
+    elif(account == "m"):
+        loginPage.email_text = "mohamedamr866@gmail.com"
+        loginPage.go_next()
+        loginPage.password_text = "abcd12345678"
+        loginPage.go_next()
+
+
     
 
 class FlickerUpload(unittest.TestCase):
@@ -32,7 +40,7 @@ class FlickerUpload(unittest.TestCase):
         inst.driver = webdriver.Chrome(path)
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
-        login(inst.driver)
+        login(inst.driver,"k")
         inst.titles = []
 
     def test_upload_page_title(self):
@@ -245,7 +253,7 @@ class FlickrGroupsTest(unittest.TestCase):
         inst.driver = webdriver.Chrome(path)
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
-        login(inst.driver)
+        login(inst.driver, "k")
         home_page = HomePage(inst.driver)
         home_page.go_to_groups()
 
@@ -307,7 +315,7 @@ class FlickrNotifications(unittest.TestCase):
         inst.driver = webdriver.Chrome(path)
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
-        login(inst.driver)
+        login(inst.driver, "k")
 
     def test_push(self):
         home_page = HomePage(self.driver)
@@ -328,7 +336,7 @@ class FlikcrPrints(unittest.TestCase):
         inst.driver = webdriver.Chrome(path)
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
-        login(inst.driver)
+        login(inst.driver,"k")
         home_page = HomePage(inst.driver)
         time.sleep(5)
         home_page.go_to_prints()
