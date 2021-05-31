@@ -105,6 +105,6 @@ prints_test_suite.addTest(WebsiteMain.FlikcrPrints("test_choose_photo"))
 people_test_suite = unittest.TestSuite()
 
 #people_test_suite.addTest(WebsiteMain.FlickPeople("test_people_title"))
-people_test_suite.addTest(WebsiteMain.FlickPeople("test_all_photos_from_follwing"))
+people_test_suite.addTest(WebsiteMain.FlickPeople("test_following_list_updates"))
 
 runner = HtmlTestRunner.HTMLTestRunner(report_name="People",report_title="People test",combine_reports=True).run(people_test_suite)

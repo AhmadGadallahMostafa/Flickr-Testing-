@@ -61,7 +61,8 @@ class HomePage(BasePage):
         follow_button = self.driver.find_element(*SearchPeoplePageLocators.FOLLOW_BUTTON)
         follow_button.click()
         time.sleep(5)
-        
+
+    #enter in the search field a group name then switch to group search  
     def search_group(self, groupName):
         search = self.driver.find_element(*HomePageLocators.SEARCH_FIELD)
         search.send_keys(groupName)
@@ -70,6 +71,17 @@ class HomePage(BasePage):
         search_groups = self.driver.find_element(*SearchGroupsPageLocators.SEARCH_GROUPS)
         search_groups.click()
         time.sleep(5)
+
+    #enter in the search field a profile name then switch to people search 
+    def search_people(self, accountName):
+        search = self.driver.find_element(*HomePageLocators.SEARCH_FIELD)
+        search.send_keys(accountName)
+        search.send_keys(Keys.RETURN)
+        time.sleep(5)
+        search_people = self.driver.find_element(*SearchPeoplePageLocators.SEARCH_PEOPLE)
+        search_people.click()
+        time.sleep(5)
+
 
 
 

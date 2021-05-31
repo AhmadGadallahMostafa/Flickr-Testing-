@@ -1,3 +1,4 @@
+from Pages.ProfilePage import ProfilePage
 import unittest
 from selenium import webdriver
 from Pages.MainPage import MainPage
@@ -12,7 +13,9 @@ from Pages.MainPage import MainPage
 from Pages.SignupPage import SignupPage
 from Pages.UploadPage import UploadPage
 from Pages.SearchGroupPage import SearchGroupsPage
+from Pages.SearchPeoplePage import SearchPeoplePage
 from Pages.PeoplePage import PeoplePage
+from Pages.ProfilePage import ProfilePage
 
 import time
 
@@ -392,7 +395,6 @@ class FlikcrPrints(unittest.TestCase):
 
 
 class FlickPeople(unittest.TestCase):
-
     def setUp(self):
         path = "chromedriver.exe"
         self.driver = webdriver.Chrome(path)
@@ -406,12 +408,26 @@ class FlickPeople(unittest.TestCase):
         people_page = PeoplePage(self.driver)
         self.assertTrue(people_page.page_title_matches())
     
+    #test all photos are from people that you follow
     def test_all_photos_from_follwing(self):
         login(self.driver,"k")
         home_page = HomePage(self.driver)
         home_page.go_to_people()
         people_page = PeoplePage(self.driver)
         self.assertTrue(people_page.all_photos_from_following())
+    
+    def test_following_list_updates(self):
+        login(self.driver,"k")                          #login to karim's account and search for a profile
+        home_page = HomePage(self.driver)
+        home_page.search_people("Abdallah Shedid")
+        search_people = SearchPeoplePage(self.driver)
+        search_people.open_profile()                    #open first matching result
+        profile_page = ProfilePage(self.driver)
+        profile_page.follow_opened_profile()            #follow this account
+        home_page.go_to_people()
+        people_page = PeoplePage(self.driver)           #redirect to people see if the following list is updated
+        self.assertTrue(people_page.follow_is_updated("Abdallah Shedid"))
+
 
 
 
