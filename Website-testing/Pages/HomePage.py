@@ -1,6 +1,7 @@
 from Pages.BasePage import BasePage
 from Locators.HomePageLocators import HomePageLocators
 from Locators.SearchPeopleLocator import SearchPeoplePageLocators
+from Locators.SearchGroupsLocators import SearchGroupsPageLocators
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 import time
@@ -47,3 +48,14 @@ class HomePage(BasePage):
         follow_button.click()
         time.sleep(5)
         
+    def search_group(self, groupName):
+        search = self.driver.find_element(*HomePageLocators.SEARCH_FIELD)
+        search.send_keys(groupName)
+        search.send_keys(Keys.RETURN)
+        time.sleep(5)
+        search_groups = self.driver.find_element(*SearchGroupsPageLocators.SEARCH_GROUPS)
+        search_groups.click()
+        time.sleep(5)
+
+
+

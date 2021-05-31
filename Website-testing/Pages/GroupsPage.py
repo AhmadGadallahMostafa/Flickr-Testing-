@@ -1,5 +1,6 @@
 from Pages.BasePage import BasePage
 from Locators.GroupsPageLocators import GroupsPageLocators
+from Locators.HomePageLocators import HomePageLocators
 
 import time
 
@@ -8,6 +9,10 @@ class GroupsPage(BasePage):
         time.sleep(1)
         page_title = self.driver.title
         return "groups" in page_title
+    
+    def group_name_matches(self, groupName):
+        group_name = self.driver.title
+        return groupName in group_name
 
     def create_group_no_name(self):
         create_group = self.driver.find_element(*GroupsPageLocators.CREATE_GROUP)

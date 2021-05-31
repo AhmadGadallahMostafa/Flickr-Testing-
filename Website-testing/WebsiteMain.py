@@ -11,6 +11,7 @@ from Pages.PrintsPage import PrintsPage
 from Pages.MainPage import MainPage
 from Pages.SignupPage import SignupPage
 from Pages.UploadPage import UploadPage
+from Pages.SearchGroupPage import SearchGroupsPage
 
 import time
 
@@ -247,14 +248,14 @@ class FlickerSignup(unittest.TestCase):
 
 class FlickrGroupsTest(unittest.TestCase):
     
-    @classmethod
-    def setUpClass(inst):
+    
+    def setUp(self):
         path = "C:\Program Files (x86)\chromedriver.exe"
-        inst.driver = webdriver.Chrome(path)
-        inst.driver.get("https://www.flickr.com/")
-        inst.driver.maximize_window()
-        login(inst.driver, "k")
-        home_page = HomePage(inst.driver)
+        self.driver = webdriver.Chrome(path)
+        self.driver.get("https://www.flickr.com/")
+        self.driver.maximize_window()
+        login(self.driver, "k")
+        home_page = HomePage(self.driver)
         home_page.go_to_groups()
 
     def test_groups_page_title(self):
@@ -285,9 +286,19 @@ class FlickrGroupsTest(unittest.TestCase):
         groups_page = GroupsPage(self.driver)
         self.assertTrue(groups_page.add_photo_to_group())
 
-    @classmethod
-    def tearDownClass(inst):
-        inst.driver.close()
+    def test_join_group(self):
+        home_page = HomePage(self.driver)
+        home_page.search_group("Flickr Badge in Europe")
+        search_group = SearchGroupsPage(self.driver)
+        search_group.open_group()
+        group_page = GroupsPage(self.driver)
+        self.assertTrue(group_page.group_name_matches())
+
+
+    
+    def tearDown(self):
+        self.driver.close()
+    
 
 
 
