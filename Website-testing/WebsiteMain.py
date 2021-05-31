@@ -12,6 +12,7 @@ from Pages.MainPage import MainPage
 from Pages.SignupPage import SignupPage
 from Pages.UploadPage import UploadPage
 from Pages.SearchGroupPage import SearchGroupsPage
+from Pages.PeoplePage import PeoplePage
 
 import time
 
@@ -388,6 +389,38 @@ class FlikcrPrints(unittest.TestCase):
     @classmethod
     def tearDownClass(inst):
         inst.driver.close()
+
+
+class FlickPeople(unittest.TestCase):
+
+    def setUp(self):
+        path = "chromedriver.exe"
+        self.driver = webdriver.Chrome(path)
+        self.driver.get("https://www.flickr.com/")
+        self.driver.maximize_window()
+    
+    def test_people_title(self):
+        login(self.driver,"k")
+        home_page = HomePage(self.driver)
+        home_page.go_to_people()
+        people_page = PeoplePage(self.driver)
+        self.assertTrue(people_page.page_title_matches())
+    
+    def test_all_photos_from_follwing(self):
+        login(self.driver,"k")
+        home_page = HomePage(self.driver)
+        home_page.go_to_people()
+        people_page = PeoplePage(self.driver)
+        self.assertTrue(people_page.all_photos_from_following())
+
+
+
+    def tearDown(self):
+        self.driver.close()
+    
+
+
+        
 
 
 if __name__ == "__main__":

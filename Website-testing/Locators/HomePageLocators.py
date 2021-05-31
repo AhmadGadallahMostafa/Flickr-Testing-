@@ -9,3 +9,5 @@ class HomePageLocators(object):
     SEARCH_FIELD = (By.ID, "search-field")
     NOTIFICATION = (By.XPATH, "//ul[@class='notifications-list']//li[2]")
     PRINTS = (By.XPATH, "//ul[@class='nav-menu desktop-only']//li[3]/a")
+    PEOPLE = (By.XPATH, "//ul[@class='gn-submenu']//li[10]")
+

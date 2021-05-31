@@ -31,6 +31,19 @@ class HomePage(BasePage):
     def go_to_prints(self):
         self.driver.get("https://www.flickr.com/prints")
 
+    def go_to_people(self):
+        time.sleep(3)
+        you = self.driver.find_element(*HomePageLocators.YOU)
+        action = ActionChains(self.driver)
+        action.move_to_element(you)
+        people = self.driver.find_element(*HomePageLocators.PEOPLE)
+        action.move_to_element(people)
+        action.click(people)
+        action.perform()
+        time.sleep(5)
+        
+    
+
     def check_push_notifications(self):
         time.sleep(10)
         push_notifications = self.driver.find_element(*HomePageLocators.PUSH_NOTIFICATION)
