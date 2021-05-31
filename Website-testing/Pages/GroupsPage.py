@@ -27,8 +27,6 @@ class GroupsPage(BasePage):
         return "Please enter a group name" in error_message.text
 
     def create_group(self):
-        self.driver.refresh()
-        time.sleep(5)
         create_group = self.driver.find_element(*GroupsPageLocators.CREATE_GROUP)
         create_group.click()
         time.sleep(2)
@@ -36,11 +34,11 @@ class GroupsPage(BasePage):
         next1.click()
         time.sleep(2)
         group_name = self.driver.find_element(*GroupsPageLocators.GROUP_NAME_TEXT)
-        group_name.send_keys("TESTGROUP12341256456741589")
+        group_name.send_keys("TESTGROUP-SE-7")
         next1.click() #2nd next
         next1.click() #create group
         time.sleep(5)
-        return "TESTGROUP12341256456741589" in self.driver.title
+        return "TESTGROUP-SE-7" in self.driver.title
 
     def create_group_that_exists(self):
         create_group = self.driver.find_element(*GroupsPageLocators.CREATE_GROUP)
@@ -49,7 +47,7 @@ class GroupsPage(BasePage):
         next1 = self.driver.find_element(*GroupsPageLocators.NEXT)
         next1.click()
         group_name = self.driver.find_element(*GroupsPageLocators.GROUP_NAME_TEXT)
-        group_name.send_keys("TESTGROUP12341256456741589")
+        group_name.send_keys("TESTGROUP-SE-7")
         next1.click() #2nd next
         next1.click() #create group
         time.sleep(1)
@@ -96,3 +94,20 @@ class GroupsPage(BasePage):
         time.sleep(5)
         uploaded_title = self.driver.find_element(*GroupsPageLocators.PHOTO_UPLOADED_TITLE)
         return selected_title in uploaded_title.text
+    
+    def join_group(self):
+        group_join_button = self.driver.find_element(*GroupsPageLocators.JOIN_GROUP_BUTTON)
+        group_join_button.click()
+        time.sleep(5)
+
+    def get_groups(self):
+        joined_groups = self.driver.find_elements(*GroupsPageLocators.JOINED_GROUPS) #gets all groups that a user has joined and 
+        print(joined_groups[0].text)
+        return joined_groups
+
+    def group_in_joined_groups(self, groupName): #gets all groups then check if the last given group name exists, once found it returns true 
+        groups = self.get_groups()
+        for i in range(0,len(groups)):
+            if groupName in groups[i].text:
+                return True
+        else: return False

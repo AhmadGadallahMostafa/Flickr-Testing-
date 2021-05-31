@@ -26,6 +26,7 @@ class HomePage(BasePage):
         action.move_to_element(groups)
         action.click(groups)
         action.perform()
+        time.sleep(5)
 
     def go_to_prints(self):
         self.driver.get("https://www.flickr.com/prints")

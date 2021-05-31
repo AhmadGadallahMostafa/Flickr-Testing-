@@ -15,3 +15,5 @@ class GroupsPageLocators(object):
     PHOTO_BOX_SELECTED = (By.XPATH, "//div[@id='pp-source']/ul/li[1]")
     ADD_TO_GROUP = (By.ID, "pp-add-photos")
     PHOTO_UPLOADED_TITLE = (By.CLASS_NAME, "interaction-bar")
+    JOIN_GROUP_BUTTON = (By.XPATH, "//div[@class='view join-group-view']/button")
+    JOINED_GROUPS = (By.XPATH, "//td[@class='show-after-locked ']")

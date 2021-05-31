@@ -25,11 +25,13 @@ def login(driver, account):
         loginPage.go_next()
         loginPage.password_text = ",Q#8zUvxmSVJ-L^"
         loginPage.go_next()
+        time.sleep(3)
     elif(account == "m"):
         loginPage.email_text = "mohamedamr866@gmail.com"
         loginPage.go_next()
         loginPage.password_text = "abcd12345678"
         loginPage.go_next()
+        time.sleep(3)
 
 
     
@@ -254,48 +256,71 @@ class FlickrGroupsTest(unittest.TestCase):
         self.driver = webdriver.Chrome(path)
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
+
+
+    def test_groups_page_title(self):
         login(self.driver, "k")
         home_page = HomePage(self.driver)
         home_page.go_to_groups()
-
-    def test_groups_page_title(self):
         groups_page = GroupsPage(self.driver)
         self.assertTrue(groups_page.title_matches())
 
     def test_create_group_no_name(self):
+        login(self.driver, "k")
+        home_page = HomePage(self.driver)
+        home_page.go_to_groups()
         groups_page = GroupsPage(self.driver)
         self.assertTrue(groups_page.create_group_no_name())
         
     def test_create_group(self):
+        login(self.driver, "k")
+        home_page = HomePage(self.driver)
+        home_page.go_to_groups()
         groups_page = GroupsPage(self.driver)
         self.assertTrue(groups_page.create_group())
     
     def test_create_group_that_exists(self):
+        login(self.driver, "k")
         home_page = HomePage(self.driver)
         home_page.go_to_groups()
         groups_page = GroupsPage(self.driver)
         self.assertTrue(groups_page.create_group_that_exists())
 
     def test_create_18_group(self):
+        login(self.driver, "k")
+        home_page = HomePage(self.driver)
+        home_page.go_to_groups()
         groups_page = GroupsPage(self.driver)
         self.assertTrue(groups_page.create_18_age_group())
 
     def test_add_photo_to_group(self):
+        login(self.driver, "k")
         home_page = HomePage(self.driver)
         home_page.go_to_groups()
         groups_page = GroupsPage(self.driver)
+        home_page.go_to_groups()
         self.assertTrue(groups_page.add_photo_to_group())
 
-    def test_join_group(self):
+    def test_group_is_created(self):
+        login(self.driver,"m")
         home_page = HomePage(self.driver)
-        home_page.search_group("Flickr Badge in Europe")
+        home_page.search_group("TESTGROUP-SE-7")
         search_group = SearchGroupsPage(self.driver)
         search_group.open_group()
         group_page = GroupsPage(self.driver)
-        self.assertTrue(group_page.group_name_matches())
+        self.assertTrue(group_page.group_name_matches("TESTGROUP-SE-7"))
 
+    def test_join_group(self):
+        login(self.driver,"m")
+        home_page = HomePage(self.driver)
+        home_page.search_group("TESTGROUP-SE-7")
+        search_group = SearchGroupsPage(self.driver)
+        search_group.open_group()
+        group_page = GroupsPage(self.driver)
+        group_page.join_group()#joins opened group and waits 5s
+        home_page.go_to_groups()
+        self.assertTrue(group_page.group_in_joined_groups("TESTGROUP-SE-7"))
 
-    
     def tearDown(self):
         self.driver.close()
     

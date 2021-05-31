@@ -60,13 +60,15 @@ upload_test_suite.addTest(WebsiteMain.FlickerUpload('test_close_before_uploading
 groups_test_suite = unittest.TestSuite()
 
 # Test cases are added manually to ensure their execution order
-groups_test_suite.addTest(WebsiteMain.FlickrGroupsTest("test_join_group"))
+
 groups_test_suite.addTest(WebsiteMain.FlickrGroupsTest("test_groups_page_title"))
 groups_test_suite.addTest(WebsiteMain.FlickrGroupsTest("test_create_group_no_name"))
 groups_test_suite.addTest(WebsiteMain.FlickrGroupsTest("test_create_group"))
 groups_test_suite.addTest(WebsiteMain.FlickrGroupsTest("test_add_photo_to_group"))
 groups_test_suite.addTest(WebsiteMain.FlickrGroupsTest("test_create_group_that_exists"))
 groups_test_suite.addTest(WebsiteMain.FlickrGroupsTest("test_create_18_group"))
+groups_test_suite.addTest(WebsiteMain.FlickrGroupsTest("test_group_is_created"))
+groups_test_suite.addTest(WebsiteMain.FlickrGroupsTest("test_join_group"))
 
 
 
