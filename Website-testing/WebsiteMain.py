@@ -42,7 +42,7 @@ def login(driver, account):
 class FlickerUpload(unittest.TestCase):
     @classmethod
     def setUpClass(inst):
-        path = "C:\Program Files (x86)\chromedriver.exe"
+        path = "chromedriver.exe"
         inst.driver = webdriver.Chrome(path)
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
@@ -134,7 +134,7 @@ class FlickerUpload(unittest.TestCase):
 class FlickrLogin(unittest.TestCase):
     @classmethod
     def setUpClass(inst):
-        path = "C:\Program Files (x86)\chromedriver.exe"
+        path = "chromedriver.exe"
         inst.driver = webdriver.Chrome(path)
         inst.driver.get("https://www.flickr.com/")
         login = inst.driver.find_element_by_link_text("Log In")
@@ -177,7 +177,7 @@ class FlickrLogin(unittest.TestCase):
 class FlickerLogout(unittest.TestCase):
     @classmethod
     def setUpClass(inst):
-        path = "C:\Program Files (x86)\chromedriver.exe"
+        path = "chromedriver.exe"
         inst.driver = webdriver.Chrome(path)
         inst.driver.get("https://www.flickr.com/")
         login = inst.driver.find_element_by_link_text("Log In")
@@ -206,7 +206,7 @@ class FlickerLogout(unittest.TestCase):
 class FlickerSignup(unittest.TestCase):
     @classmethod
     def setUpClass(inst):
-        path = "C:\Program Files (x86)\chromedriver.exe"
+        path = "chromedriver.exe"
         inst.driver = webdriver.Chrome(path)
         inst.driver.get("https://www.flickr.com/")
         signup = inst.driver.find_element_by_link_text("Sign Up")
@@ -252,7 +252,7 @@ class FlickerSignup(unittest.TestCase):
 class FlickrGroupsTest(unittest.TestCase):
 
     def setUp(self):
-        path = "C:\Program Files (x86)\chromedriver.exe"
+        path = "chromedriver.exe"
         self.driver = webdriver.Chrome(path)
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
@@ -343,7 +343,7 @@ class FlickrNotifications(unittest.TestCase):
     @classmethod
     def setUpClass(inst):
         #first send open second account and send notification to main account
-        path = "C:\Program Files (x86)\chromedriver.exe"
+        path = "chromedriver.exe"
         inst.driver = webdriver.Chrome(path)
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
@@ -358,7 +358,7 @@ class FlickrNotifications(unittest.TestCase):
         time.sleep(5)
         home_page.send_notification()       #follows account karimamr9 to send a notification
         inst.driver.close()
-        path = "C:\Program Files (x86)\chromedriver.exe"
+        path = "chromedriver.exe"
         inst.driver = webdriver.Chrome(path)
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
@@ -382,7 +382,7 @@ class FlickrNotifications(unittest.TestCase):
 class FlikcrPrints(unittest.TestCase):
     @classmethod
     def setUpClass(inst):
-        path = "C:\Program Files (x86)\chromedriver.exe"
+        path = "chromedriver.exe"
         inst.driver = webdriver.Chrome(path)
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
