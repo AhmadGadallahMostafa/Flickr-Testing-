@@ -8,14 +8,17 @@ import time
 
 
 class HomePage(BasePage):
+    #each go function goes to specific page and then waits 5s to load
     def go_upload(self):
         upload = self.driver.find_element(*HomePageLocators.UPLOAD_ICON)
         upload.click()
+        time.sleep(5)
 
     def go_to_photostream(self):
         self.driver.implicitly_wait(10)
         you = self.driver.find_element(*HomePageLocators.YOU)
         you.click()
+        time.sleep(5)
     
     def go_to_groups(self):
         self.driver.implicitly_wait(10)
@@ -41,9 +44,19 @@ class HomePage(BasePage):
         action.click(people)
         action.perform()
         time.sleep(5)
-        
     
-
+    def go_to_help(self):
+        self.driver.get("https://help.flickr.com/")
+        time.sleep(5)
+        """
+        help = self.driver.find_element(*HomePageLocators.HELP)
+        action = ActionChains(self.driver)
+        action.move_to_element(help)
+        action.click(help)
+        action.perform()
+        time.sleep(5)
+        """
+        
     def check_push_notifications(self):
         time.sleep(10)
         push_notifications = self.driver.find_element(*HomePageLocators.PUSH_NOTIFICATION)

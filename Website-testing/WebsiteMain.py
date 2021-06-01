@@ -16,6 +16,7 @@ from Pages.SearchGroupPage import SearchGroupsPage
 from Pages.SearchPeoplePage import SearchPeoplePage
 from Pages.PeoplePage import PeoplePage
 from Pages.ProfilePage import ProfilePage
+from Pages.HelpPage import HelpPage
 
 import time
 
@@ -38,8 +39,6 @@ def login(driver, account):
         time.sleep(3)
 
 
-    
-
 class FlickerUpload(unittest.TestCase):
     @classmethod
     def setUpClass(inst):
@@ -49,7 +48,7 @@ class FlickerUpload(unittest.TestCase):
         inst.driver.maximize_window()
         login(inst.driver,"k")
         inst.titles = []
-
+    
     def test_upload_page_title(self):
         home_page = HomePage(self.driver)
         self.driver.implicitly_wait(5)
@@ -68,7 +67,6 @@ class FlickerUpload(unittest.TestCase):
     def test_upload_multiple_pictures(self):
         home_page = HomePage(self.driver)
         home_page.go_upload()
-        self.driver.implicitly_wait(5)
         upload_age = UploadPage(self.driver)
         files = ["p2.png", "p3.png", "p4.jpg"]
         self.titles.append("p2")
@@ -132,7 +130,6 @@ class FlickerUpload(unittest.TestCase):
     def tearDownClass(inst):
         inst.driver.close()
 
-# -------------------------------------------------------------------------------------------------------------------------------------------------
 
 class FlickrLogin(unittest.TestCase):
     @classmethod
@@ -205,6 +202,7 @@ class FlickerLogout(unittest.TestCase):
     def tearDownClass(inst):
         inst.driver.close()
 
+
 class FlickerSignup(unittest.TestCase):
     @classmethod
     def setUpClass(inst):
@@ -251,17 +249,15 @@ class FlickerSignup(unittest.TestCase):
         inst.driver.close()
 
 
-
 class FlickrGroupsTest(unittest.TestCase):
-    
-    
+
     def setUp(self):
         path = "C:\Program Files (x86)\chromedriver.exe"
         self.driver = webdriver.Chrome(path)
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
 
-
+    #Groups page opened correctly and its title matches "group"
     def test_groups_page_title(self):
         login(self.driver, "k")
         home_page = HomePage(self.driver)
@@ -269,20 +265,26 @@ class FlickrGroupsTest(unittest.TestCase):
         groups_page = GroupsPage(self.driver)
         self.assertTrue(groups_page.title_matches())
 
+    #Create a group without entering a name 
+    #We should detect a warning and the group isn't created
     def test_create_group_no_name(self):
         login(self.driver, "k")
         home_page = HomePage(self.driver)
         home_page.go_to_groups()
         groups_page = GroupsPage(self.driver)
         self.assertTrue(groups_page.create_group_no_name())
-        
+    
+    #Create a group 
+    #We should get a new group page with title being name that is named inside create_group
     def test_create_group(self):
         login(self.driver, "k")
         home_page = HomePage(self.driver)
         home_page.go_to_groups()
         groups_page = GroupsPage(self.driver)
         self.assertTrue(groups_page.create_group())
-    
+
+    #Try to create a group with the same name of the group we just created
+    # We should get a warning that this group already exsits
     def test_create_group_that_exists(self):
         login(self.driver, "k")
         home_page = HomePage(self.driver)
@@ -290,6 +292,8 @@ class FlickrGroupsTest(unittest.TestCase):
         groups_page = GroupsPage(self.driver)
         self.assertTrue(groups_page.create_group_that_exists())
 
+    #Test 18+ group creation
+    #we should get a page with 18+ warning
     def test_create_18_group(self):
         login(self.driver, "k")
         home_page = HomePage(self.driver)
@@ -297,6 +301,8 @@ class FlickrGroupsTest(unittest.TestCase):
         groups_page = GroupsPage(self.driver)
         self.assertTrue(groups_page.create_18_age_group())
 
+    #add a photo to a group 
+    #we verify title of the photo matches 
     def test_add_photo_to_group(self):
         login(self.driver, "k")
         home_page = HomePage(self.driver)
@@ -305,6 +311,7 @@ class FlickrGroupsTest(unittest.TestCase):
         home_page.go_to_groups()
         self.assertTrue(groups_page.add_photo_to_group())
 
+    #check that a group turns up when searched for
     def test_group_is_created(self):
         login(self.driver,"m")
         home_page = HomePage(self.driver)
@@ -314,6 +321,8 @@ class FlickrGroupsTest(unittest.TestCase):
         group_page = GroupsPage(self.driver)
         self.assertTrue(group_page.group_name_matches("TESTGROUP-SE-7"))
 
+    #try to join a group
+    #then open group list and verify that it exists
     def test_join_group(self):
         login(self.driver,"m")
         home_page = HomePage(self.driver)
@@ -329,13 +338,11 @@ class FlickrGroupsTest(unittest.TestCase):
         self.driver.close()
     
 
-
-
 class FlickrNotifications(unittest.TestCase):
     
     @classmethod
     def setUpClass(inst):
-        #first send open second account and send notification to main acc
+        #first send open second account and send notification to main account
         path = "C:\Program Files (x86)\chromedriver.exe"
         inst.driver = webdriver.Chrome(path)
         inst.driver.get("https://www.flickr.com/")
@@ -349,18 +356,20 @@ class FlickrNotifications(unittest.TestCase):
         loginPage.go_next()
         home_page = HomePage(inst.driver)
         time.sleep(5)
-        home_page.send_notification()
+        home_page.send_notification()       #follows account karimamr9 to send a notification
         inst.driver.close()
         path = "C:\Program Files (x86)\chromedriver.exe"
         inst.driver = webdriver.Chrome(path)
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
-        login(inst.driver, "k")
+        login(inst.driver, "k")             #opens main account
 
-    def test_push(self):
+    #check that the follow sent a notification and that it appeared correctly
+    def test_push(self): 
         home_page = HomePage(self.driver)
         self.assertTrue(home_page.check_push_notifications())
 
+    #check last follow is in notification history
     def test_notifications(self):
         notification_page = NotificationPage(self.driver)
         self.assertTrue(notification_page.check_last_notficiation())
@@ -368,6 +377,7 @@ class FlickrNotifications(unittest.TestCase):
     @classmethod
     def tearDownClass(inst):
         inst.driver.close()
+
 
 class FlikcrPrints(unittest.TestCase):
     @classmethod
@@ -394,13 +404,14 @@ class FlikcrPrints(unittest.TestCase):
         inst.driver.close()
 
 
-class FlickPeople(unittest.TestCase):
+class FlickrPeople(unittest.TestCase):
     def setUp(self):
         path = "chromedriver.exe"
         self.driver = webdriver.Chrome(path)
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
     
+    #People page loads and its title is correct
     def test_people_title(self):
         login(self.driver,"k")
         home_page = HomePage(self.driver)
@@ -409,6 +420,7 @@ class FlickPeople(unittest.TestCase):
         self.assertTrue(people_page.page_title_matches())
     
     #test all photos are from people that you follow
+    #no photos from an account that you don't follow should appear
     def test_all_photos_from_follwing(self):
         login(self.driver,"k")
         home_page = HomePage(self.driver)
@@ -428,13 +440,52 @@ class FlickPeople(unittest.TestCase):
         people_page = PeoplePage(self.driver)           #redirect to people see if the following list is updated
         self.assertTrue(people_page.follow_is_updated("Abdallah Shedid"))
 
-
-
-
     def tearDown(self):
         self.driver.close()
     
 
+class FlikcrHelp(unittest.TestCase):
+    def setUp(self):
+        path = "chromedriver.exe"
+        self.driver = webdriver.Chrome(path)
+        self.driver.get("https://www.flickr.com/")
+        self.driver.maximize_window()
+
+    #help page is loaded and its tilte is Help
+    def test_help_title(self):
+        login(self.driver, "k")
+        home_page = HomePage(self.driver)
+        time.sleep(5)
+        home_page.go_to_help()
+        help_page = HelpPage(self.driver)
+        self.assertTrue(help_page.title_matches_help())
+    
+    #help page categories are appearing correctly (in HelpPage=> categories_appearing() we specify what categories we are expecting )
+    def test_help_all_categories(self):
+        login(self.driver, "k")
+        home_page = HomePage(self.driver)
+        time.sleep(5)
+        home_page.go_to_help()
+        help_page = HelpPage(self.driver)
+        self.assertTrue(help_page.categories_appearing())
+
+    #help articles are consistent with their titles and they are all accessable
+    #any article causing error would be printed in report after test
+    def test_all_articles_content(self):
+        login(self.driver, "k")
+        home_page = HomePage(self.driver)
+        time.sleep(5)
+        home_page.go_to_help()
+        help_page = HelpPage(self.driver)
+        errors = help_page.articles_content_match()
+        self.assertEqual(len(errors), 0)
+        if len(errors) != 0:
+            print("errors in: ", errors)
+        
+
+
+    def tearDown(self):
+        self.driver.close()
 
         
 
