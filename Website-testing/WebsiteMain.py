@@ -12,11 +12,15 @@ from Pages.PrintsPage import PrintsPage
 from Pages.MainPage import MainPage
 from Pages.SignupPage import SignupPage
 from Pages.UploadPage import UploadPage
+<<<<<<< Updated upstream
 from Pages.SearchGroupPage import SearchGroupsPage
 from Pages.SearchPeoplePage import SearchPeoplePage
 from Pages.PeoplePage import PeoplePage
 from Pages.ProfilePage import ProfilePage
 from Pages.HelpPage import HelpPage
+=======
+from Pages.PhotoViewPage import PhotoViewPage
+>>>>>>> Stashed changes
 
 import time
 
@@ -403,6 +407,55 @@ class FlikcrPrints(unittest.TestCase):
     def tearDownClass(inst):
         inst.driver.close()
 
+class FlickrViewPhoto(unittest.TestCase):
+    @classmethod
+    def setUpClass(inst):
+        path = "C:\Program Files (x86)\chromedriver.exe"
+        inst.driver = webdriver.Chrome(path)
+        inst.driver.get("https://www.flickr.com/")
+        inst.driver.maximize_window()
+        login(inst.driver, "m")
+        home_page = HomePage(inst.driver)
+        time.sleep(5)
+        home_page.go_to_photostream()
+
+    def test_opened_photo(self):
+        photo_stream_page = PhotoStreamPage(self.driver)
+        self.assertTrue(photo_stream_page.opened_photo())
+
+    @classmethod
+    def tearDownClass(inst):
+        inst.driver.close()
+
+
+class FlickrComments(unittest.TestCase):
+    @classmethod
+    def setUpClass(inst):
+        path = "C:\Program Files (x86)\chromedriver.exe"
+        inst.driver = webdriver.Chrome(path)
+        inst.driver.get("https://www.flickr.com/")
+        inst.driver.maximize_window()
+        login(inst.driver, "m")
+        time.sleep(5)
+
+
+
+    def test_comment(self):
+        home_page = HomePage(self.driver)
+        home_page.go_to_photostream()
+        photo_stream_page = PhotoStreamPage(self.driver)
+        photo_stream_page.open_photo()
+        photo_view_page = PhotoViewPage(self.driver)
+        photo_view_page.comment()
+        self.driver.close()
+        self.driver.get("https://www.flickr.com/")
+        self.driver.maximize_window()
+        login(inst.driver, "k")
+        time.sleep(5)
+        self.driver.get("https://www.flickr.com/photos/192788328@N06")
+        time.sleep(5)
+        photo_stream_page.open_photo()
+        self.assertTrue(photo_stream_page.opened_photo())
 
 class FlickrPeople(unittest.TestCase):
     def setUp(self):

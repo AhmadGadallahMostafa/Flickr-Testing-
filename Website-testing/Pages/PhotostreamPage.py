@@ -1,6 +1,6 @@
 from Pages.BasePage import BasePage
 from Locators.PhotostreamPageLocators import PhotoStreamLocators
-
+import time
 
 class PhotoStreamPage(BasePage):
     def picture_title_matches_upload(self, title_uploaded):
@@ -17,4 +17,15 @@ class PhotoStreamPage(BasePage):
                     if j == len(title_uploaded)-1:
                         title_matches_upload.append(False)
         return all(title_matches_upload)
+
+    def opened_photo(self):
+        photo = self.driver.find_element(*PhotoStreamLocators.PHOTO)
+        photo.click()
+        time.sleep(5)
+        result = self.driver.title
+        return "IMG" in result
+
+    def open_photo(self):
+        photo = self.driver.find_element(*PhotoStreamLocators.PHOTO)
+        photo.click()
 
