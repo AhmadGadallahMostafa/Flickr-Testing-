@@ -488,10 +488,8 @@ class FlickrComments(unittest.TestCase):
         photo_view_page = PhotoViewPage(self.driver)
         self.assertTrue(photo_view_page.check_edited_comment())'''
 
-
-
-        def tearDown(self):
-            self.driver.close()
+    def tearDown(self):
+        self.driver.close()
 
 class FlickrPeople(unittest.TestCase):
     def setUp(self):
