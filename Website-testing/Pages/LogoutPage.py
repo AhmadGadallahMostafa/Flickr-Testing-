@@ -16,3 +16,4 @@ class LogoutPage(BasePage):
         time.sleep(5)
         result = self.driver.find_element(*LogoutPageLocators.CHOOSE_AN_ACCOUNT)
         return "Choose an account" in result.text
+

@@ -12,15 +12,15 @@ from Pages.PrintsPage import PrintsPage
 from Pages.MainPage import MainPage
 from Pages.SignupPage import SignupPage
 from Pages.UploadPage import UploadPage
-<<<<<<< Updated upstream
+
 from Pages.SearchGroupPage import SearchGroupsPage
 from Pages.SearchPeoplePage import SearchPeoplePage
 from Pages.PeoplePage import PeoplePage
 from Pages.ProfilePage import ProfilePage
 from Pages.HelpPage import HelpPage
-=======
+
 from Pages.PhotoViewPage import PhotoViewPage
->>>>>>> Stashed changes
+
 
 import time
 
@@ -442,20 +442,54 @@ class FlickrComments(unittest.TestCase):
 
     def test_comment(self):
         home_page = HomePage(self.driver)
-        home_page.go_to_photostream()
+        home_page.search_people("karimamr9")
+        search_people = SearchPeoplePage(self.driver)
+        search_people.open_profile()
         photo_stream_page = PhotoStreamPage(self.driver)
         photo_stream_page.open_photo()
         photo_view_page = PhotoViewPage(self.driver)
         photo_view_page.comment()
         self.driver.close()
+        path = "C:\Program Files (x86)\chromedriver.exe"
+        self.driver = webdriver.Chrome(path)
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
-        login(inst.driver, "k")
+        login(self.driver, "k")
         time.sleep(5)
-        self.driver.get("https://www.flickr.com/photos/192788328@N06")
-        time.sleep(5)
+        home_page = HomePage(self.driver)
+        home_page.go_to_photostream()
+        photo_stream_page = PhotoStreamPage(self.driver)
         photo_stream_page.open_photo()
-        self.assertTrue(photo_stream_page.opened_photo())
+        photo_view_page = PhotoViewPage(self.driver)
+        self.assertTrue(photo_view_page.check_comment())
+
+    '''def test_edit_comment(self):
+        home_page = HomePage(self.driver)
+        home_page.search_people("karimamr9")
+        search_people = SearchPeoplePage(self.driver)
+        search_people.open_profile()
+        photo_stream_page = PhotoStreamPage(self.driver)
+        photo_stream_page.open_photo()
+        photo_view_page = PhotoViewPage(self.driver)
+        photo_view_page.edit_comment()
+        self.driver.close()
+        path = "C:\Program Files (x86)\chromedriver.exe"
+        self.driver = webdriver.Chrome(path)
+        self.driver.get("https://www.flickr.com/")
+        self.driver.maximize_window()
+        login(self.driver, "k")
+        time.sleep(5)
+        home_page = HomePage(self.driver)
+        home_page.go_to_photostream()
+        photo_stream_page = PhotoStreamPage(self.driver)
+        photo_stream_page.open_photo()
+        photo_view_page = PhotoViewPage(self.driver)
+        self.assertTrue(photo_view_page.check_edited_comment())'''
+
+
+
+        def tearDown(self):
+            self.driver.close()
 
 class FlickrPeople(unittest.TestCase):
     def setUp(self):

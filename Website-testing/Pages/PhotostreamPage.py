@@ -28,4 +28,5 @@ class PhotoStreamPage(BasePage):
     def open_photo(self):
         photo = self.driver.find_element(*PhotoStreamLocators.PHOTO)
         photo.click()
+        time.sleep(3)
 
