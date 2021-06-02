@@ -1,3 +1,4 @@
+from Pages.MessagePage import MessagePage
 from Pages.ProfilePage import ProfilePage
 import unittest
 from selenium import webdriver
@@ -17,6 +18,7 @@ from Pages.SearchPeoplePage import SearchPeoplePage
 from Pages.PeoplePage import PeoplePage
 from Pages.ProfilePage import ProfilePage
 from Pages.HelpPage import HelpPage
+from Pages.MessagePage import MessagePage
 
 import time
 
@@ -487,7 +489,36 @@ class FlikcrHelp(unittest.TestCase):
     def tearDown(self):
         self.driver.close()
 
-        
+
+class FlickrMsg(unittest.TestCase):
+    def setUp(self):
+        path = "chromedriver.exe"
+        self.driver = webdriver.Chrome(path)
+        self.driver.get("https://www.flickr.com/")
+        self.driver.maximize_window()
+    
+    def test_send_msg(self):
+        login(self.driver, "m")
+        home_page = HomePage(self.driver)
+        home_page.search_people("karimamr9")
+        search_people = SearchPeoplePage(self.driver)
+        search_people.open_profile()
+        profile_page = ProfilePage(self.driver)
+        profile_page.send_message()
+        msg_page = MessagePage(self.driver)
+        self.assertTrue(msg_page.send_message())
+    
+    def test_receive_msg(self):
+        login(self.driver, "k")
+        home_page = HomePage(self.driver)
+        home_page.open_notifications()
+        home_page.open_msg()
+        msg_page = MessagePage(self.driver)
+        self.assertTrue(msg_page.receive_message())
+    
+    def tearDown(self):
+        self.driver.close()
+
 
 
 if __name__ == "__main__":

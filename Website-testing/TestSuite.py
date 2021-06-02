@@ -115,5 +115,12 @@ help_test_suite = unittest.TestSuite()
 
 help_test_suite.addTest((WebsiteMain.FlikcrHelp("test_all_articles_content")))
 
-runner = HtmlTestRunner.HTMLTestRunner(report_name="Help Page",report_title="Help test",combine_reports=True).run(help_test_suite)
+#runner = HtmlTestRunner.HTMLTestRunner(report_name="Help Page",report_title="Help test",combine_reports=True).run(help_test_suite)
+
+msg_test_suite = unittest.TestSuite()
+
+msg_test_suite.addTest((WebsiteMain.FlickrMsg("test_send_msg")))
+msg_test_suite.addTest((WebsiteMain.FlickrMsg("test_receive_msg")))
+
+runner = HtmlTestRunner.HTMLTestRunner(report_name="MSG Page",report_title="MSG test",combine_reports=True).run(msg_test_suite)
 
