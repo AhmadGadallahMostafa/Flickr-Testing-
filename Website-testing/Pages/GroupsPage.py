@@ -67,8 +67,10 @@ class GroupsPage(BasePage):
         group_name.send_keys("This is a test group20111 18+")
         #This is a test group 18+
         next1.click()
+        time.sleep(2)
         check_adult = self.driver.find_element(*GroupsPageLocators.ADULT_GROUP_SELECTOR)
         check_adult.click()
+        time.sleep(1)
         next1.click()
         time.sleep(5)
         group_text = self.driver.find_element(*GroupsPageLocators.GROUP_MESSAGE)

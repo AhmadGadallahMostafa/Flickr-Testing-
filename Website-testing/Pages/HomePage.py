@@ -48,14 +48,6 @@ class HomePage(BasePage):
     def go_to_help(self):
         self.driver.get("https://help.flickr.com/")
         time.sleep(5)
-        """
-        help = self.driver.find_element(*HomePageLocators.HELP)
-        action = ActionChains(self.driver)
-        action.move_to_element(help)
-        action.click(help)
-        action.perform()
-        time.sleep(5)
-        """
         
     def check_push_notifications(self):
         time.sleep(5)

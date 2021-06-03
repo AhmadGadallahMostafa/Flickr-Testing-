@@ -4,7 +4,7 @@ import time
 
 class PhotoStreamPage(BasePage):
     def picture_title_matches_upload(self, title_uploaded):
-        self.driver.implicitly_wait(5)
+        time.sleep(5)
         title_matches_upload = []
         picture_title = self.driver.find_elements(*PhotoStreamLocators.TITLE)
 

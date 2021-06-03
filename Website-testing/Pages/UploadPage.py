@@ -12,6 +12,7 @@ class UploadPage(BasePage):
         choose_button = self.driver.find_element(*UploadPageLocators.CHOOSE_PHOTO)
         for i in range(0, len(files)):
             choose_button.send_keys("D:\\TV & Movies\\" + files[i])
+        time.sleep(5)
 
     def confirm_upload(self):
         photostream_link = self.driver.find_element(*UploadPageLocators.PHOTOSTREAM_LINK).get_attribute("href")
@@ -43,7 +44,7 @@ class UploadPage(BasePage):
         action.move_to_element(publish)
         action.click(publish)
         action.perform()
-        self.driver.implicitly_wait(3)
+        time.sleep(5)
         confirm_publish = self.driver.find_element(*UploadPageLocators.CONFRIM_PUBLISH)
         confirm_publish.click()
         time.sleep(5)
