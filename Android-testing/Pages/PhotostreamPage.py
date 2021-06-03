@@ -30,3 +30,14 @@ class PhotostreamPage:
         self.driver.implicitly_wait(5)
         status = self.driver.find_element(*PhotostreamPageLocator.MESSAGE_BAR)
         return "Uploading" in status.text
+
+    def view_photo(self):
+        photo = self.driver.find_element(*PhotostreamPageLocator.PHOTO)
+        photo.click()
+        photo_id = self.driver.find_element(*PhotoviewPageLocator.TITLE)
+        result = "IMG" in photo_id.text
+        return result
+
+    def open_photo(self):
+        photo = self.driver.find_element(*PhotostreamPageLocator.PHOTO)
+        photo.click()

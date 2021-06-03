@@ -463,28 +463,6 @@ class FlickrComments(unittest.TestCase):
         photo_view_page = PhotoViewPage(self.driver)
         self.assertTrue(photo_view_page.check_comment())
 
-    '''def test_edit_comment(self):
-        home_page = HomePage(self.driver)
-        home_page.search_people("karimamr9")
-        search_people = SearchPeoplePage(self.driver)
-        search_people.open_profile()
-        photo_stream_page = PhotoStreamPage(self.driver)
-        photo_stream_page.open_photo()
-        photo_view_page = PhotoViewPage(self.driver)
-        photo_view_page.edit_comment()
-        self.driver.close()
-        path = "C:\Program Files (x86)\chromedriver.exe"
-        self.driver = webdriver.Chrome(path)
-        self.driver.get("https://www.flickr.com/")
-        self.driver.maximize_window()
-        login(self.driver, "k")
-        time.sleep(5)
-        home_page = HomePage(self.driver)
-        home_page.go_to_photostream()
-        photo_stream_page = PhotoStreamPage(self.driver)
-        photo_stream_page.open_photo()
-        photo_view_page = PhotoViewPage(self.driver)
-        self.assertTrue(photo_view_page.check_edited_comment())'''
 
 
 

@@ -14,6 +14,8 @@ from Locators.PhotostreamPageLocator import PhotostreamPageLocator
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from appium.webdriver.common.mobileby import MobileBy
+from Locators.LoginPageLocator import LoginPageLocator
+
 
 
 def login(driver):
@@ -216,6 +218,48 @@ class FlickrSignupAndroid(unittest.TestCase):
 
     def tearDown(self):
         self.driver.close_app()
+
+
+
+class FlickrViewPhotoAndroid(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(inst):
+        desired_cap = {
+            'platformName': 'Android',
+            'deviceName': 'emulator-5554',
+            'appPackage': 'com.flickr.android',
+            'appActivity': 'com.yahoo.mobile.client.android.flickr.activity.MainActivity'
+        }
+        inst.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_cap)
+        get_started = WebDriverWait(inst.driver, 30).until(
+            EC.presence_of_element_located((MobileBy.ACCESSIBILITY_ID, "Get Started"
+        )))
+        get_started.click()
+        inst.driver.implicitly_wait(60)
+        email = inst.driver.find_element_by_id("login-email")
+        email.send_keys("mohamedamr866@gmail.com")
+        login = inst.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.widget.Button")
+        login.click()
+        inst.driver.implicitly_wait(60)
+        password = inst.driver.find_element_by_id("login-password")
+        password.send_keys("abcd12345678")
+        signin = inst.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.widget.Button")
+        signin.click()
+        inst.driver.implicitly_wait(60)
+
+    def test_view_photo(self):
+        home_page = HomePage(self.driver)
+        home_page.go_to_photo_stream()
+        time.sleep(5)
+        photo_stream_page = PhotostreamPage(self.driver)
+        time.sleep(10)
+        photo_stream_page.view_photo()
+
+    def tearDown(self):
+        self.driver.close_app()
+
+
 
 if __name__ == "__main__":
     unittest.main()
