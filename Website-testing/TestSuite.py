@@ -16,9 +16,8 @@ Signup_test_suite.addTest(WebsiteMain.FlickerSignup('test_valid_age'))
 Signup_test_suite.addTest(WebsiteMain.FlickerSignup('test_valid_email'))
 Signup_test_suite.addTest(WebsiteMain.FlickerSignup('test_valid_password'))
 
-#runner = HtmlTestRunner.HTMLTestRunner(
-   # report_name="Flicker Signup tests", report_title="Signup test", combine_reports=True).run(Signup_test_suite)
-
+runner = HtmlTestRunner.HTMLTestRunner(
+    report_name="Flicker Signup tests", report_title="Signup test", combine_reports=True).run(Signup_test_suite)
 
 
 # ===========================================================================================================================
@@ -36,16 +35,16 @@ Login_test_suite.addTest(WebsiteMain.FlickrLogin(
 Login_test_suite.addTest(WebsiteMain.FlickrLogin(
     'test_right_email_and_right_password'))
 
-#runner = HtmlTestRunner.HTMLTestRunner(
-    #report_name="Flicker Login tests", report_title="Login test", combine_reports=True).run(Login_test_suite)
+runner = HtmlTestRunner.HTMLTestRunner(
+    report_name="Flicker Login tests", report_title="Login test", combine_reports=True).run(Login_test_suite)
 
 # ===========================================================================================================================
 Logout_test_suite = unittest.TestSuite()
 
 Logout_test_suite.addTest(WebsiteMain.FlickerLogout('test_logout'))
 
-#runner = HtmlTestRunner.HTMLTestRunner(
-    #report_name="Flicker Logout tests", report_title="Logout test", combine_reports=True).run(Logout_test_suite)
+runner = HtmlTestRunner.HTMLTestRunner(
+    report_name="Flicker Logout tests", report_title="Logout test", combine_reports=True).run(Logout_test_suite)
 
 # ===========================================================================================================================
 
@@ -69,8 +68,8 @@ upload_test_suite.addTest(
 
 
 # configure HTMLTestRunner options
-#runner = HtmlTestRunner.HTMLTestRunner(
-    #report_name="Flicker  Upload", report_title="Upload test", combine_reports=True).run(upload_test_suite)
+runner = HtmlTestRunner.HTMLTestRunner(
+    report_name="Flicker  Upload", report_title="Upload test", combine_reports=True).run(upload_test_suite)
 
 
 # ===========================================================================================================================
@@ -99,7 +98,6 @@ runner = HtmlTestRunner.HTMLTestRunner(
     report_name="Flicker group test", report_title="Groups test", combine_reports=True).run(groups_test_suite)
 
 
-
 # ===========================================================================================================================
 
 notification_test_suite = unittest.TestSuite()
@@ -110,8 +108,8 @@ notification_test_suite.addTest(
     WebsiteMain.FlickrNotifications("test_notifications"))
 
 # configure HTMLTestRunner options
-#runner = HtmlTestRunner.HTMLTestRunner(report_name="Flicker notification test",
-                                       #report_title="Notifications test", combine_reports=True).run(notification_test_suite)
+runner = HtmlTestRunner.HTMLTestRunner(report_name="Flicker notification test",
+                                       report_title="Notifications test", combine_reports=True).run(notification_test_suite)
 
 # ===========================================================================================================================
 
@@ -120,8 +118,8 @@ prints_test_suite = unittest.TestSuite()
 prints_test_suite.addTest(WebsiteMain.FlikcrPrints('test_prints_title'))
 prints_test_suite.addTest(WebsiteMain.FlikcrPrints("test_choose_photo"))
 
-#runner = HtmlTestRunner.HTMLTestRunner(
-    #report_name="Prints", report_title="Prints test", combine_reports=True).run(prints_test_suite)
+runner = HtmlTestRunner.HTMLTestRunner(
+    report_name="Prints", report_title="Prints test", combine_reports=True).run(prints_test_suite)
 
 
 # ===========================================================================================================================
@@ -133,35 +131,33 @@ people_test_suite.addTest(WebsiteMain.FlickrPeople(
 people_test_suite.addTest(
     WebsiteMain.FlickrPeople("test_following_list_updates"))
 
-#runner = HtmlTestRunner.HTMLTestRunner(
-    #report_name="People", report_title="People test", combine_reports=True).run(people_test_suite)
+runner = HtmlTestRunner.HTMLTestRunner(
+    report_name="People", report_title="People test", combine_reports=True).run(people_test_suite)
 
 # ==============================================================================================================================
 help_test_suite = unittest.TestSuite()
 
 help_test_suite.addTest((WebsiteMain.FlikcrHelp("test_all_articles_content")))
 
-#runner = HtmlTestRunner.HTMLTestRunner(
-    #report_name="Help Page", report_title="Help test", combine_reports=True).run(help_test_suite)
+runner = HtmlTestRunner.HTMLTestRunner(
+    report_name="Help Page", report_title="Help test", combine_reports=True).run(help_test_suite)
 
 # ===========================================================================================================================
 view_photo_test_suite = unittest.TestSuite()
 view_photo_test_suite.addTest(WebsiteMain.FlickrViewPhoto('test_opened_photo'))
-#runner = HtmlTestRunner.HTMLTestRunner(report_name="Flicker view photo tests",
-                                       #report_title="View photo test", combine_reports=True).run(view_photo_test_suite)
+runner = HtmlTestRunner.HTMLTestRunner(report_name="Flicker view photo tests",
+                                       report_title="View photo test", combine_reports=True).run(view_photo_test_suite)
 # ===========================================================================================================================
 comment_test_suite = unittest.TestSuite()
 comment_test_suite.addTest(WebsiteMain.FlickrComments('test_comment'))
 
-#runner = HtmlTestRunner.HTMLTestRunner(report_name="Flicker comment tests",
-                                       #report_title="Comment test", combine_reports=True).run(comment_test_suite)
+runner = HtmlTestRunner.HTMLTestRunner(report_name="Flicker comment tests",
+                                       report_title="Comment test", combine_reports=True).run(comment_test_suite)
 # =============================================================================================================================
 msg_test_suite = unittest.TestSuite()
 
 msg_test_suite.addTest((WebsiteMain.FlickrMsg("test_send_msg")))
 msg_test_suite.addTest((WebsiteMain.FlickrMsg("test_receive_msg")))
 
-#runner = HtmlTestRunner.HTMLTestRunner(
-    #report_name="MSG Page", report_title="MSG test", combine_reports=True).run(msg_test_suite)
-
-
+runner = HtmlTestRunner.HTMLTestRunner(
+    report_name="MSG Page", report_title="MSG test", combine_reports=True).run(msg_test_suite)
