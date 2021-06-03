@@ -58,7 +58,7 @@ class HomePage(BasePage):
         """
         
     def check_push_notifications(self):
-        time.sleep(10)
+        time.sleep(5)
         push_notifications = self.driver.find_element(*HomePageLocators.PUSH_NOTIFICATION)
         return len(push_notifications.text) != 0 
         #if not zero => true then we got a notification
@@ -87,12 +87,24 @@ class HomePage(BasePage):
 
     #enter in the search field a profile name then switch to people search 
     def search_people(self, accountName):
+        time.sleep(2)
         search = self.driver.find_element(*HomePageLocators.SEARCH_FIELD)
         search.send_keys(accountName)
         search.send_keys(Keys.RETURN)
         time.sleep(5)
         search_people = self.driver.find_element(*SearchPeoplePageLocators.SEARCH_PEOPLE)
         search_people.click()
+        time.sleep(5)
+
+    def open_notifications(self):
+        time.sleep(5)
+        push_notifications = self.driver.find_element(*HomePageLocators.NOTIFICATIONS_ICON)
+        push_notifications.click()
+        time.sleep(5)
+
+    def open_msg(self):
+        msg = self.driver.find_element(*HomePageLocators.MSG_RECIEVED)
+        msg.click()
         time.sleep(5)
 
 

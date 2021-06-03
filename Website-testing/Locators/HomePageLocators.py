@@ -10,6 +10,7 @@ class HomePageLocators(object):
     PRINTS = (By.XPATH, "//ul[@class='nav-menu desktop-only']//li[3]/a")
     PEOPLE = (By.XPATH, "//ul[@class='gn-submenu']//li[10]")
     HELP = (By.XPATH, "//div[@class='feed-rail-content-container']//div[2]/div/a[6]")
-
+    MSG_RECIEVED = (By.XPATH, "//ul[@class='notifications-list']//li[2]/div/div/div/span/a[2]")
+    SEARCH_PEOPLE = (By.PARTIAL_LINK_TEXT, "People")
 
 

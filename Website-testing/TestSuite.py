@@ -148,4 +148,10 @@ comment_test_suite.addTest(WebsiteMain.FlickrComments('test_comment'))
 #comment_test_suite.addTest(WebsiteMain.FlickrComments('test_edit_comment'))
 runner = HtmlTestRunner.HTMLTestRunner(report_name="Flicker comment tests",report_title="Comment test", combine_reports = True).run(comment_test_suite)
 
+msg_test_suite = unittest.TestSuite()
+
+msg_test_suite.addTest((WebsiteMain.FlickrMsg("test_send_msg")))
+msg_test_suite.addTest((WebsiteMain.FlickrMsg("test_receive_msg")))
+
+runner = HtmlTestRunner.HTMLTestRunner(report_name="MSG Page",report_title="MSG test",combine_reports=True).run(msg_test_suite)
 
