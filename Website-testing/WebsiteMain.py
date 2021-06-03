@@ -383,7 +383,11 @@ class FlickrNotifications(unittest.TestCase):
         home_page.send_notification()       #follows account karimamr9 to send a notification
         inst.driver.close()
         path = "chromedriver.exe"
-        inst.driver = webdriver.Chrome(path)
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.headless = True
+        chrome_options.add_argument('--window-size=1920,1080')
+        inst.driver = webdriver.Chrome(
+        executable_path=path, chrome_options=chrome_options)
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
         login(inst.driver, "k")             #opens main account
@@ -480,8 +484,10 @@ class FlickrComments(unittest.TestCase):
         photo_view_page = PhotoViewPage(self.driver)
         photo_view_page.comment()
         self.driver.close()
-        path = "C:\Program Files (x86)\chromedriver.exe"
-        self.driver = webdriver.Chrome(path)
+        path = "chromedriver.exe"
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.headless = True
+        chrome_options.add_argument('--window-size=1920,1080')
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
         login(self.driver, "k")
