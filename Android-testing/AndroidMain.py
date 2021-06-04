@@ -283,7 +283,7 @@ class FlickrProfileAndroid(unittest.TestCase):
         search_people.search_people()
         search_people.open_profile()
         profile_page = ProfilePage(self.driver)
-        with self.assertRaises(Exception) as context:
+        with self.assertRaises(Exception) as context:  #we expect an exception as we cant find element that has text
             profile_page.follow_profile()
 
     def test_unfollow(self):
@@ -293,7 +293,7 @@ class FlickrProfileAndroid(unittest.TestCase):
         search_people.search_people()
         search_people.open_profile()
         profile_page = ProfilePage(self.driver)
-        self.assertTrue(profile_page.unfollow())
+        self.assertTrue(profile_page.unfollow())   #we verify that the text follow appears meaning we unfollowed
     
     def tearDown(self):
         self.driver.close_app()
