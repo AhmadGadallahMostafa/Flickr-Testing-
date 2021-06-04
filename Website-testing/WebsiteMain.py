@@ -31,25 +31,24 @@ def login(driver, account):
     main_page = MainPage(driver)
     main_page.click_login_button()
     loginPage = LoginPage(driver)
-    if (account == "k"):
+    if account == "k":
         loginPage.email_text = "karimamr9@outlook.com"
         loginPage.go_next()
         loginPage.password_text = ",Q#8zUvxmSVJ-L^"
         loginPage.go_next()
         time.sleep(3)
-    elif(account == "m"):
+    elif account == "m":
         loginPage.email_text = "mohamedamr866@gmail.com"
         loginPage.go_next()
         loginPage.password_text = "abcd12345678"
         loginPage.go_next()
         time.sleep(3)
-    elif(account == "k2"):
+    elif account == "k2":
         loginPage.email_text = "karim_nimo@yahoo.com"
         loginPage.go_next()
         loginPage.password_text = "AVZ7Xf!_SNRBQP2"
         loginPage.go_next()
         time.sleep(3)
-
 
 
 class FlickerUpload(unittest.TestCase):
@@ -58,14 +57,15 @@ class FlickerUpload(unittest.TestCase):
         path = "chromedriver.exe"
         chrome_options = webdriver.ChromeOptions()
         chrome_options.headless = True
-        chrome_options.add_argument('--window-size=1920,1080')
+        chrome_options.add_argument("--window-size=1920,1080")
         inst.driver = webdriver.Chrome(
-        executable_path=path, chrome_options=chrome_options)
+            executable_path=path, chrome_options=chrome_options
+        )
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
-        login(inst.driver,"k")
+        login(inst.driver, "k")
         inst.titles = []
-    
+
     def test_upload_page_title(self):
         home_page = HomePage(self.driver)
         self.driver.implicitly_wait(5)
@@ -98,7 +98,7 @@ class FlickerUpload(unittest.TestCase):
         time.sleep(5)
         photo_stream_page = PhotoStreamPage(self.driver)
         self.assertTrue(photo_stream_page.picture_title_matches_upload(self.titles))
-        
+
     def test_upload_invalid_type(self):
         upload_age = UploadPage(self.driver)
         files = ["invalid.pdf"]
@@ -149,9 +149,10 @@ class FlickrLogin(unittest.TestCase):
         path = "chromedriver.exe"
         chrome_options = webdriver.ChromeOptions()
         chrome_options.headless = True
-        chrome_options.add_argument('--window-size=1920,1080')
+        chrome_options.add_argument("--window-size=1920,1080")
         inst.driver = webdriver.Chrome(
-        executable_path=path, chrome_options=chrome_options)
+            executable_path=path, chrome_options=chrome_options
+        )
         inst.driver.get("https://www.flickr.com/")
         login = inst.driver.find_element_by_link_text("Log In")
         login.click()
@@ -184,7 +185,6 @@ class FlickrLogin(unittest.TestCase):
         login_page = LoginPage(self.driver)
         self.assertTrue(login_page.right_email_and_right_password())
 
-
     @classmethod
     def tearDownClass(inst):
         inst.driver.close()
@@ -196,9 +196,10 @@ class FlickerLogout(unittest.TestCase):
         path = "chromedriver.exe"
         chrome_options = webdriver.ChromeOptions()
         chrome_options.headless = True
-        chrome_options.add_argument('--window-size=1920,1080')
+        chrome_options.add_argument("--window-size=1920,1080")
         inst.driver = webdriver.Chrome(
-        executable_path=path, chrome_options=chrome_options)
+            executable_path=path, chrome_options=chrome_options
+        )
         inst.driver.get("https://www.flickr.com/")
         login = inst.driver.find_element_by_link_text("Log In")
         login.click()
@@ -228,9 +229,10 @@ class FlickerSignup(unittest.TestCase):
         path = "chromedriver.exe"
         chrome_options = webdriver.ChromeOptions()
         chrome_options.headless = True
-        chrome_options.add_argument('--window-size=1920,1080')
+        chrome_options.add_argument("--window-size=1920,1080")
         inst.driver = webdriver.Chrome(
-        executable_path=path, chrome_options=chrome_options)
+            executable_path=path, chrome_options=chrome_options
+        )
         inst.driver.get("https://www.flickr.com/")
         signup = inst.driver.find_element_by_link_text("Sign Up")
         signup.click()
@@ -273,18 +275,18 @@ class FlickerSignup(unittest.TestCase):
 
 
 class FlickrGroupsTest(unittest.TestCase):
-
     def setUp(self):
         path = "chromedriver.exe"
         chrome_options = webdriver.ChromeOptions()
         chrome_options.headless = True
-        chrome_options.add_argument('--window-size=1920,1080')
+        chrome_options.add_argument("--window-size=1920,1080")
         self.driver = webdriver.Chrome(
-        executable_path=path, chrome_options=chrome_options)
+            executable_path=path, chrome_options=chrome_options
+        )
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
 
-    #Groups page opened correctly and its title matches "group"
+    # Groups page opened correctly and its title matches "group"
     def test_groups_page_title(self):
         login(self.driver, "k")
         home_page = HomePage(self.driver)
@@ -292,17 +294,17 @@ class FlickrGroupsTest(unittest.TestCase):
         groups_page = GroupsPage(self.driver)
         self.assertTrue(groups_page.title_matches())
 
-    #Create a group without entering a name 
-    #We should detect a warning and the group isn't created
+    # Create a group without entering a name
+    # We should detect a warning and the group isn't created
     def test_create_group_no_name(self):
         login(self.driver, "k")
         home_page = HomePage(self.driver)
         home_page.go_to_groups()
         groups_page = GroupsPage(self.driver)
         self.assertTrue(groups_page.create_group_no_name())
-    
-    #Create a group 
-    #We should get a new group page with title being name that is named inside create_group
+
+    # Create a group
+    # We should get a new group page with title being name that is named inside create_group
     def test_create_group(self):
         login(self.driver, "k")
         home_page = HomePage(self.driver)
@@ -310,7 +312,7 @@ class FlickrGroupsTest(unittest.TestCase):
         groups_page = GroupsPage(self.driver)
         self.assertTrue(groups_page.create_group())
 
-    #Try to create a group with the same name of the group we just created
+    # Try to create a group with the same name of the group we just created
     # We should get a warning that this group already exsits
     def test_create_group_that_exists(self):
         login(self.driver, "k")
@@ -319,8 +321,8 @@ class FlickrGroupsTest(unittest.TestCase):
         groups_page = GroupsPage(self.driver)
         self.assertTrue(groups_page.create_group_that_exists())
 
-    #Test 18+ group creation
-    #we should get a page with 18+ warning
+    # Test 18+ group creation
+    # we should get a page with 18+ warning
     def test_create_18_group(self):
         login(self.driver, "k")
         home_page = HomePage(self.driver)
@@ -328,8 +330,8 @@ class FlickrGroupsTest(unittest.TestCase):
         groups_page = GroupsPage(self.driver)
         self.assertTrue(groups_page.create_18_age_group())
 
-    #add a photo to a group 
-    #we verify title of the photo matches 
+    # add a photo to a group
+    # we verify title of the photo matches
     def test_add_photo_to_group(self):
         login(self.driver, "k")
         home_page = HomePage(self.driver)
@@ -338,9 +340,9 @@ class FlickrGroupsTest(unittest.TestCase):
         home_page.go_to_groups()
         self.assertTrue(groups_page.add_photo_to_group())
 
-    #check that a group turns up when searched for
+    # check that a group turns up when searched for
     def test_group_is_created(self):
-        login(self.driver,"m")
+        login(self.driver, "m")
         home_page = HomePage(self.driver)
         home_page.search_group("TESTGROUP-SE-7")
         search_group = SearchGroupsPage(self.driver)
@@ -348,57 +350,58 @@ class FlickrGroupsTest(unittest.TestCase):
         group_page = GroupsPage(self.driver)
         self.assertTrue(group_page.group_name_matches("TESTGROUP-SE-7"))
 
-    #try to join a group
-    #then open group list and verify that it exists
+    # try to join a group
+    # then open group list and verify that it exists
     def test_join_group(self):
-        login(self.driver,"m")
+        login(self.driver, "m")
         home_page = HomePage(self.driver)
         home_page.search_group("TESTGROUP-SE-7")
         search_group = SearchGroupsPage(self.driver)
         search_group.open_group()
         group_page = GroupsPage(self.driver)
-        group_page.join_group()#joins opened group and waits 5s
+        group_page.join_group()  # joins opened group and waits 5s
         home_page.go_to_groups()
         self.assertTrue(group_page.group_in_joined_groups("TESTGROUP-SE-7"))
 
     def tearDown(self):
         self.driver.close()
-    
+
 
 class FlickrNotifications(unittest.TestCase):
-    
     @classmethod
     def setUpClass(inst):
-        #first send open second account and send notification to main account
+        # first send open second account and send notification to main account
         path = "chromedriver.exe"
         chrome_options = webdriver.ChromeOptions()
         chrome_options.headless = True
-        chrome_options.add_argument('--window-size=1920,1080')
+        chrome_options.add_argument("--window-size=1920,1080")
         inst.driver = webdriver.Chrome(
-        executable_path=path, chrome_options=chrome_options)
+            executable_path=path, chrome_options=chrome_options
+        )
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
         login(inst.driver, "k2")
         home_page = HomePage(inst.driver)
         time.sleep(5)
-        home_page.send_notification()       #follows account karimamr9 to send a notification
+        home_page.send_notification()  # follows account karimamr9 to send a notification
         inst.driver.close()
         path = "chromedriver.exe"
         chrome_options = webdriver.ChromeOptions()
         chrome_options.headless = True
-        chrome_options.add_argument('--window-size=1920,1080')
+        chrome_options.add_argument("--window-size=1920,1080")
         inst.driver = webdriver.Chrome(
-        executable_path=path, chrome_options=chrome_options)
+            executable_path=path, chrome_options=chrome_options
+        )
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
-        login(inst.driver, "k")             #opens main account
+        login(inst.driver, "k")  # opens main account
 
-    #check that the follow sent a notification and that it appeared correctly
-    def test_push(self): 
+    # check that the follow sent a notification and that it appeared correctly
+    def test_push(self):
         home_page = HomePage(self.driver)
         self.assertTrue(home_page.check_push_notifications())
 
-    #check last follow is in notification history
+    # check last follow is in notification history
     def test_notifications(self):
         notification_page = NotificationPage(self.driver)
         self.assertTrue(notification_page.check_last_notficiation())
@@ -414,16 +417,17 @@ class FlikcrPrints(unittest.TestCase):
         path = "chromedriver.exe"
         chrome_options = webdriver.ChromeOptions()
         chrome_options.headless = True
-        chrome_options.add_argument('--window-size=1920,1080')
+        chrome_options.add_argument("--window-size=1920,1080")
         inst.driver = webdriver.Chrome(
-        executable_path=path, chrome_options=chrome_options)
+            executable_path=path, chrome_options=chrome_options
+        )
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
-        login(inst.driver,"k")
+        login(inst.driver, "k")
         home_page = HomePage(inst.driver)
         time.sleep(5)
         home_page.go_to_prints()
-    
+
     def test_prints_title(self):
         prints_page = PrintsPage(self.driver)
         self.assertTrue(prints_page.title_matches())
@@ -436,15 +440,17 @@ class FlikcrPrints(unittest.TestCase):
     def tearDownClass(inst):
         inst.driver.close()
 
+
 class FlickrViewPhoto(unittest.TestCase):
     @classmethod
     def setUpClass(inst):
         path = "chromedriver.exe"
         chrome_options = webdriver.ChromeOptions()
         chrome_options.headless = True
-        chrome_options.add_argument('--window-size=1920,1080')
+        chrome_options.add_argument("--window-size=1920,1080")
         inst.driver = webdriver.Chrome(
-        executable_path=path, chrome_options=chrome_options)
+            executable_path=path, chrome_options=chrome_options
+        )
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
         login(inst.driver, "m")
@@ -467,9 +473,10 @@ class FlickrComments(unittest.TestCase):
         path = "chromedriver.exe"
         chrome_options = webdriver.ChromeOptions()
         chrome_options.headless = True
-        chrome_options.add_argument('--window-size=1920,1080')
+        chrome_options.add_argument("--window-size=1920,1080")
         inst.driver = webdriver.Chrome(
-        executable_path=path, chrome_options=chrome_options)
+            executable_path=path, chrome_options=chrome_options
+        )
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
         login(inst.driver, "m")
@@ -488,7 +495,7 @@ class FlickrComments(unittest.TestCase):
         path = "chromedriver.exe"
         chrome_options = webdriver.ChromeOptions()
         chrome_options.headless = True
-        chrome_options.add_argument('--window-size=1920,1080')
+        chrome_options.add_argument("--window-size=1920,1080")
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
         login(self.driver, "k")
@@ -509,44 +516,47 @@ class FlickrPeople(unittest.TestCase):
         path = "chromedriver.exe"
         chrome_options = webdriver.ChromeOptions()
         chrome_options.headless = True
-        chrome_options.add_argument('--window-size=1920,1080')
+        chrome_options.add_argument("--window-size=1920,1080")
         self.driver = webdriver.Chrome(
-        executable_path=path, chrome_options=chrome_options)
+            executable_path=path, chrome_options=chrome_options
+        )
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
-    
-    #People page loads and its title is correct
+
+    # People page loads and its title is correct
     def test_people_title(self):
-        login(self.driver,"k")
+        login(self.driver, "k")
         home_page = HomePage(self.driver)
         home_page.go_to_people()
         people_page = PeoplePage(self.driver)
         self.assertTrue(people_page.page_title_matches())
-    
-    #test all photos are from people that you follow
-    #no photos from an account that you don't follow should appear
+
+    # test all photos are from people that you follow
+    # no photos from an account that you don't follow should appear
     def test_all_photos_from_follwing(self):
-        login(self.driver,"k")
+        login(self.driver, "k")
         home_page = HomePage(self.driver)
         home_page.go_to_people()
         people_page = PeoplePage(self.driver)
         self.assertTrue(people_page.all_photos_from_following())
-    
+
     def test_following_list_updates(self):
-        login(self.driver,"k")                          #login to karim's account and search for a profile
+        login(self.driver, "k")  # login to karim's account and search for a profile
         home_page = HomePage(self.driver)
         home_page.search_people("Abdallah Shedid")
         search_people = SearchPeoplePage(self.driver)
-        search_people.open_profile()                    #open first matching result
+        search_people.open_profile()  # open first matching result
         profile_page = ProfilePage(self.driver)
-        profile_page.follow_opened_profile()            #follow this account
+        profile_page.follow_opened_profile()  # follow this account
         home_page.go_to_people()
-        people_page = PeoplePage(self.driver)           #redirect to people see if the following list is updated
+        people_page = PeoplePage(
+            self.driver
+        )  # redirect to people see if the following list is updated
         self.assertTrue(people_page.follow_is_updated("Abdallah Shedid"))
 
     def tearDown(self):
         self.driver.close()
-    
+
 
 class FlikcrHelp(unittest.TestCase):
     def setUp(self):
@@ -554,13 +564,14 @@ class FlikcrHelp(unittest.TestCase):
         path = "chromedriver.exe"
         chrome_options = webdriver.ChromeOptions()
         chrome_options.headless = True
-        chrome_options.add_argument('--window-size=1920,1080')
+        chrome_options.add_argument("--window-size=1920,1080")
         self.driver = webdriver.Chrome(
-        executable_path=path, chrome_options=chrome_options)
+            executable_path=path, chrome_options=chrome_options
+        )
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
 
-    #help page is loaded and its tilte is Help
+    # help page is loaded and its tilte is Help
     def test_help_title(self):
         login(self.driver, "k")
         home_page = HomePage(self.driver)
@@ -568,8 +579,8 @@ class FlikcrHelp(unittest.TestCase):
         home_page.go_to_help()
         help_page = HelpPage(self.driver)
         self.assertTrue(help_page.title_matches_help())
-    
-    #help page categories are appearing correctly (in HelpPage=> categories_appearing() we specify what categories we are expecting )
+
+    # help page categories are appearing correctly (in HelpPage=> categories_appearing() we specify what categories we are expecting )
     def test_help_all_categories(self):
         login(self.driver, "k")
         home_page = HomePage(self.driver)
@@ -578,8 +589,8 @@ class FlikcrHelp(unittest.TestCase):
         help_page = HelpPage(self.driver)
         self.assertTrue(help_page.categories_appearing())
 
-    #help articles are consistent with their titles and they are all accessable
-    #any article causing error would be printed in report after test
+    # help articles are consistent with their titles and they are all accessable
+    # any article causing error would be printed in report after test
     def test_all_articles_content(self):
         login(self.driver, "k")
         home_page = HomePage(self.driver)
@@ -590,8 +601,6 @@ class FlikcrHelp(unittest.TestCase):
         self.assertEqual(len(errors), 0)
         if len(errors) != 0:
             print("errors in: ", errors)
-        
-
 
     def tearDown(self):
         self.driver.close()
@@ -602,12 +611,13 @@ class FlickrMsg(unittest.TestCase):
         path = "chromedriver.exe"
         chrome_options = webdriver.ChromeOptions()
         chrome_options.headless = True
-        chrome_options.add_argument('--window-size=1920,1080')
+        chrome_options.add_argument("--window-size=1920,1080")
         self.driver = webdriver.Chrome(
-        executable_path=path, chrome_options=chrome_options)
+            executable_path=path, chrome_options=chrome_options
+        )
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
-    
+
     def test_send_msg(self):
         login(self.driver, "m")
         home_page = HomePage(self.driver)
@@ -618,7 +628,7 @@ class FlickrMsg(unittest.TestCase):
         profile_page.send_message()
         msg_page = MessagePage(self.driver)
         self.assertTrue(msg_page.send_message())
-    
+
     def test_receive_msg(self):
         login(self.driver, "k")
         home_page = HomePage(self.driver)
@@ -626,28 +636,27 @@ class FlickrMsg(unittest.TestCase):
         home_page.open_msg()
         msg_page = MessagePage(self.driver)
         self.assertTrue(msg_page.receive_message())
-    
+
     def tearDown(self):
         self.driver.close()
+
 
 class FlickExplore(unittest.TestCase):
     def setUp(self):
         path = "chromedriver.exe"
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.headless = True
-        chrome_options.add_argument('--window-size=1920,1080')
+        
         self.driver = webdriver.Chrome(
-        executable_path=path, chrome_options=chrome_options)
+            executable_path=path)
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
-    
+
     def test_explore_page(self):
         login(self.driver, "k")
         home_page = HomePage(self.driver)
         home_page.go_to_explore()
         explore_page = ExplorePage(self.driver)
         self.assertTrue(explore_page.page_title_is_explore())
-    
+
     def test_explore_photos_load(self):
         login(self.driver, "k")
         home_page = HomePage(self.driver)
@@ -661,13 +670,13 @@ class FlickExplore(unittest.TestCase):
         home_page.go_to_explore()
         explore_page = ExplorePage(self.driver)
         explore_page.go_to_trending()
-        self.assertTrue(explore_page.trending_in_are_loaded_ordered())   
+        self.assertTrue(explore_page.trending_in_are_loaded_ordered())
 
     def test_trending_photos_load(self):
         login(self.driver, "k")
         home_page = HomePage(self.driver)
         home_page.go_to_explore()
-        explore_page = ExplorePage(self.driver)   
+        explore_page = ExplorePage(self.driver)
         explore_page.go_to_trending()
         self.assertNotEqual(explore_page.trending_photos_loaded(), 0)
 
@@ -677,5 +686,3 @@ class FlickExplore(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
-
