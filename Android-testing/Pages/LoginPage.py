@@ -9,16 +9,41 @@ class LoginPage:
     def __init__(self, d):
         self.driver = d
 
-    def enter_email(self):
-        email_field = self.driver.find_element(*LoginPageLocator.EMAIL_FIELD)
-        email_field.send_keys("karimamr9@outlook.com")
-        next_button = self.driver.find_element(*LoginPageLocator.NEXT_BUTTON)
-        next_button.click()
-        self.driver.implicitly_wait(10)
-        password = self.driver.find_element(*LoginPageLocator.PASSWORD)
-        password.send_keys(",Q#8zUvxmSVJ-L^")
-        sign_in = self.driver.find_element(*LoginPageLocator.SIGN_IN)
-        sign_in.click()
+    def enter_email(self, selector):
+        if selector == "k":
+            email_field = self.driver.find_element(*LoginPageLocator.EMAIL_FIELD)
+            email_field.send_keys("karimamr9@outlook.com")
+            next_button = self.driver.find_element(*LoginPageLocator.NEXT_BUTTON)
+            next_button.click()
+            time.sleep(1)
+            password = self.driver.find_element(*LoginPageLocator.PASSWORD)
+            password.send_keys(",Q#8zUvxmSVJ-L^")
+            sign_in = self.driver.find_element(*LoginPageLocator.SIGN_IN)
+            sign_in.click()
+            time.sleep(5)
+        elif selector == "m":
+            email_field = self.driver.find_element(*LoginPageLocator.EMAIL_FIELD)
+            email_field.send_keys("mohamedamr866@gmail.com")
+            next_button = self.driver.find_element(*LoginPageLocator.NEXT_BUTTON)
+            next_button.click()
+            time.sleep(1)
+            password = self.driver.find_element(*LoginPageLocator.PASSWORD)
+            password.send_keys("abcd12345678")
+            sign_in = self.driver.find_element(*LoginPageLocator.SIGN_IN)
+            sign_in.click()
+            time.sleep(5)
+        elif selector == "k2":
+            email_field = self.driver.find_element(*LoginPageLocator.EMAIL_FIELD)
+            email_field.send_keys("karim_nimo@yahoo.com")
+            next_button = self.driver.find_element(*LoginPageLocator.NEXT_BUTTON)
+            next_button.click()
+            time.sleep(1)
+            password = self.driver.find_element(*LoginPageLocator.PASSWORD)
+            password.send_keys("AVZ7Xf!_SNRBQP2")
+            sign_in = self.driver.find_element(*LoginPageLocator.SIGN_IN)
+            sign_in.click()
+            time.sleep(5)
+
 
     # Tester: Mohamed Amr
     # In this function if we try to log in with an email in a wrong format an error message will appear to the user "Hmm… that's not an email address"

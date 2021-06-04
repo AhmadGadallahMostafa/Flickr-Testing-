@@ -7,20 +7,20 @@ from Pages.PhotostreamPage import PhotostreamPage
 from Pages.SignupPage import SignupPage
 from Pages.UploadPage import UploadPage
 from Pages.WelcomePage import WelcomePage
+from Pages.ProfilePage import ProfilePage
+from Pages.SearchPage import SearchPage
 from appium import webdriver
-from appium.webdriver.common import touch_action
-import unittest
-from Locators.PhotostreamPageLocator import PhotostreamPageLocator
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from appium.webdriver.common.mobileby import MobileBy
-from Locators.LoginPageLocator import LoginPageLocator
+from Locators.PhotostreamPagaLocator import  PhotoStreamPageLocator
 
 
 
-def login(driver):
+
+def login(driver, selector):
     login_page = LoginPage(driver)
-    login_page.enter_email()
+    login_page.enter_email(selector)
 
 
 class FlickrUploadAndroid(unittest.TestCase):
@@ -39,7 +39,7 @@ class FlickrUploadAndroid(unittest.TestCase):
         home = WelcomePage(inst.driver)
         home.go()
         inst.driver.implicitly_wait(10)
-        login(inst.driver)
+        login(inst.driver, "k")
 
     def test_upload_activity(self):
         home = HomePage(self.driver)
@@ -62,9 +62,9 @@ class FlickrUploadAndroid(unittest.TestCase):
     def test_photo_from_camera_in_photo_stream(self):
         time.sleep(5)
         photo_stream_page = PhotostreamPage(self.driver)
-        sort_list = self.driver.find_element(*PhotostreamPageLocator.DATE_LIST)
+        sort_list = self.driver.find_element(*PhotoStreamPageLocator.DATE_LIST)
         sort_list.click()
-        by_date = self.driver.find_element(*PhotostreamPageLocator.DATE_UPLOADED)
+        by_date = self.driver.find_element(*PhotoStreamPageLocator.DATE_UPLOADED)
         by_date.click()
         time.sleep(5)
         self.assertTrue(photo_stream_page.check_last_uploaded_title_matches("Android camera upload"))
@@ -72,9 +72,9 @@ class FlickrUploadAndroid(unittest.TestCase):
     def test_photo_from_gallery_in_photo_stream(self):
         time.sleep(5)
         photo_stream_page = PhotostreamPage(self.driver)
-        sort_list = self.driver.find_element(*PhotostreamPageLocator.DATE_LIST)
+        sort_list = self.driver.find_element(*PhotoStreamPageLocator.DATE_LIST)
         sort_list.click()
-        by_date = self.driver.find_element(*PhotostreamPageLocator.DATE_UPLOADED)
+        by_date = self.driver.find_element(*PhotoStreamPageLocator.DATE_UPLOADED)
         by_date.click()
         time.sleep(5)
         self.assertTrue(photo_stream_page.check_last_uploaded_title_matches("Android gallery upload"))
@@ -220,7 +220,6 @@ class FlickrSignupAndroid(unittest.TestCase):
         self.driver.close_app()
 
 
-
 class FlickrViewPhotoAndroid(unittest.TestCase):
 
     @classmethod
@@ -254,10 +253,57 @@ class FlickrViewPhotoAndroid(unittest.TestCase):
         time.sleep(5)
         photo_stream_page = PhotostreamPage(self.driver)
         time.sleep(10)
-        photo_stream_page.view_photo()
+        self.assertTrue(photo_stream_page.view_photo())
 
     def tearDown(self):
         self.driver.close_app()
+
+
+class FlickrProfileAndroid(unittest.TestCase):
+    
+    def setUp(self):
+        desired_cap = {
+                'platformName': 'Android',
+                'deviceName': 'emulator-5554',
+                'appPackage': 'com.flickr.android',
+                'appActivity': 'com.yahoo.mobile.client.android.flickr.activity.MainActivity'
+            }
+        self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_cap)
+        get_started = WebDriverWait(self.driver, 30).until(
+        EC.presence_of_element_located((MobileBy.ACCESSIBILITY_ID, "Get Started"
+        )))
+        get_started.click()
+        time.sleep(10)
+        login(self.driver, "k")
+    
+    def test_follow(self):
+        home_page = HomePage(self.driver)
+        home_page.search_for_profile("Abdallah shedid")
+        search_people = SearchPage(self.driver)
+        search_people.search_people()
+        search_people.open_profile()
+        profile_page = ProfilePage(self.driver)
+        with self.assertRaises(Exception) as context:
+            profile_page.follow_profile()
+
+    def test_unfollow(self):
+        home_page = HomePage(self.driver)
+        home_page.search_for_profile("Abdallah shedid")
+        search_people = SearchPage(self.driver)
+        search_people.search_people()
+        search_people.open_profile()
+        profile_page = ProfilePage(self.driver)
+        self.assertTrue(profile_page.unfollow())
+    
+    def tearDown(self):
+        self.driver.close_app()
+
+    
+    
+
+
+
+
 
 
 

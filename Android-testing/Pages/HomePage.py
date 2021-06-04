@@ -1,8 +1,7 @@
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
-from appium.webdriver.common.mobileby import MobileBy
-from appium import webdriver
 from Locators.HomePageLocator import HomePageLocator
+from appium.webdriver.common.touch_action import TouchAction
+
 import time
 
 class HomePage:
@@ -17,3 +16,14 @@ class HomePage:
     def go_to_photo_stream(self):
         profile_button = self.driver.find_element(*HomePageLocator.PHOTO_STREAM_ICON)
         profile_button.click()
+
+    def search_for_profile(self, acc):
+        search_icon = self.driver.find_element(*HomePageLocator.SEARCH_ICON)
+        search_icon.click()
+        time.sleep(1)
+        search_field = self.driver.find_element(*HomePageLocator.SEARCH_BOX)
+        search_field.clear()
+        search_field.send_keys(acc)
+        TouchAction(self.driver).tap(x=968, y=1706).perform()
+        
+        time.sleep(2)
