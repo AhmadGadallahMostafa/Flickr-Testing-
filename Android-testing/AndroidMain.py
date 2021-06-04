@@ -236,16 +236,7 @@ class FlickrViewPhotoAndroid(unittest.TestCase):
         )))
         get_started.click()
         inst.driver.implicitly_wait(60)
-        email = inst.driver.find_element_by_id("login-email")
-        email.send_keys("mohamedamr866@gmail.com")
-        login = inst.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.widget.Button")
-        login.click()
-        inst.driver.implicitly_wait(60)
-        password = inst.driver.find_element_by_id("login-password")
-        password.send_keys("abcd12345678")
-        signin = inst.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.widget.Button")
-        signin.click()
-        inst.driver.implicitly_wait(60)
+        login(self.driver, "m")
 
     def test_view_photo(self):
         home_page = HomePage(self.driver)
@@ -297,6 +288,46 @@ class FlickrProfileAndroid(unittest.TestCase):
     
     def tearDown(self):
         self.driver.close_app()
+
+
+class FlickrComments(unittest.TestCase):
+    @classmethod
+    def setUpClass(inst):
+        path = "chromedriver.exe"
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.headless = True
+        chrome_options.add_argument('--window-size=1920,1080')
+        inst.driver = webdriver.Chrome(
+        executable_path=path, chrome_options=chrome_options)
+        inst.driver.get("https://www.flickr.com/")
+        inst.driver.maximize_window()
+        login(inst.driver, "m")
+        time.sleep(5)
+
+    def test_comment(self):
+        home_page = HomePage(self.driver)
+        home_page.search_people("karimamr9")
+        search_people = SearchPeoplePage(self.driver)
+        search_people.open_profile()
+        photo_stream_page = PhotoStreamPage(self.driver)
+        photo_stream_page.open_photo()
+        photo_view_page = PhotoViewPage(self.driver)
+        photo_view_page.comment()
+        self.driver.close()
+        path = "chromedriver.exe"
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.headless = True
+        chrome_options.add_argument('--window-size=1920,1080')
+        self.driver.get("https://www.flickr.com/")
+        self.driver.maximize_window()
+        login(self.driver, "k")
+        time.sleep(5)
+        home_page = HomePage(self.driver)
+        home_page.go_to_photostream()
+        photo_stream_page = PhotoStreamPage(self.driver)
+        photo_stream_page.open_photo()
+        photo_view_page = PhotoViewPage(self.driver)
+        self.assertTrue(photo_view_page.check_comment())
 
     
     
