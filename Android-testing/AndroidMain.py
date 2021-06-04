@@ -4,6 +4,7 @@ from Pages.HomePage import HomePage
 from Pages.LoginPage import LoginPage
 from Pages.LogoutPage import LogoutPage
 from Pages.PhotostreamPage import PhotostreamPage
+from Pages.PhotoviewPage import PhotoViewPage
 from Pages.SignupPage import SignupPage
 from Pages.UploadPage import UploadPage
 from Pages.WelcomePage import WelcomePage
@@ -236,7 +237,8 @@ class FlickrViewPhotoAndroid(unittest.TestCase):
         )))
         get_started.click()
         inst.driver.implicitly_wait(60)
-        login(self.driver, "m")
+        login(inst.driver, "m")
+        time.sleep(10)
 
     def test_view_photo(self):
         home_page = HomePage(self.driver)
@@ -290,46 +292,58 @@ class FlickrProfileAndroid(unittest.TestCase):
         self.driver.close_app()
 
 
-class FlickrComments(unittest.TestCase):
+class FlickrCommentsAndroid(unittest.TestCase):
     @classmethod
     def setUpClass(inst):
-        path = "chromedriver.exe"
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.headless = True
-        chrome_options.add_argument('--window-size=1920,1080')
-        inst.driver = webdriver.Chrome(
-        executable_path=path, chrome_options=chrome_options)
-        inst.driver.get("https://www.flickr.com/")
-        inst.driver.maximize_window()
+        desired_cap = {
+            'platformName': 'Android',
+            'deviceName': 'emulator-5554',
+            'appPackage': 'com.flickr.android',
+            'appActivity': 'com.yahoo.mobile.client.android.flickr.activity.MainActivity'
+        }
+        inst.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_cap)
+        get_started = WebDriverWait(inst.driver, 30).until(
+            EC.presence_of_element_located((MobileBy.ACCESSIBILITY_ID, "Get Started"
+                                            )))
+        get_started.click()
+        time.sleep(10)
         login(inst.driver, "m")
-        time.sleep(5)
 
     def test_comment(self):
         home_page = HomePage(self.driver)
-        home_page.search_people("karimamr9")
-        search_people = SearchPeoplePage(self.driver)
+        home_page.search_for_profile("karimamr9")
+        search_people = SearchPage(self.driver)
+        search_people.search_people()
         search_people.open_profile()
-        photo_stream_page = PhotoStreamPage(self.driver)
-        photo_stream_page.open_photo()
+        photo_stream_page = PhotostreamPage(self.driver)
+        photo_stream_page.open_photo_of_searched_profile()
         photo_view_page = PhotoViewPage(self.driver)
+        time.sleep(5)
         photo_view_page.comment()
-        self.driver.close()
-        path = "chromedriver.exe"
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.headless = True
-        chrome_options.add_argument('--window-size=1920,1080')
-        self.driver.get("https://www.flickr.com/")
-        self.driver.maximize_window()
+        self.driver.close_app()
+        desired_cap = {
+            'platformName': 'Android',
+            'deviceName': 'emulator-5554',
+            'appPackage': 'com.flickr.android',
+            'appActivity': 'com.yahoo.mobile.client.android.flickr.activity.MainActivity'
+        }
+        self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_cap)
+        get_started = WebDriverWait(self.driver, 30).until(
+            EC.presence_of_element_located((MobileBy.ACCESSIBILITY_ID, "Get Started"
+                                            )))
+        get_started.click()
+        time.sleep(10)
         login(self.driver, "k")
         time.sleep(5)
         home_page = HomePage(self.driver)
-        home_page.go_to_photostream()
-        photo_stream_page = PhotoStreamPage(self.driver)
-        photo_stream_page.open_photo()
+        home_page.go_to_photo_stream()
+        photo_stream_page = PhotostreamPage(self.driver)
+        photo_stream_page.open_photo_in_another_profile()
         photo_view_page = PhotoViewPage(self.driver)
         self.assertTrue(photo_view_page.check_comment())
 
-    
+    def tearDown(self):
+        self.driver.close_app()
     
 
 

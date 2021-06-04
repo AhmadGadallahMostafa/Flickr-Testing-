@@ -67,7 +67,7 @@ view_photo_test_suite = unittest.TestSuite()
 
 view_photo_test_suite.addTest(
     AndroidMain.FlickrViewPhotoAndroid('test_view_photo'))
-runner = HtmlTestRunner.HTMLTestRunner(report_name="Flickr Android View Photo", report_title="View Photo Android", combine_reports=True).run(view_photo_test_suite)
+#runner = HtmlTestRunner.HTMLTestRunner(report_name="Flickr Android View Photo", report_title="View Photo Android", combine_reports=True).run(view_photo_test_suite)
 
 #=========================================================
 profile_test_suite = unittest.TestSuite()
@@ -82,3 +82,12 @@ profile_test_suite.addTest(
 
 #runner = HtmlTestRunner.HTMLTestRunner(report_name="Flickr Profile",
                                        #report_title="Flickr Profile", combine_reports=True).run(profile_test_suite)
+
+comment_test_suite = unittest.TestSuite()
+
+# Test cases are added manually to ensure their execution order
+
+comment_test_suite.addTest(
+    AndroidMain.FlickrCommentsAndroid('test_comment'))
+runner = HtmlTestRunner.HTMLTestRunner(report_name="Flickr Android Comment", report_title="Comment Android", combine_reports=True).run(comment_test_suite)
+

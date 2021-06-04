@@ -8,3 +8,5 @@ class PhotoviewPageLocator:
     COMMENT_TEXTBOX = (MobileBy.ID, "com.flickr.android:id/add_comment_content")
     POST_BUTTON = (MobileBy.ID, "com.flickr.android:id/add_comment_post")
 
+
+
