@@ -9,6 +9,7 @@ from Pages.UploadPage import UploadPage
 from Pages.WelcomePage import WelcomePage
 from Pages.ProfilePage import ProfilePage
 from Pages.SearchPage import SearchPage
+from Pages.GroupPage import GroupPage
 from appium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -298,7 +299,52 @@ class FlickrProfileAndroid(unittest.TestCase):
     def tearDown(self):
         self.driver.close_app()
 
+
+class FlickGroupAndroid(unittest.TestCase):
+    def setUp(self):
+        desired_cap = {
+                'platformName': 'Android',
+                'deviceName': 'emulator-5554',
+                'appPackage': 'com.flickr.android',
+                'appActivity': 'com.yahoo.mobile.client.android.flickr.activity.MainActivity'
+            }
+        self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_cap)
+        get_started = WebDriverWait(self.driver, 30).until(
+        EC.presence_of_element_located((MobileBy.ACCESSIBILITY_ID, "Get Started"
+        )))
+        get_started.click()
+        time.sleep(10)
+        login(self.driver, "k")
+
+    def test_join_group(self):
+        home_page = HomePage(self.driver)
+        home_page.search_for_group("test group for se")
+        search_group = SearchPage(self.driver)
+        search_group.search_groups()
+        search_group.open_group()
+        group_page = GroupPage(self.driver)
+        with self.assertRaises(Exception) as context:  #we expect an exception as we cant find element that has text
+            group_page.join_group()
     
+    def test_add_photo_to_group(self):
+        home_page = HomePage(self.driver)
+        home_page.search_for_group("test group for se")
+        search_group = SearchPage(self.driver)
+        search_group.search_groups()
+        search_group.open_group()
+        group_page = GroupPage(self.driver)  
+        self.assertTrue(group_page.add_photo_to_group())   
+
+    def test_leave_group(self):
+        home_page = HomePage(self.driver)
+        home_page.search_for_group("test group for se")
+        search_group = SearchPage(self.driver)
+        search_group.search_groups()
+        search_group.open_group()
+        group_page = GroupPage(self.driver)  
+        self.assertTrue(group_page.leave_group())        
+
+
     
 
 

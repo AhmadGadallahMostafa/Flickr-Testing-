@@ -25,5 +25,16 @@ class HomePage:
         search_field.clear()
         search_field.send_keys(acc)
         TouchAction(self.driver).tap(x=968, y=1706).perform()
-        
         time.sleep(2)
+    
+    def search_for_group(self, groupName):
+        search_icon = self.driver.find_element(*HomePageLocator.SEARCH_ICON)
+        search_icon.click()
+        time.sleep(1)
+        search_field = self.driver.find_element(*HomePageLocator.SEARCH_BOX)
+        search_field.clear()
+        search_field.send_keys(groupName)
+        TouchAction(self.driver).tap(x=968, y=1706).perform()
+        time.sleep(2)
+
+
