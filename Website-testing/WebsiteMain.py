@@ -20,6 +20,7 @@ from Pages.ProfilePage import ProfilePage
 from Pages.HelpPage import HelpPage
 from Pages.MessagePage import MessagePage
 from Pages.PhotoViewPage import PhotoViewPage
+from Pages.ExplorePage import ExplorePage
 from selenium.webdriver.chrome.options import Options
 
 
@@ -629,6 +630,49 @@ class FlickrMsg(unittest.TestCase):
     def tearDown(self):
         self.driver.close()
 
+class FlickExplore(unittest.TestCase):
+    def setUp(self):
+        path = "chromedriver.exe"
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.headless = True
+        chrome_options.add_argument('--window-size=1920,1080')
+        self.driver = webdriver.Chrome(
+        executable_path=path, chrome_options=chrome_options)
+        self.driver.get("https://www.flickr.com/")
+        self.driver.maximize_window()
+    
+    def test_explore_page(self):
+        login(self.driver, "k")
+        home_page = HomePage(self.driver)
+        home_page.go_to_explore()
+        explore_page = ExplorePage(self.driver)
+        self.assertTrue(explore_page.page_title_is_explore())
+    
+    def test_explore_photos_load(self):
+        login(self.driver, "k")
+        home_page = HomePage(self.driver)
+        home_page.go_to_explore()
+        explore_page = ExplorePage(self.driver)
+        self.assertNotEqual(explore_page.photos_are_loaded(), 0)
+
+    def test_trending(self):
+        login(self.driver, "k")
+        home_page = HomePage(self.driver)
+        home_page.go_to_explore()
+        explore_page = ExplorePage(self.driver)
+        explore_page.go_to_trending()
+        self.assertTrue(explore_page.trending_in_are_loaded_ordered())   
+
+    def test_trending_photos_load(self):
+        login(self.driver, "k")
+        home_page = HomePage(self.driver)
+        home_page.go_to_explore()
+        explore_page = ExplorePage(self.driver)   
+        explore_page.go_to_trending()
+        self.assertNotEqual(explore_page.trending_photos_loaded(), 0)
+
+    def tearDown(self):
+        self.driver.close()
 
 
 if __name__ == "__main__":

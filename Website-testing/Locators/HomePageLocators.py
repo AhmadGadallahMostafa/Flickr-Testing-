@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 class HomePageLocators(object):
     UPLOAD_ICON = (By.CLASS_NAME, "upload-icon")
     YOU = (By.XPATH, "//ul[@class='nav-menu desktop-only']//li[1]")
+    EXPLORE = (By.XPATH, "//ul[@class='nav-menu desktop-only']//li[2]")
     GROUPS_ICON = (By.XPATH, "//ul[@class='gn-submenu']//li[6]")
     NOTIFICATIONS_ICON = (By.XPATH, "//ul[@class='gn-tools']/li[3]")
     PUSH_NOTIFICATION = (By.XPATH, "//div[@class='view notifications-menu-view']/a/span/span")

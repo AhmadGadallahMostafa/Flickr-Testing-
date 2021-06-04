@@ -49,6 +49,12 @@ class HomePage(BasePage):
         self.driver.get("https://help.flickr.com/")
         time.sleep(5)
         
+    def go_to_explore(self):
+        time.sleep(5)
+        explore = self.driver.find_element(*HomePageLocators.EXPLORE)
+        explore.click()
+        time.sleep(2)
+
     def check_push_notifications(self):
         time.sleep(5)
         push_notifications = self.driver.find_element(*HomePageLocators.PUSH_NOTIFICATION)
