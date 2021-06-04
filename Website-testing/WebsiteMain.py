@@ -644,9 +644,12 @@ class FlickrMsg(unittest.TestCase):
 class FlickExplore(unittest.TestCase):
     def setUp(self):
         path = "chromedriver.exe"
-        
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.headless = True
+        chrome_options.add_argument("--window-size=1920,1080")
         self.driver = webdriver.Chrome(
-            executable_path=path)
+            executable_path=path, chrome_options=chrome_options
+        )
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
 
