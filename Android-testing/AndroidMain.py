@@ -253,7 +253,7 @@ class FlickrViewPhotoAndroid(unittest.TestCase):
         time.sleep(5)
         photo_stream_page = PhotostreamPage(self.driver)
         time.sleep(10)
-        photo_stream_page.view_photo()
+        self.assertTrue(photo_stream_page.view_photo())
 
     def tearDown(self):
         self.driver.close_app()
@@ -273,6 +273,7 @@ class FlickrProfileAndroid(unittest.TestCase):
         EC.presence_of_element_located((MobileBy.ACCESSIBILITY_ID, "Get Started"
         )))
         get_started.click()
+        time.sleep(10)
         login(self.driver, "k")
     
     def test_follow(self):
@@ -282,7 +283,8 @@ class FlickrProfileAndroid(unittest.TestCase):
         search_people.search_people()
         search_people.open_profile()
         profile_page = ProfilePage(self.driver)
-        self.assertTrue(profile_page.follow_profile())
+        with self.assertRaises(Exception) as context:
+            profile_page.follow_profile()
 
     def test_unfollow(self):
         home_page = HomePage(self.driver)
@@ -293,6 +295,8 @@ class FlickrProfileAndroid(unittest.TestCase):
         profile_page = ProfilePage(self.driver)
         self.assertTrue(profile_page.unfollow())
     
+    def tearDown(self):
+        self.driver.close_app()
 
     
     

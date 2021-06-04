@@ -1,5 +1,7 @@
 from selenium.webdriver.support import expected_conditions as EC
 from Locators.HomePageLocator import HomePageLocator
+from appium.webdriver.common.touch_action import TouchAction
+
 import time
 
 class HomePage:
@@ -22,4 +24,6 @@ class HomePage:
         search_field = self.driver.find_element(*HomePageLocator.SEARCH_BOX)
         search_field.clear()
         search_field.send_keys(acc)
+        TouchAction(self.driver).tap(x=968, y=1706).perform()
+        
         time.sleep(2)

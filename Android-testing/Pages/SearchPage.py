@@ -9,6 +9,7 @@ class SearchPage():
         people = self.driver.find_element(*SearchPageLocators.PEOPLE_SEARCH)
         people.click()
         time.sleep(2)
+        
     
     def open_profile(self):
         profile = self.driver.find_element(*SearchPageLocators.PROFILE_BOX)

@@ -67,8 +67,7 @@ view_photo_test_suite = unittest.TestSuite()
 
 view_photo_test_suite.addTest(
     AndroidMain.FlickrViewPhotoAndroid('test_view_photo'))
-runner = HtmlTestRunner.HTMLTestRunner(report_name="Flickr Android View Photo",
-                                       report_title="View Photo Android", combine_reports=True).run(view_photo_test_suite)
+runner = HtmlTestRunner.HTMLTestRunner(report_name="Flickr Android View Photo", report_title="View Photo Android", combine_reports=True).run(view_photo_test_suite)
 
 #=========================================================
 profile_test_suite = unittest.TestSuite()
@@ -77,9 +76,9 @@ profile_test_suite = unittest.TestSuite()
 
 profile_test_suite.addTest(
     AndroidMain.FlickrProfileAndroid('test_follow'))
-profile_test_suite.addTest(
-    AndroidMain.FlickrProfileAndroid('test_unfollow'))
+#profile_test_suite.addTest(
+   # AndroidMain.FlickrProfileAndroid('test_unfollow'))
 
 
-runner = HtmlTestRunner.HTMLTestRunner(report_name="Flickr Profile",
-                                       report_title="Flickr Profile", combine_reports=True).run(profile_test_suite)
+#runner = HtmlTestRunner.HTMLTestRunner(report_name="Flickr Profile",
+                                       #report_title="Flickr Profile", combine_reports=True).run(profile_test_suite)
