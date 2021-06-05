@@ -157,6 +157,10 @@ explore_test_suite = unittest.TestSuite()
 #explore_test_suite.addTest(WebsiteMain.FlickExplore("test_trending"))
 explore_test_suite.addTest(WebsiteMain.FlickExplore("test_trending_photos_load"))
 
+#explore_test_suite.addTest(WebsiteMain.FlickExplore("test_trending_photos_load"))
+#runner = HtmlTestRunner.HTMLTestRunner(#report_name="Explore Page", report_title="Explore test", combine_reports=True).run(explore_test_suite)
+
+
 #runner = HtmlTestRunner.HTMLTestRunner(report_name="Explore Page", report_title="Explore test", combine_reports=True).run(explore_test_suite)
 #=================================================================================================
 edit_profile_info_test_suite = unittest.TestSuite()
@@ -171,6 +175,7 @@ edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edi
 edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_pinterest"))
 edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_tumblr"))
 
+
 #runner = HtmlTestRunner.HTMLTestRunner(report_name="Flicker Edit Profile Info tests",report_title="edit_profile_info test", combine_reports=True).run(edit_profile_info_test_suite )
 #=================================================================================================
 search_test_suite = unittest.TestSuite()
@@ -180,5 +185,6 @@ search_test_suite.addTest(WebsiteMain.FlickSearch("test_search_photo_results"))
 search_test_suite.addTest(WebsiteMain.FlickSearch("test_search_people_results"))
 search_test_suite.addTest(WebsiteMain.FlickSearch("test_search_group_results"))
 
-runner = HtmlTestRunner.HTMLTestRunner(report_name="Flicker search tests",report_title="Search test", combine_reports=True).run(search_test_suite )
+runner = HtmlTestRunner.HTMLTestRunner(report_name="Flicker search tests",report_title="Search test", combine_reports=True).run(search_test_suite)
 #=================================================================================================
+

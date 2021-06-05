@@ -703,68 +703,69 @@ class FlickrEditProfileInfo(unittest.TestCase):
     def test_edit_occupation(self):
         home_page = HomePage(self.driver)
         home_page.go_to_about()
-        time.sleep(10)
+        time.sleep(3)
         about_page = AboutPage(self.driver)
         self.assertTrue(about_page.edit_occupation())
 
     def test_edit_home_town(self):
         home_page = HomePage(self.driver)
         home_page.go_to_about()
-        time.sleep(10)
+        time.sleep(3)
         about_page = AboutPage(self.driver)
         self.assertTrue(about_page.edit_home_town())
 
     def test_edit_city(self):
         home_page = HomePage(self.driver)
         home_page.go_to_about()
-        time.sleep(10)
+        time.sleep(3)
         about_page = AboutPage(self.driver)
         self.assertTrue(about_page.edit_city())
 
     def test_edit_country(self):
         home_page = HomePage(self.driver)
         home_page.go_to_about()
-        time.sleep(10)
+        time.sleep(3)
         about_page = AboutPage(self.driver)
         self.assertTrue(about_page.edit_country())
 
     def test_edit_facebook(self):
         home_page = HomePage(self.driver)
         home_page.go_to_about()
-        time.sleep(10)
+        time.sleep(3)
         about_page = AboutPage(self.driver)
         self.assertTrue(about_page.edit_facebook())
 
     def test_edit_twitter(self):
         home_page = HomePage(self.driver)
         home_page.go_to_about()
-        time.sleep(10)
+        time.sleep(3)
         about_page = AboutPage(self.driver)
         self.assertTrue(about_page.edit_twitter())
 
     def test_edit_instagram(self):
         home_page = HomePage(self.driver)
         home_page.go_to_about()
-        time.sleep(10)
+        time.sleep(3)
         about_page = AboutPage(self.driver)
         self.assertTrue(about_page.edit_instagram())
 
     def test_edit_pinterest(self):
         home_page = HomePage(self.driver)
         home_page.go_to_about()
-        time.sleep(10)
+        time.sleep(3)
         about_page = AboutPage(self.driver)
         self.assertTrue(about_page.edit_pinterest())
 
     def test_edit_tumblr(self):
         home_page = HomePage(self.driver)
         home_page.go_to_about()
-        time.sleep(10)
+        time.sleep(3)
         about_page = AboutPage(self.driver)
         self.assertTrue(about_page.edit_tumblr())
 
-    def tearDown(self):
-        self.driver.close()
+    @classmethod
+    def tearDownClass(inst):
+        inst.driver.close()
 
 
 class FlickSearch(unittest.TestCase):
