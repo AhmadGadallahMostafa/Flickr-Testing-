@@ -9,16 +9,18 @@ import time
 class AboutPage(BasePage):
     def edit_occupation(self):
         edit = self.driver.find_element(*AboutPageLocators.EDIT)
+        self.driver.execute_script("window.scrollTo(0, 700)")
+        time.sleep(2)
         edit.click()
-        time.sleep(10)
+        time.sleep(1)
         occupation = self.driver.find_element(*AboutPageLocators.OCCUPATION_TEXTBOX)
+        occupation.clear()
         occupation.send_keys("Engineer")
-        time.sleep(10)
+        time.sleep(1)
         done = self.driver.find_element(*AboutPageLocators.DONE)
         done.click()
         time.sleep(3)
         occupation_info = self.driver.find_element(*AboutPageLocators.OCCUPATION_INFO)
-        self.driver.print(occupation_info.text)
         result = "Engineer" in occupation_info.text
         return result
 
