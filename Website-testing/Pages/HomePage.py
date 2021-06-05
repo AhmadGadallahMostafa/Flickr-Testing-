@@ -104,6 +104,14 @@ class HomePage(BasePage):
         search_people = self.driver.find_element(*SearchPeoplePageLocators.SEARCH_PEOPLE)
         search_people.click()
         time.sleep(5)
+    
+    #enter in the search field a profile name then switch to photo search 
+    def search_photos(self, photoName):
+        time.sleep(2)
+        search = self.driver.find_element(*HomePageLocators.SEARCH_FIELD)
+        search.send_keys(photoName)
+        search.send_keys(Keys.RETURN)
+        time.sleep(5)
 
     def open_notifications(self):
         time.sleep(5)

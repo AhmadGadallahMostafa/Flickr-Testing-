@@ -16,6 +16,7 @@ from Pages.SignupPage import SignupPage
 from Pages.UploadPage import UploadPage
 from Pages.SearchGroupPage import SearchGroupsPage
 from Pages.SearchPeoplePage import SearchPeoplePage
+from Pages.SearchPhotosPage import SearchPhotosPage
 from Pages.PeoplePage import PeoplePage
 from Pages.ProfilePage import ProfilePage
 from Pages.HelpPage import HelpPage
@@ -765,6 +766,68 @@ class FlickrEditProfileInfo(unittest.TestCase):
     @classmethod
     def tearDownClass(inst):
         inst.driver.close()
+
+
+class FlickSearch(unittest.TestCase):
+    def setUp(self):
+        path = "chromedriver.exe"
+
+        self.driver = webdriver.Chrome(
+            executable_path=path
+        )
+        self.driver.get("https://www.flickr.com/")
+        self.driver.maximize_window()
+
+    def test_search_photo_loads(self):
+        login(self.driver, "k")
+        home_page = HomePage(self.driver)
+        home_page.search_photos("test")
+        photo_search = SearchPhotosPage(self.driver)
+        self.assertTrue(photo_search.title_mactches())
+    
+    def test_search_photo_loads(self):
+        login(self.driver, "k")
+        home_page = HomePage(self.driver)
+        home_page.search_people("Jon")
+        people_search = SearchPeoplePage(self.driver)
+        self.assertTrue(people_search.search_people_title())
+
+    # search for a photo and then grabs titles of all results counting
+    # how many time we get a match 
+    # we set criteria at atleast 10 matches
+    def test_search_photo_results(self):
+        login(self.driver, "k")
+        home_page = HomePage(self.driver)
+        home_page.search_photos("test")
+        photo_search = SearchPhotosPage(self.driver)
+        self.assertGreater(photo_search.search_results_match("test"), 10, "search resulted in less than 10 matches")
+
+    # search for a profile and then grabs titles of all results counting
+    # how many time we get a match 
+    # we set criteria at atleast 10 matches
+    def test_search_people_results(self):
+        login(self.driver, "k")
+        home_page = HomePage(self.driver)
+        home_page.search_people("Jon")
+        people_search = SearchPeoplePage(self.driver)
+        self.assertGreater(people_search.search_results_match("Jon"), 10, "search resulted in less than 10 matches")
+
+    # search for a group and then grabs titles of all results counting
+    # how many time we get a match 
+    # we set criteria at atleast 10 matches
+    def test_search_group_results(self):
+        login(self.driver, "k")
+        home_page = HomePage(self.driver)
+        home_page.search_people("Lovers")
+        group_search = SearchGroupsPage(self.driver)
+        self.assertGreater(group_search.search_results_match("Lovers"), 10, "search resulted in less than 10 matches")
+    
+
+    
+    
+    def tearDown(self):
+        self.driver.close()
+
 
 
 if __name__ == "__main__":
