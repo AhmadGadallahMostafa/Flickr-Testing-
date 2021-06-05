@@ -52,12 +52,10 @@ upload_test_suite.addTest(AndroidMain.FlickrUploadAndroid('test_photo_from_galle
 
 
 #runner = HtmlTestRunner.HTMLTestRunner(report_name="Flickr Android Upload",report_title="Upload Android",combine_reports=True).run(upload_test_suite)
-
 #========================================================================
 view_photo_test_suite = unittest.TestSuite()
 
 # Test cases are added manually to ensure their execution order
-
 view_photo_test_suite.addTest(AndroidMain.FlickrViewPhotoAndroid('test_view_photo'))
 
 #runner = HtmlTestRunner.HTMLTestRunner(report_name="Flickr Android View Photo", report_title="View Photo Android", combine_reports=True).run(view_photo_test_suite)
@@ -75,8 +73,20 @@ profile_test_suite.addTest(AndroidMain.FlickrProfileAndroid('test_unfollow'))
 
 group_test_suite = unittest.TestSuite()
 
-#group_test_suite.addTest(AndroidMain.FlickGroupAndroid("test_join_group"))
-#group_test_suite.addTest(AndroidMain.FlickGroupAndroid("test_add_photo_to_group"))
+group_test_suite.addTest(AndroidMain.FlickGroupAndroid("test_join_group"))
+group_test_suite.addTest(AndroidMain.FlickGroupAndroid("test_add_photo_to_group"))
 group_test_suite.addTest(AndroidMain.FlickGroupAndroid("test_leave_group"))
 
+
 runner = HtmlTestRunner.HTMLTestRunner(report_name="Flickr Groups",report_title="Flickr Groups", combine_reports=True).run(group_test_suite)
+#===============================================================
+
+
+comment_test_suite = unittest.TestSuite()
+
+# Test cases are added manually to ensure their execution order
+
+comment_test_suite.addTest(AndroidMain.FlickrCommentsAndroid('test_comment'))
+runner = HtmlTestRunner.HTMLTestRunner(report_name="Flickr Android Comment", report_title="Comment Android", combine_reports=True).run(comment_test_suite)
+
+

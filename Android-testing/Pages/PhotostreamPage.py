@@ -38,6 +38,13 @@ class PhotostreamPage:
         result = "IMG" in photo_id.text
         return result
 
-    def open_photo(self):
-        photo = self.driver.find_element(*PhotoStreamPageLocator.PHOTO)
+    def open_photo_of_searched_profile(self):
+        photo = self.driver.find_element(*PhotoStreamPageLocator.PHOTO_IN_SEARCHED_PROFILE)
         photo.click()
+        time.sleep(5)
+
+    def open_photo_in_another_profile(self):
+        photo = self.driver.find_element(*PhotoStreamPageLocator.PHOTO_IN_ANOTHER_PROFILE)
+        photo.click()
+        time.sleep(5)
+

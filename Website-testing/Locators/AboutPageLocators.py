@@ -1,0 +1,23 @@
+from selenium.webdriver.common.by import By
+class AboutPageLocators(object):
+    EDIT = (By.XPATH, "//div[@class='actions-container']")
+    DONE = (By.XPATH, "//li[@class='done']/span[2]")
+    OCCUPATION_TEXTBOX = (By.XPATH, "//input[@name='occupation']")
+    HOME_TOWN_TEXTBOX = (By.NAME, "hometown")
+    CITY_TEXTBOX = (By.NAME, "city")
+    COUNTRY_TEXTBOX = (By.NAME, "country")
+    FACEBOOK_TEXTBOX = (By.NAME, "facebook")
+    TWITTER_TEXTBOX = (By.NAME, "twitter")
+    INSTAGRAM_TEXTBOX = (By.NAME, "instagram")
+    PINTEREST_TEXTBOX = (By.NAME, "pinterest")
+    TUMBLR_TEXTBOX = (By.NAME, "tumblr")
+    OCCUPATION_INFO = (By.XPATH, "//div[@class='infos-view-container']/ul/li[2]/span[2]")
+    HOME_TOWN_INFO = (By.XPATH, "//div[@class='infos-view-container']/ul/li[3]/span[2]")
+    CITY_INFO = (By.XPATH, "//div[@class='infos-view-container']/ul/li[4]/span[2]")
+    COUNTRY_INFO = (By.XPATH, "//div[@class='infos-view-container']/ul/li[5]/span[2]")
+    FACEBOOK_INFO = (By.XPATH, "//div[@class='infos-view-container']/ul[2]/li[1]/span[2]")
+    TWITTER_INFO = (By.XPATH, "//div[@class='infos-view-container']/ul[2]/li[2]/span[2]")
+    INSTAGRAM_INFO = (By.XPATH, "//div[@class='infos-view-container']/ul[2]/li[3]/span[2]")
+    PINTEREST_INFO = (By.XPATH, "//div[@class='infos-view-container']/ul[2]/li[4]/span[2]")
+    TUMBLR_INFO = (By.XPATH, "//div[@class='infos-view-container']/ul[2]/li[5]/span[2]")
+
