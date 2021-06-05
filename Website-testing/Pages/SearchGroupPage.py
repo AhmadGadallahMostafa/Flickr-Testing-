@@ -8,5 +8,18 @@ class SearchGroupsPage(BasePage):
         group.click()
         time.sleep(10)
 
+    def search_results_match(self, searchedFor):
+        matchings = 0
+        
+        groups_from_search = self.driver.find_elements(*SearchGroupsPageLocators.GROUP_NAMES) #we get all search results and check it matcher searched
+      
+        for i in range(0, len(groups_from_search)):
+            groups_from_search[i] = groups_from_search[i].text
+        
+        for i in range(0, len(groups_from_search)):
+            if searchedFor in groups_from_search[i]:
+                matchings+=1
+        
+        return matchings       
 
 
