@@ -13,5 +13,6 @@ class HomePageLocators(object):
     HELP = (By.XPATH, "//div[@class='feed-rail-content-container']//div[2]/div/a[6]")
     MSG_RECIEVED = (By.XPATH, "//ul[@class='notifications-list']//li[2]/div/div/div/span/a[2]")
     SEARCH_PEOPLE = (By.PARTIAL_LINK_TEXT, "People")
+    ABOUT_ICON = (By.XPATH, "//ul[@class='gn-submenu']//li[1]")
 
 

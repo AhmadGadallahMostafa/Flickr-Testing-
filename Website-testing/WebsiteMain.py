@@ -5,6 +5,7 @@ from selenium import webdriver
 from Pages.MainPage import MainPage
 from Pages.GroupsPage import GroupsPage
 from Pages.HomePage import HomePage
+from Pages.AboutPage import AboutPage
 from Pages.LoginPage import LoginPage
 from Pages.LogoutPage import LogoutPage
 from Pages.NotificationPage import NotificationPage
@@ -682,6 +683,83 @@ class FlickExplore(unittest.TestCase):
         explore_page = ExplorePage(self.driver)
         explore_page.go_to_trending()
         self.assertNotEqual(explore_page.trending_photos_loaded(), 0)
+
+    def tearDown(self):
+        self.driver.close()
+
+class FlickrEditProfileInfo(unittest.TestCase):
+    @classmethod
+    def setUpClass(inst):
+        path = "chromedriver.exe"
+        inst.driver = webdriver.Chrome(
+            executable_path=path
+            )
+        inst.driver.get("https://www.flickr.com/")
+        inst.driver.maximize_window()
+        login(inst.driver, "m")
+        time.sleep(5)
+
+    def test_edit_occupation(self):
+        home_page = HomePage(self.driver)
+        home_page.go_to_about()
+        time.sleep(10)
+        about_page = AboutPage(self.driver)
+        self.assertTrue(about_page.edit_occupation())
+
+    def test_edit_home_town(self):
+        home_page = HomePage(self.driver)
+        home_page.go_to_about()
+        about_page = AboutPage(self.driver)
+        self.assertTrue(about_page.edit_home_town())
+
+    def test_edit_city(self):
+        home_page = HomePage(self.driver)
+        home_page.go_to_about()
+        time.sleep(10)
+        about_page = AboutPage(self.driver)
+        self.assertTrue(about_page.edit_city())
+
+    def test_edit_country(self):
+        home_page = HomePage(self.driver)
+        home_page.go_to_about()
+        time.sleep(10)
+        about_page = AboutPage(self.driver)
+        self.assertTrue(about_page.edit_country())
+
+    def test_edit_facebook(self):
+        home_page = HomePage(self.driver)
+        home_page.go_to_about()
+        time.sleep(10)
+        about_page = AboutPage(self.driver)
+        self.assertTrue(about_page.edit_facebook())
+
+    def test_edit_twitter(self):
+        home_page = HomePage(self.driver)
+        home_page.go_to_about()
+        time.sleep(10)
+        about_page = AboutPage(self.driver)
+        self.assertTrue(about_page.edit_twitter())
+
+    def test_edit_instagram(self):
+        home_page = HomePage(self.driver)
+        home_page.go_to_about()
+        time.sleep(10)
+        about_page = AboutPage(self.driver)
+        self.assertTrue(about_page.edit_instagram())
+
+    def test_edit_pinterest(self):
+        home_page = HomePage(self.driver)
+        home_page.go_to_about()
+        time.sleep(10)
+        about_page = AboutPage(self.driver)
+        self.assertTrue(about_page.edit_pinterest())
+
+    def test_edit_tumblr(self):
+        home_page = HomePage(self.driver)
+        home_page.go_to_about()
+        time.sleep(10)
+        about_page = AboutPage(self.driver)
+        self.assertTrue(about_page.edit_tumblr())
 
     def tearDown(self):
         self.driver.close()

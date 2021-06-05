@@ -44,6 +44,17 @@ class HomePage(BasePage):
         action.click(people)
         action.perform()
         time.sleep(5)
+
+    def go_to_about(self):
+        time.sleep(5)
+        you = self.driver.find_element(*HomePageLocators.YOU)
+        action = ActionChains(self.driver)
+        action.move_to_element(you)
+        about = self.driver.find_element(*HomePageLocators.ABOUT_ICON)
+        action.move_to_element(about)
+        action.click(about)
+        action.perform()
+        time.sleep(5)
     
     def go_to_help(self):
         self.driver.get("https://help.flickr.com/")
