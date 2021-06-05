@@ -18,6 +18,7 @@ class AboutPage(BasePage):
         done.click()
         time.sleep(3)
         occupation_info = self.driver.find_element(*AboutPageLocators.OCCUPATION_INFO)
+        self.driver.print(occupation_info.text)
         result = "Engineer" in occupation_info.text
         return result
 

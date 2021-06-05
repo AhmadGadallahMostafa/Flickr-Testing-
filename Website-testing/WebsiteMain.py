@@ -709,6 +709,7 @@ class FlickrEditProfileInfo(unittest.TestCase):
     def test_edit_home_town(self):
         home_page = HomePage(self.driver)
         home_page.go_to_about()
+        time.sleep(10)
         about_page = AboutPage(self.driver)
         self.assertTrue(about_page.edit_home_town())
 
