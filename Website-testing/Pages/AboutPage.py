@@ -9,28 +9,33 @@ import time
 class AboutPage(BasePage):
     def edit_occupation(self):
         edit = self.driver.find_element(*AboutPageLocators.EDIT)
-        self.driver.execute_script("window.scrollTo(0, 700)")
+        self.driver.execute_script("window.scrollTo(0, 750)")
         time.sleep(2)
         edit.click()
         time.sleep(1)
         occupation = self.driver.find_element(*AboutPageLocators.OCCUPATION_TEXTBOX)
         occupation.clear()
-        occupation.send_keys("Engineer")
         time.sleep(1)
+        occupation.send_keys("Engineer")
+        time.sleep(5)
         done = self.driver.find_element(*AboutPageLocators.DONE)
         done.click()
-        time.sleep(3)
+        time.sleep(5)
         occupation_info = self.driver.find_element(*AboutPageLocators.OCCUPATION_INFO)
         result = "Engineer" in occupation_info.text
         return result
 
     def edit_home_town(self):
         edit = self.driver.find_element(*AboutPageLocators.EDIT)
+        self.driver.execute_script("window.scrollTo(0, 750)")
+        time.sleep(2)
         edit.click()
-        time.sleep(10)
+        time.sleep(1)
         home_town = self.driver.find_element(*AboutPageLocators.HOME_TOWN_TEXTBOX)
+        home_town.clear()
+        time.sleep(1)
         home_town.send_keys("Giza")
-        time.sleep(10)
+        time.sleep(5)
         done = self.driver.find_element(*AboutPageLocators.DONE)
         done.click()
         time.sleep(3)
@@ -41,11 +46,15 @@ class AboutPage(BasePage):
 
     def edit_city(self):
         edit = self.driver.find_element(*AboutPageLocators.EDIT)
+        self.driver.execute_script("window.scrollTo(0, 750)")
+        time.sleep(2)
         edit.click()
-        time.sleep(10)
+        time.sleep(1)
         city = self.driver.find_element(*AboutPageLocators.CITY_TEXTBOX)
+        city.clear()
+        time.sleep(1)
         city.send_keys("Giza")
-        time.sleep(10)
+        time.sleep(5)
         done = self.driver.find_element(*AboutPageLocators.DONE)
         done.click()
         time.sleep(3)
@@ -55,11 +64,15 @@ class AboutPage(BasePage):
 
     def edit_country(self):
         edit = self.driver.find_element(*AboutPageLocators.EDIT)
+        self.driver.execute_script("window.scrollTo(0, 750)")
+        time.sleep(2)
         edit.click()
-        time.sleep(10)
+        time.sleep(1)
         country = self.driver.find_element(*AboutPageLocators.COUNTRY_TEXTBOX)
+        country.clear()
+        time.sleep(1)
         country.send_keys("Egypt")
-        time.sleep(10)
+        time.sleep(5)
         done = self.driver.find_element(*AboutPageLocators.DONE)
         done.click()
         time.sleep(3)
@@ -69,72 +82,92 @@ class AboutPage(BasePage):
 
     def edit_facebook(self):
         edit = self.driver.find_element(*AboutPageLocators.EDIT)
+        self.driver.execute_script("window.scrollTo(0, 750)")
+        time.sleep(2)
         edit.click()
-        time.sleep(10)
+        time.sleep(1)
         facebook = self.driver.find_element(*AboutPageLocators.FACEBOOK_TEXTBOX)
-        facebook.send_keys("Mohamed Amr")
-        time.sleep(10)
+        facebook.clear()
+        time.sleep(1)
+        facebook.send_keys("MohamedAmr")
+        time.sleep(5)
         done = self.driver.find_element(*AboutPageLocators.DONE)
         done.click()
         time.sleep(3)
         facebook_info = self.driver.find_element(*AboutPageLocators.FACEBOOK_INFO)
-        result = "Mohamed Amr" in facebook_info.text
+        result = "MohamedAmr" in facebook_info.text
         return result
 
     def edit_twitter(self):
         edit = self.driver.find_element(*AboutPageLocators.EDIT)
+        self.driver.execute_script("window.scrollTo(0, 750)")
+        time.sleep(2)
         edit.click()
-        time.sleep(10)
+        time.sleep(1)
         twitter = self.driver.find_element(*AboutPageLocators.TWITTER_TEXTBOX)
-        twitter.send_keys("Mohamed Amr 1")
-        time.sleep(10)
+        twitter.clear()
+        time.sleep(1)
+        twitter.send_keys("MohamedAmr1")
+        time.sleep(5)
         done = self.driver.find_element(*AboutPageLocators.DONE)
         done.click()
         time.sleep(3)
         twitter_info = self.driver.find_element(*AboutPageLocators.TWITTER_INFO)
-        result = "Mohamed Amr 1" in twitter_info.text
+        result = "MohamedAmr1" in twitter_info.text
         return result
 
     def edit_instagram(self):
         edit = self.driver.find_element(*AboutPageLocators.EDIT)
+        self.driver.execute_script("window.scrollTo(0, 750)")
+        time.sleep(2)
         edit.click()
-        time.sleep(10)
+        time.sleep(1)
         instagram = self.driver.find_element(*AboutPageLocators.INSTAGRAM_TEXTBOX)
-        instagram.send_keys("Mohamed Amr 2")
-        time.sleep(10)
+        instagram.clear()
+        time.sleep(1)
+        instagram.send_keys("MohamedAmr2")
+        time.sleep(5)
         done = self.driver.find_element(*AboutPageLocators.DONE)
         done.click()
         time.sleep(3)
         instagram_info = self.driver.find_element(*AboutPageLocators.INSTAGRAM_INFO)
-        result = "Mohamed Amr 2" in instagram_info.text
+        result = "MohamedAmr2" in instagram_info.text
         return result
 
     def edit_pinterest(self):
         edit = self.driver.find_element(*AboutPageLocators.EDIT)
+        self.driver.execute_script("window.scrollTo(0, 750)")
+        time.sleep(2)
         edit.click()
-        time.sleep(10)
+        time.sleep(1)
         pinterest = self.driver.find_element(*AboutPageLocators.PINTEREST_TEXTBOX)
-        pinterest.send_keys("Mohamed Amr 3")
-        time.sleep(10)
+        pinterest.clear()
+        time.sleep(1)
+        pinterest.send_keys("MohamedAmr3")
+        time.sleep(5)
         done = self.driver.find_element(*AboutPageLocators.DONE)
         done.click()
         time.sleep(3)
         pinterest_info = self.driver.find_element(*AboutPageLocators.PINTEREST_INFO)
-        result = "Mohamed Amr 3" in pinterest_info.text
+        result = "MohamedAmr3" in pinterest_info.text
         return result
 
     def edit_tumblr(self):
         edit = self.driver.find_element(*AboutPageLocators.EDIT)
+        self.driver.execute_script("window.scrollTo(0, 750)")
+        time.sleep(2)
         edit.click()
-        time.sleep(10)
+        time.sleep(1)
         tumblr = self.driver.find_element(*AboutPageLocators.TUMBLR_TEXTBOX)
-        tumblr.send_keys("Mohamed Amr 4")
-        time.sleep(10)
+        tumblr.clear()
+        time.sleep(1)
+        tumblr.send_keys("MohamedAmr4")
+        time.sleep(5)
         done = self.driver.find_element(*AboutPageLocators.DONE)
         done.click()
         time.sleep(3)
         tumblr_info = self.driver.find_element(*AboutPageLocators.TUMBLR_INFO)
-        result = "Mohamed Amr 4" in tumblr_info.text
+        result = "MohamedAmr4" in tumblr_info.text
         return result
 
 
