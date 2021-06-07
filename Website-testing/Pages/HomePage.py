@@ -6,7 +6,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 import time
 
-
+#this class mostly serves as  navigation to another pages
 class HomePage(BasePage):
     #each go function goes to specific page and then waits 5s to load
     def go_upload(self):
@@ -65,6 +65,17 @@ class HomePage(BasePage):
         explore = self.driver.find_element(*HomePageLocators.EXPLORE)
         explore.click()
         time.sleep(2)
+
+    def go_to_camera_finder(self):
+        time.sleep(5)
+        explore = self.driver.find_element(*HomePageLocators.EXPLORE)
+        action = ActionChains(self.driver)
+        action.move_to_element(explore)
+        camera_finder = self.driver.find_element(*HomePageLocators.CAMERA_FINDER)
+        action.move_to_element(camera_finder)
+        action.click(camera_finder)
+        action.perform()
+        time.sleep(5)
 
     def check_push_notifications(self):
         time.sleep(5)

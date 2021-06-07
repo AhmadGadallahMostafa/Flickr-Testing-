@@ -23,6 +23,7 @@ from Pages.HelpPage import HelpPage
 from Pages.MessagePage import MessagePage
 from Pages.PhotoViewPage import PhotoViewPage
 from Pages.ExplorePage import ExplorePage
+from Pages.CameraFinderPage import CameraFinderPage
 from selenium.webdriver.chrome.options import Options
 
 
@@ -688,6 +689,7 @@ class FlickExplore(unittest.TestCase):
     def tearDown(self):
         self.driver.close()
 
+
 class FlickrEditProfileInfo(unittest.TestCase):
     @classmethod
     def setUpClass(inst):
@@ -771,9 +773,11 @@ class FlickrEditProfileInfo(unittest.TestCase):
 class FlickSearch(unittest.TestCase):
     def setUp(self):
         path = "chromedriver.exe"
-
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.headless = True
+        chrome_options.add_argument("--window-size=1920,1080")
         self.driver = webdriver.Chrome(
-            executable_path=path
+            executable_path=path, chrome_options=chrome_options
         )
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
@@ -828,6 +832,37 @@ class FlickSearch(unittest.TestCase):
     def tearDown(self):
         self.driver.close()
 
+
+class FlickCameraFinder(unittest.TestCase):
+    def setUp(self):
+        path = "chromedriver.exe"
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.headless = True
+        chrome_options.add_argument("--window-size=1920,1080")
+        self.driver = webdriver.Chrome(
+            executable_path=path, chrome_options=chrome_options
+        )
+        self.driver.get("https://www.flickr.com/")
+        self.driver.maximize_window()
+
+    def test_camera_finder_title(self):
+        login(self.driver, "k")
+        home_page = HomePage(self.driver)
+        home_page.go_to_camera_finder()
+        camera_finder_page = CameraFinderPage(self.driver)
+        self.assertTrue(camera_finder_page.title_matches())
+
+    def test_camera_finder_displays_cameras(self):
+        login(self.driver, "k")
+        home_page = HomePage(self.driver)
+        home_page.go_to_camera_finder()
+        camera_finder_page = CameraFinderPage(self.driver)
+        self.assertNotEqual(camera_finder_page.camers_are_loaded(), 0) #we check if brands shown isnt equal to zero
+
+    def tearDown(self):
+        self.driver.close()
+
+        
 
 
 if __name__ == "__main__":
