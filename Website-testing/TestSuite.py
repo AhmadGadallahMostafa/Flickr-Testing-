@@ -147,18 +147,14 @@ msg_test_suite = unittest.TestSuite()
 msg_test_suite.addTest((WebsiteMain.FlickrMsg("test_send_msg")))
 msg_test_suite.addTest((WebsiteMain.FlickrMsg("test_receive_msg")))
 
-# runner = HtmlTestRunner.HTMLTestRunner(
-# report_name="MSG Page", report_title="MSG test", combine_reports=True).run(msg_test_suite)
+# runner = HtmlTestRunner.HTMLTestRunner(report_name="MSG Page", report_title="MSG test", combine_reports=True).run(msg_test_suite)
 # ==============================================================================================================================
 explore_test_suite = unittest.TestSuite()
 
-#explore_test_suite.addTest(WebsiteMain.FlickExplore("test_explore_page"))
-#explore_test_suite.addTest(WebsiteMain.FlickExplore("test_explore_photos_load"))
-#explore_test_suite.addTest(WebsiteMain.FlickExplore("test_trending"))
+explore_test_suite.addTest(WebsiteMain.FlickExplore("test_explore_page"))
+explore_test_suite.addTest(WebsiteMain.FlickExplore("test_explore_photos_load"))
+explore_test_suite.addTest(WebsiteMain.FlickExplore("test_trending"))
 explore_test_suite.addTest(WebsiteMain.FlickExplore("test_trending_photos_load"))
-
-#explore_test_suite.addTest(WebsiteMain.FlickExplore("test_trending_photos_load"))
-#runner = HtmlTestRunner.HTMLTestRunner(#report_name="Explore Page", report_title="Explore test", combine_reports=True).run(explore_test_suite)
 
 
 #runner = HtmlTestRunner.HTMLTestRunner(report_name="Explore Page", report_title="Explore test", combine_reports=True).run(explore_test_suite)
@@ -166,17 +162,17 @@ explore_test_suite.addTest(WebsiteMain.FlickExplore("test_trending_photos_load")
 edit_profile_info_test_suite = unittest.TestSuite()
 
 #edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_occupation"))
-#edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_home_town"))
-#edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_city"))
-#edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_country"))
-#edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_facebook"))
-#edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_twitter"))
-#edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_instagram"))
-#edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_pinterest"))
+edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_home_town"))
+edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_city"))
+edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_country"))
+edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_facebook"))
+edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_twitter"))
+edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_instagram"))
+edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_pinterest"))
 edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_tumblr"))
 
 
-runner = HtmlTestRunner.HTMLTestRunner(report_name="Flicker Edit Profile Info tests",report_title="edit_profile_info test", combine_reports=True).run(edit_profile_info_test_suite )
+#runner = HtmlTestRunner.HTMLTestRunner(report_name="Flicker Edit Profile Info tests",report_title="edit_profile_info test", combine_reports=True).run(edit_profile_info_test_suite )
 #=================================================================================================
 search_test_suite = unittest.TestSuite()
 
@@ -187,4 +183,9 @@ search_test_suite.addTest(WebsiteMain.FlickSearch("test_search_group_results"))
 
 #runner = HtmlTestRunner.HTMLTestRunner(report_name="Flicker search tests",report_title="Search test", combine_reports=True).run(search_test_suite)
 #=================================================================================================
+camera_finder_test_suite = unittest.TestSuite()
 
+camera_finder_test_suite.addTest((WebsiteMain.FlickCameraFinder("test_camera_finder_title")))
+camera_finder_test_suite.addTest((WebsiteMain.FlickCameraFinder("test_camera_finder_displays_cameras")))
+
+runner = HtmlTestRunner.HTMLTestRunner(report_name="Camera Finder Page", report_title="Camera Finder test", combine_reports=True).run(camera_finder_test_suite)

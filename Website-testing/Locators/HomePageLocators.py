@@ -14,5 +14,6 @@ class HomePageLocators(object):
     MSG_RECIEVED = (By.XPATH, "//ul[@class='notifications-list']//li[2]/div/div/div/span/a[2]")
     SEARCH_PEOPLE = (By.PARTIAL_LINK_TEXT, "People")
     ABOUT_ICON = (By.XPATH, "//ul[@class='gn-submenu']//li[1]")
+    CAMERA_FINDER = (By.XPATH, "//li[@aria-label='Camera Finder']")
 
 
