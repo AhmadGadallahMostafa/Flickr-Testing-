@@ -11,6 +11,7 @@ from Pages.WelcomePage import WelcomePage
 from Pages.ProfilePage import ProfilePage
 from Pages.SearchPage import SearchPage
 from Pages.GroupPage import GroupPage
+from Pages.NotificationPage import NotificationPage
 from appium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -336,7 +337,10 @@ class FlickGroupAndroid(unittest.TestCase):
         search_group.search_groups()
         search_group.open_group()
         group_page = GroupPage(self.driver)  
-        self.assertTrue(group_page.leave_group())        
+        self.assertTrue(group_page.leave_group())    
+
+    def tearDown(self):
+        self.driver.close_app()    
 
 
 
@@ -393,13 +397,42 @@ class FlickrCommentsAndroid(unittest.TestCase):
     def tearDown(self):
         self.driver.close_app()
 
+
+class FlickrNotificationAndroid(unittest.TestCase):
+    def setUp(self):
+        desired_cap = {
+                'platformName': 'Android',
+                'deviceName': 'emulator-5554',
+                'appPackage': 'com.flickr.android',
+                'appActivity': 'com.yahoo.mobile.client.android.flickr.activity.MainActivity'
+            }
+        self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_cap)
+        get_started = WebDriverWait(self.driver, 30).until(
+        EC.presence_of_element_located((MobileBy.ACCESSIBILITY_ID, "Get Started"
+        )))
+        get_started.click()
+        time.sleep(10)
     
+    def test_notifications(self):
+        login(self.driver, "k2")                            #we login to second account to search for for first account
+        home_page = HomePage(self.driver)   
+        home_page.search_for_profile("karimamr9")
+        search_people = SearchPage(self.driver)
+        search_people.search_people()
+        search_people.open_profile()
+        profile_page = ProfilePage(self.driver)
+        profile_page.follow_opened_profile()                 #we then follow it to send a notification 
+        self.driver.close_app()                              #we then close app and start a new session
+        self.setUp()
+        login(self.driver, "k")
+        home_page = HomePage(self.driver)
+        home_page.go_to_notifications()                      #we go to notification tab
+        notifiaction_page = NotificationPage(self.driver)
+        self.assertTrue(notifiaction_page.check_last_notification()) #we check last received notification
 
+    def tearDown(self):
+        self.driver.close_app()
 
-
-
-
-
-
+    
 if __name__ == "__main__":
     unittest.main()

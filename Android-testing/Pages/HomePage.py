@@ -12,10 +12,17 @@ class HomePage:
         self.driver.implicitly_wait(5)
         upload_button = self.driver.find_element(*HomePageLocator.UPLOAD_ICON)
         upload_button.click()
+        time.sleep(2)
 
     def go_to_photo_stream(self):
         profile_button = self.driver.find_element(*HomePageLocator.PHOTO_STREAM_ICON)
         profile_button.click()
+        time.sleep(2)
+    
+    def go_to_notifications(self):
+        notification_tab = self.driver.find_element(*HomePageLocator.NOTIFICATION)
+        notification_tab.click()
+        time.sleep(2)
 
     def search_for_profile(self, acc):
         search_icon = self.driver.find_element(*HomePageLocator.SEARCH_ICON)
