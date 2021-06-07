@@ -165,14 +165,14 @@ explore_test_suite.addTest(WebsiteMain.FlickExplore("test_trending_photos_load")
 #=================================================================================================
 edit_profile_info_test_suite = unittest.TestSuite()
 
-#edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_occupation"))
-#edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_home_town"))
-#edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_city"))
-#edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_country"))
-#edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_facebook"))
-#edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_twitter"))
-#edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_instagram"))
-#edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_pinterest"))
+edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_occupation"))
+edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_home_town"))
+edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_city"))
+edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_country"))
+edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_facebook"))
+edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_twitter"))
+edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_instagram"))
+edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_pinterest"))
 edit_profile_info_test_suite.addTest(WebsiteMain.FlickrEditProfileInfo("test_edit_tumblr"))
 
 
