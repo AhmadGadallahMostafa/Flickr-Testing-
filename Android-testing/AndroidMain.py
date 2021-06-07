@@ -426,6 +426,40 @@ class FlickrCommentsAndroid(unittest.TestCase):
         photo_view_page = PhotoViewPage(self.driver)
         self.assertTrue(photo_view_page.check_edit_comment())
 
+    def test_delete_comment(self):
+        home_page = HomePage(self.driver)
+        home_page.search_for_profile("karimamr9")
+        search_people = SearchPage(self.driver)
+        search_people.search_people()
+        search_people.open_profile()
+        photo_stream_page = PhotostreamPage(self.driver)
+        photo_stream_page.open_photo_of_searched_profile()
+        photo_view_page = PhotoViewPage(self.driver)
+        time.sleep(5)
+        photo_view_page.delete_comment()
+        self.driver.close_app()
+        desired_cap = {
+            'platformName': 'Android',
+            'deviceName': 'emulator-5554',
+            'appPackage': 'com.flickr.android',
+            'appActivity': 'com.yahoo.mobile.client.android.flickr.activity.MainActivity'
+        }
+        self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_cap)
+        get_started = WebDriverWait(self.driver, 30).until(
+            EC.presence_of_element_located((MobileBy.ACCESSIBILITY_ID, "Get Started"
+                                            )))
+        get_started.click()
+        time.sleep(10)
+        login(self.driver, "k")
+        time.sleep(5)
+        home_page = HomePage(self.driver)
+        home_page.go_to_photo_stream()
+        photo_stream_page = PhotostreamPage(self.driver)
+        photo_stream_page.open_photo_in_another_profile()
+        photo_view_page = PhotoViewPage(self.driver)
+        with self.assertRaises(Exception) as context:
+            photo_view_page.check_delete_comment()
+
     def tearDown(self):
         self.driver.close_app()
     

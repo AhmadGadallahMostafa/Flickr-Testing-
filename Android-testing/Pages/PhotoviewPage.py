@@ -49,3 +49,22 @@ class PhotoViewPage:
         comment_text = self.driver.find_element(*PhotoviewPageLocator.COMMENT_TEXT)
         result = "Nice pic Karim" in comment_text.text
         return result
+
+    def delete_comment(self):
+        comment_button = self.driver.find_element(*PhotoviewPageLocator.COMMENT_BUTTON)
+        comment_button.click()
+        time.sleep(1)
+        options = self.driver.find_element(*PhotoviewPageLocator.OPTIONS_BUTTON)
+        options.click()
+        time.sleep(1)
+        delete = self.driver.find_element(*PhotoviewPageLocator.DELETE_BUTTON)
+        delete.click()
+        yes_button = self.driver.find_element(*PhotoviewPageLocator.YES_BUTTON)
+        yes_button.click()
+        time.sleep(3)
+
+    def check_delete_comment(self):
+        comment_button = self.driver.find_element(*PhotoviewPageLocator.COMMENT_BUTTON)
+        comment_button.click()
+        time.sleep(2)
+        comment_text = self.driver.find_element(*PhotoviewPageLocator.COMMENT_TEXT)
