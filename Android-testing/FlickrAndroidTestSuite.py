@@ -93,7 +93,7 @@ notification_test_suite = unittest.TestSuite()
 
 notification_test_suite.addTest(AndroidMain.FlickrNotificationAndroid('test_notifications'))
 
-runner = HtmlTestRunner.HTMLTestRunner(report_name="Flickr Android Noftification", report_title="Noftification Android", combine_reports=True).run(notification_test_suite)
+#runner = HtmlTestRunner.HTMLTestRunner(report_name="Flickr Android Noftification", report_title="Noftification Android", combine_reports=True).run(notification_test_suite)
 
 
 

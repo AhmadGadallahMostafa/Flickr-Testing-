@@ -30,19 +30,20 @@ class PhotostreamPage:
         self.driver.implicitly_wait(5)
         status = self.driver.find_element(*PhotoStreamPageLocator.MESSAGE_BAR)
         return "Uploading" in status.text
-
+    # In this function we open the photo then check that it is opened by checking its id
     def view_photo(self):
-        photo = self.driver.find_element(*PhotoStreamPageLocator.PHOTO)
+        photo = self.driver.find_element(*PhotoStreamPageLocator.PHOTO)  #Locating the photo to open it
         photo.click()
-        photo_id = self.driver.find_element(*PhotoviewPageLocator.TITLE)
-        result = "IMG" in photo_id.text
+        photo_id = self.driver.find_element(*PhotoviewPageLocator.TITLE)  #Locating the photo id
+        result = "IMG" in photo_id.text  #Check that IMG in the photo id
         return result
-
+    # Open the photo in the first profile
     def open_photo_of_searched_profile(self):
         photo = self.driver.find_element(*PhotoStreamPageLocator.PHOTO_IN_SEARCHED_PROFILE)
         photo.click()
         time.sleep(5)
 
+    # Open the photo in the second profile
     def open_photo_in_another_profile(self):
         photo = self.driver.find_element(*PhotoStreamPageLocator.PHOTO_IN_ANOTHER_PROFILE)
         photo.click()

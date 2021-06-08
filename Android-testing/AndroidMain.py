@@ -362,16 +362,16 @@ class FlickrCommentsAndroid(unittest.TestCase):
 
     def test_comment(self):
         home_page = HomePage(self.driver)
-        home_page.search_for_profile("karimamr9")
+        home_page.search_for_profile("karimamr9")  #Search for this profile
         search_people = SearchPage(self.driver)
         search_people.search_people()
-        search_people.open_profile()
+        search_people.open_profile()  #Opening the searched profile
         photo_stream_page = PhotostreamPage(self.driver)
-        photo_stream_page.open_photo_of_searched_profile()
+        photo_stream_page.open_photo_of_searched_profile()  #Opening a photo
         photo_view_page = PhotoViewPage(self.driver)
         time.sleep(5)
-        photo_view_page.comment()
-        self.driver.close_app()
+        photo_view_page.comment()  #Using this function to write a comment
+        self.driver.close_app()  #Close and open the app again to check the comment
         desired_cap = {
             'platformName': 'Android',
             'deviceName': 'emulator-5554',
@@ -384,27 +384,27 @@ class FlickrCommentsAndroid(unittest.TestCase):
                                             )))
         get_started.click()
         time.sleep(10)
-        login(self.driver, "k")
+        login(self.driver, "k")  #Login in the another account to check that the comment is written
         time.sleep(5)
         home_page = HomePage(self.driver)
         home_page.go_to_photo_stream()
         photo_stream_page = PhotostreamPage(self.driver)
-        photo_stream_page.open_photo_in_another_profile()
+        photo_stream_page.open_photo_in_another_profile()  #Open the photo
         photo_view_page = PhotoViewPage(self.driver)
-        self.assertTrue(photo_view_page.check_comment())
+        self.assertTrue(photo_view_page.check_comment())  #Check that the comment is written
 
     def test_edit_comment(self):
         home_page = HomePage(self.driver)
-        home_page.search_for_profile("karimamr9")
+        home_page.search_for_profile("karimamr9")  #Search for this profile
         search_people = SearchPage(self.driver)
         search_people.search_people()
-        search_people.open_profile()
+        search_people.open_profile()  #Opening the searched profile
         photo_stream_page = PhotostreamPage(self.driver)
-        photo_stream_page.open_photo_of_searched_profile()
+        photo_stream_page.open_photo_of_searched_profile()  #Opening a photo
         photo_view_page = PhotoViewPage(self.driver)
         time.sleep(5)
-        photo_view_page.edit_comment()
-        self.driver.close_app()
+        photo_view_page.edit_comment()   #Using this function to edit a comment
+        self.driver.close_app()   #Close and open the app again to check the comment
         desired_cap = {
             'platformName': 'Android',
             'deviceName': 'emulator-5554',
@@ -417,27 +417,27 @@ class FlickrCommentsAndroid(unittest.TestCase):
                                             )))
         get_started.click()
         time.sleep(10)
-        login(self.driver, "k")
+        login(self.driver, "k")  #Login in the another account to check that the comment is edited
         time.sleep(5)
         home_page = HomePage(self.driver)
         home_page.go_to_photo_stream()
         photo_stream_page = PhotostreamPage(self.driver)
-        photo_stream_page.open_photo_in_another_profile()
+        photo_stream_page.open_photo_in_another_profile()  #Open the photo
         photo_view_page = PhotoViewPage(self.driver)
-        self.assertTrue(photo_view_page.check_edit_comment())
+        self.assertTrue(photo_view_page.check_edit_comment())  #Check that the comment is edited
 
     def test_delete_comment(self):
         home_page = HomePage(self.driver)
-        home_page.search_for_profile("karimamr9")
+        home_page.search_for_profile("karimamr9")  #Search for this profile
         search_people = SearchPage(self.driver)
         search_people.search_people()
-        search_people.open_profile()
+        search_people.open_profile()  #Opening the searched profile
         photo_stream_page = PhotostreamPage(self.driver)
-        photo_stream_page.open_photo_of_searched_profile()
+        photo_stream_page.open_photo_of_searched_profile()  #Opening a photo
         photo_view_page = PhotoViewPage(self.driver)
         time.sleep(5)
-        photo_view_page.delete_comment()
-        self.driver.close_app()
+        photo_view_page.delete_comment()  #Using this function to delete a comment
+        self.driver.close_app()  #Close and open the app again to check the comment
         desired_cap = {
             'platformName': 'Android',
             'deviceName': 'emulator-5554',
@@ -450,14 +450,14 @@ class FlickrCommentsAndroid(unittest.TestCase):
                                             )))
         get_started.click()
         time.sleep(10)
-        login(self.driver, "k")
+        login(self.driver, "k")   #Login in the another account to check that the comment is edited
         time.sleep(5)
         home_page = HomePage(self.driver)
         home_page.go_to_photo_stream()
         photo_stream_page = PhotostreamPage(self.driver)
-        photo_stream_page.open_photo_in_another_profile()
+        photo_stream_page.open_photo_in_another_profile()  #Open the photo
         photo_view_page = PhotoViewPage(self.driver)
-        with self.assertRaises(Exception) as context:
+        with self.assertRaises(Exception) as context:  #Check that the comment is deleted
             photo_view_page.check_delete_comment()
 
     def tearDown(self):
