@@ -19,11 +19,11 @@ class PhotoStreamPage(BasePage):
         return all(title_matches_upload)
 
     def opened_photo(self):
-        photo = self.driver.find_element(*PhotoStreamLocators.PHOTO)
+        photo = self.driver.find_element(*PhotoStreamLocators.PHOTO)  #Locating the photo
         photo.click()
         time.sleep(5)
         result = self.driver.title
-        return "IMG" in result
+        return "IMG" in result  #Checking that a photo is opened
 
     def open_photo(self):
         photo = self.driver.find_element(*PhotoStreamLocators.PHOTO)

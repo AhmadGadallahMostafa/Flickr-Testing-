@@ -457,28 +457,28 @@ class FlickrComments(unittest.TestCase):
 
     def test_comment(self):
         home_page = HomePage(self.driver)
-        home_page.search_people("karimamr9")
+        home_page.search_people("karimamr9")  #Search for this profile
         search_people = SearchPeoplePage(self.driver)
-        search_people.open_profile()
+        search_people.open_profile()  #Open the searched profile
         photo_stream_page = PhotoStreamPage(self.driver)
-        photo_stream_page.open_photo()
+        photo_stream_page.open_photo()  #Open a photo
         photo_view_page = PhotoViewPage(self.driver)
-        photo_view_page.comment()
-        self.driver.close()
+        photo_view_page.comment()  #Using this function to write a comment
+        self.driver.close()  #Close the browser and open it again to check that the comment is written
         path = "chromedriver.exe"
         self.driver = webdriver.Chrome(
             executable_path=path
         )
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
-        login(self.driver, "k")
+        login(self.driver, "k")  #Login to the second account
         time.sleep(5)
         home_page = HomePage(self.driver)
         home_page.go_to_photostream()
         photo_stream_page = PhotoStreamPage(self.driver)
-        photo_stream_page.open_photo()
+        photo_stream_page.open_photo()  #Open the photo
         photo_view_page = PhotoViewPage(self.driver)
-        self.assertTrue(photo_view_page.check_comment())
+        self.assertTrue(photo_view_page.check_comment())  #Checking that the comment is written
 
     def tearDown(self):
         self.driver.close()
@@ -651,7 +651,7 @@ class FlickrEditProfileInfo(unittest.TestCase):
         inst.driver.maximize_window()
         login(inst.driver, "m")
         time.sleep(5)
-
+    #In each of the following functions, we go to the about page, then we call the required function to edit the required field
     def test_edit_occupation(self):
         home_page = HomePage(self.driver)
         home_page.go_to_about()
