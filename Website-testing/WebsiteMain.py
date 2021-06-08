@@ -58,11 +58,8 @@ class FlickerUpload(unittest.TestCase):
     @classmethod
     def setUpClass(inst):
         path = "chromedriver.exe"
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.headless = True
-        chrome_options.add_argument("--window-size=1920,1080")
         inst.driver = webdriver.Chrome(
-            executable_path=path, chrome_options=chrome_options
+            executable_path=path
         )
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
@@ -150,11 +147,8 @@ class FlickrLogin(unittest.TestCase):
     @classmethod
     def setUpClass(inst):
         path = "chromedriver.exe"
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.headless = True
-        chrome_options.add_argument("--window-size=1920,1080")
         inst.driver = webdriver.Chrome(
-            executable_path=path, chrome_options=chrome_options
+            executable_path=path
         )
         inst.driver.get("https://www.flickr.com/")
         login = inst.driver.find_element_by_link_text("Log In")
@@ -197,12 +191,9 @@ class FlickerLogout(unittest.TestCase):
     @classmethod
     def setUpClass(inst):
         path = "chromedriver.exe"
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.headless = True
-        chrome_options.add_argument("--window-size=1920,1080")
+       
         inst.driver = webdriver.Chrome(
-            executable_path=path, chrome_options=chrome_options
-        )
+            executable_path=path)
         inst.driver.get("https://www.flickr.com/")
         login = inst.driver.find_element_by_link_text("Log In")
         login.click()
@@ -230,11 +221,8 @@ class FlickerSignup(unittest.TestCase):
     @classmethod
     def setUpClass(inst):
         path = "chromedriver.exe"
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.headless = True
-        chrome_options.add_argument("--window-size=1920,1080")
         inst.driver = webdriver.Chrome(
-            executable_path=path, chrome_options=chrome_options
+            executable_path=path
         )
         inst.driver.get("https://www.flickr.com/")
         signup = inst.driver.find_element_by_link_text("Sign Up")
@@ -280,11 +268,8 @@ class FlickerSignup(unittest.TestCase):
 class FlickrGroupsTest(unittest.TestCase):
     def setUp(self):
         path = "chromedriver.exe"
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.headless = True
-        chrome_options.add_argument("--window-size=1920,1080")
         self.driver = webdriver.Chrome(
-            executable_path=path, chrome_options=chrome_options
+            executable_path=path
         )
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
@@ -375,11 +360,8 @@ class FlickrNotifications(unittest.TestCase):
     def setUpClass(inst):
         # first send open second account and send notification to main account
         path = "chromedriver.exe"
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.headless = True
-        chrome_options.add_argument("--window-size=1920,1080")
         inst.driver = webdriver.Chrome(
-            executable_path=path, chrome_options=chrome_options
+            executable_path=path
         )
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
@@ -389,11 +371,8 @@ class FlickrNotifications(unittest.TestCase):
         home_page.send_notification()  # follows account karimamr9 to send a notification
         inst.driver.close()
         path = "chromedriver.exe"
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.headless = True
-        chrome_options.add_argument("--window-size=1920,1080")
         inst.driver = webdriver.Chrome(
-            executable_path=path, chrome_options=chrome_options
+            executable_path=path
         )
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
@@ -418,11 +397,8 @@ class FlikcrPrints(unittest.TestCase):
     @classmethod
     def setUpClass(inst):
         path = "chromedriver.exe"
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.headless = True
-        chrome_options.add_argument("--window-size=1920,1080")
         inst.driver = webdriver.Chrome(
-            executable_path=path, chrome_options=chrome_options
+            executable_path=path, 
         )
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
@@ -448,11 +424,8 @@ class FlickrViewPhoto(unittest.TestCase):
     @classmethod
     def setUpClass(inst):
         path = "chromedriver.exe"
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.headless = True
-        chrome_options.add_argument("--window-size=1920,1080")
         inst.driver = webdriver.Chrome(
-            executable_path=path, chrome_options=chrome_options
+            executable_path=path
         )
         inst.driver.get("https://www.flickr.com/")
         inst.driver.maximize_window()
@@ -474,11 +447,8 @@ class FlickrComments(unittest.TestCase):
     
     def setUp(self):
         path = "chromedriver.exe"
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.headless = True
-        chrome_options.add_argument("--window-size=1920,1080")
         self.driver = webdriver.Chrome(
-            executable_path=path, chrome_options=chrome_options
+            executable_path=path
         )
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
@@ -496,11 +466,8 @@ class FlickrComments(unittest.TestCase):
         photo_view_page.comment()
         self.driver.close()
         path = "chromedriver.exe"
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.headless = True
-        chrome_options.add_argument("--window-size=1920,1080")
         self.driver = webdriver.Chrome(
-            executable_path=path, chrome_options=chrome_options
+            executable_path=path
         )
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
@@ -520,11 +487,8 @@ class FlickrComments(unittest.TestCase):
 class FlickrPeople(unittest.TestCase):
     def setUp(self):
         path = "chromedriver.exe"
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.headless = True
-        chrome_options.add_argument("--window-size=1920,1080")
         self.driver = webdriver.Chrome(
-            executable_path=path, chrome_options=chrome_options
+            executable_path=path
         )
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
@@ -566,13 +530,9 @@ class FlickrPeople(unittest.TestCase):
 
 class FlikcrHelp(unittest.TestCase):
     def setUp(self):
-        option = Options()
         path = "chromedriver.exe"
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.headless = True
-        chrome_options.add_argument("--window-size=1920,1080")
         self.driver = webdriver.Chrome(
-            executable_path=path, chrome_options=chrome_options
+            executable_path=path
         )
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
@@ -615,11 +575,8 @@ class FlikcrHelp(unittest.TestCase):
 class FlickrMsg(unittest.TestCase):
     def setUp(self):
         path = "chromedriver.exe"
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.headless = True
-        chrome_options.add_argument("--window-size=1920,1080")
         self.driver = webdriver.Chrome(
-            executable_path=path, chrome_options=chrome_options
+            executable_path=path
         )
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
@@ -650,11 +607,8 @@ class FlickrMsg(unittest.TestCase):
 class FlickExplore(unittest.TestCase):
     def setUp(self):
         path = "chromedriver.exe"
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.headless = True
-        chrome_options.add_argument("--window-size=1920,1080")
         self.driver = webdriver.Chrome(
-            executable_path=path, chrome_options=chrome_options
+            executable_path=path
         )
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
@@ -769,11 +723,8 @@ class FlickrEditProfileInfo(unittest.TestCase):
 class FlickSearch(unittest.TestCase):
     def setUp(self):
         path = "chromedriver.exe"
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.headless = True
-        chrome_options.add_argument("--window-size=1920,1080")
         self.driver = webdriver.Chrome(
-            executable_path=path, chrome_options=chrome_options
+            executable_path=path
         )
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
@@ -832,11 +783,8 @@ class FlickSearch(unittest.TestCase):
 class FlickCameraFinder(unittest.TestCase):
     def setUp(self):
         path = "chromedriver.exe"
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.headless = True
-        chrome_options.add_argument("--window-size=1920,1080")
         self.driver = webdriver.Chrome(
-            executable_path=path, chrome_options=chrome_options
+            executable_path=path
         )
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
