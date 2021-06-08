@@ -356,7 +356,7 @@ class FlickrGroupsTest(unittest.TestCase):
     # try to join a group
     # then open group list and verify that it exists
     def test_join_group(self):
-        login(self.driver, "m")
+        login(self.driver, "k2")
         home_page = HomePage(self.driver)
         home_page.search_group("TESTGROUP-SE-7")
         search_group = SearchGroupsPage(self.driver)
@@ -471,18 +471,18 @@ class FlickrViewPhoto(unittest.TestCase):
 
 
 class FlickrComments(unittest.TestCase):
-    @classmethod
-    def setUpClass(inst):
+    
+    def setUp(self):
         path = "chromedriver.exe"
         chrome_options = webdriver.ChromeOptions()
         chrome_options.headless = True
         chrome_options.add_argument("--window-size=1920,1080")
-        inst.driver = webdriver.Chrome(
+        self.driver = webdriver.Chrome(
             executable_path=path, chrome_options=chrome_options
         )
-        inst.driver.get("https://www.flickr.com/")
-        inst.driver.maximize_window()
-        login(inst.driver, "m")
+        self.driver.get("https://www.flickr.com/")
+        self.driver.maximize_window()
+        login(self.driver, "m")
         time.sleep(5)
 
     def test_comment(self):
@@ -499,6 +499,9 @@ class FlickrComments(unittest.TestCase):
         chrome_options = webdriver.ChromeOptions()
         chrome_options.headless = True
         chrome_options.add_argument("--window-size=1920,1080")
+        self.driver = webdriver.Chrome(
+            executable_path=path, chrome_options=chrome_options
+        )
         self.driver.get("https://www.flickr.com/")
         self.driver.maximize_window()
         login(self.driver, "k")
@@ -670,14 +673,7 @@ class FlickExplore(unittest.TestCase):
         explore_page = ExplorePage(self.driver)
         self.assertNotEqual(explore_page.photos_are_loaded(), 0)
 
-    def test_trending(self):
-        login(self.driver, "k")
-        home_page = HomePage(self.driver)
-        home_page.go_to_explore()
-        explore_page = ExplorePage(self.driver)
-        explore_page.go_to_trending()
-        self.assertTrue(explore_page.trending_in_are_loaded_ordered())
-
+   
     def test_trending_photos_load(self):
         login(self.driver, "k")
         home_page = HomePage(self.driver)
@@ -863,7 +859,5 @@ class FlickCameraFinder(unittest.TestCase):
         self.driver.close()
 
         
-
-
 if __name__ == "__main__":
     unittest.main()

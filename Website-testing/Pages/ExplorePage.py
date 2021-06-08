@@ -16,19 +16,7 @@ class ExplorePage(BasePage):
         trending_tab.click()
         time.sleep(3)
     
-    #trending page is divided in trending by mutiple periods 
-    #we check that they are loaded
-    # if one is missing we return false
-    def trending_in_are_loaded_ordered(self):
-        trending_in = self.driver.find_elements(*ExplorePageLocators.TRENDING_TAG_TITLES)
-        for i in range(len(trending_in)):
-            trending_in[i] = trending_in[i].text
-        trending_by = ["Now", "Week", "All Time"]
-        for i in range(0, len(trending_in)):
-            if trending_by[i] not  in trending_in[i]:
-                return False
-        return True
-
+ 
     def trending_photos_loaded(self):
         time.sleep(2)
         trending_photos = self.driver.find_element(*ExplorePageLocators.TRENDING_PHOTOS)
